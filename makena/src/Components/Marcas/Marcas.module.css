@@ -1,0 +1,15 @@
+.containerSeccionMarcas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerSection{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 200px;
+}
+
+.containerImg img{
+    height: 200px;
+}
