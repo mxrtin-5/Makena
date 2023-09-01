@@ -1,14 +1,14 @@
 import ItemCard from "./ItemCard/ItemCard";
+import styles from './Seleccion.module.css'
 
 
+const Seleccion = ({ celulares }) => {
 
-const SeleccionXiaomi = ({ celulares }) => {
 
-    console.log("celulares seccionXiaomi:", celulares);
     return (
-        <section>
-            <h1>Productos Xiaomi</h1>
-            <div>
+        <section className={styles.section}>
+            <h1 className={styles.tituloSamsungs}>Productos</h1>
+            <div className={styles.containerProds}>
                 {
                     celulares && celulares.map((cel) => (
                         <ItemCard key={cel.id} item={cel} />
@@ -19,4 +19,4 @@ const SeleccionXiaomi = ({ celulares }) => {
     );
 }
 
-export default SeleccionXiaomi;
+export default Seleccion;

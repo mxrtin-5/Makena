@@ -1,16 +1,14 @@
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
-import Marcas from './Components/Marcas/Marcas';
-import Xiaomi from './Components/Xiaomi/Xiaomi'
 import './App.css'
-import SeleccionXiaomi from './Components/ItemListContainer/SeleccionXiaomi/SeleccionXiaomi';
-import Home from './Components/home/Home';
+import Home from '../src/Pages/Home/Home'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
-
+import CrearFunda from '../src/Pages/CrearFunda/CrearFunda'
+import Xiaomi from '../src/Components/Xiaomi/Xiaomi'
 
 function App() {
 
-  
+
 
   return (
     <div>
@@ -20,8 +18,9 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/marcas' element={<Marcas />}/>
-          <Route path='/seleccion-xiaomi/:categoryId' element={<ItemListContainer/>} />
+          <Route path='/crear-funda/seleccion' element={<CrearFunda />}/>
+          <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer/>} />
+          <Route path='/detail/:item' element={<Xiaomi />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase/config'
 import Loader from "../Loader/Loader";
-import SeleccionXiaomi from "./SeleccionXiaomi/SeleccionXiaomi";
+import Seleccion from './SeleccionXiaomi/Seleccion'
 
 
 const ItemListContainer = () => {
@@ -11,23 +11,24 @@ const ItemListContainer = () => {
     const [celulares, setCelulares] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const { categoryId } = useParams()
+    const { marca } = useParams()
+    console.log(marca);
 
-    console.log("porongaaaaaa");
+
 
     useEffect(() => {
 
         setLoading(true)
 
         //1 armo la referencia
-
         const productosRef = collection(db, "celulares")
 
-        const q = categoryId
-            ? query(productosRef, where("marca", "==", categoryId))
+        //2 filtro los datos por la marca
+        const q = marca
+            ? query(productosRef, where("marca", "==", marca))
             : productosRef
 
-        //2 llamo a la referencia
+        //3 obtengo los documentos
         getDocs(q)
             .then((resp) => {
                 const docs = resp.docs.map((doc) => {
@@ -36,21 +37,20 @@ const ItemListContainer = () => {
                         ...doc.data()
                     }
                 })
-                console.log("Datos de Firebase:", docs);
-                console.log("Estado de celulares antes de actualizar:", celulares);
+
                 setCelulares(docs);
-                console.log("Estado de celulares después de actualizar:", celulares)
+
             })
             .catch((error) => {
                 console.log(error);
             })
             .finally(() => setLoading(false))
 
-        console.log("celulares:", celulares);
 
-    }, [categoryId])
 
-    console.log(celulares);
+    }, [marca])
+
+
 
     return (
         <section>
@@ -58,7 +58,7 @@ const ItemListContainer = () => {
             {
                 loading
                     ? <Loader />
-                    : <SeleccionXiaomi celulares={celulares} />
+                    : <Seleccion celulares={celulares} />
             }
 
         </section>

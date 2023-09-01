@@ -2,7 +2,7 @@
 
 
 const Home = () => {
-    console.log('pito');
+
     return (
         <h1>Home</h1>
     );

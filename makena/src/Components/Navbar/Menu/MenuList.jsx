@@ -24,7 +24,7 @@ const Menulist = ({ cerrar }) => {
 
             <nav ref={navRef} onClick={handleCloseMenu} className='menulist'>
                 <Link onClick={showNavbar} className="menulist__link active" to="/">Inicio</Link>
-                <Link onClick={showNavbar} className="menulist__link" to="/marcas">Marcas</Link>
+                <Link onClick={showNavbar} className="menulist__link" to="/crear-funda/seleccion">Crear Funda</Link>
                 <Link onClick={showNavbar} className="menulist__link" to="/web-hosting">Web Hosting</Link>
                 <Link onClick={showNavbar} className="menulist__link" to="/web-design">Diseño Web</Link>
                 <Link onClick={showNavbar} className="menulist__link" to="/mantenimiento">Mantenimiento</Link>

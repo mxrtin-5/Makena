@@ -1,0 +1,11 @@
+.tituloProducto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    color: blueviolet;
+}
+
+.product{
+    width: 350px;
+}
