@@ -1,0 +1,16 @@
+
+
+.divContenedor{
+    position: absolute;
+    top: 45%;
+    left: 2%;
+    color: rgb(238, 238, 238);
+}
+
+.divContenedor h1{
+    font-size: 50px;
+}
+
+.divContenedor h2{
+    font-size: 30px;
+}
