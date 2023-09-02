@@ -1,4 +1,4 @@
-import styles from './Detail.css'
+import styles from './Detail.module.css'
 import { useLocation, useParams } from "react-router-dom";
 import Grilla1 from '../../Components/grillas/grilla1/Grilla1';
 import Grilla0 from '../../Components/grillas/Grilla0/Grilla0'
