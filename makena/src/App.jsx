@@ -4,7 +4,8 @@ import './App.css'
 import Home from '../src/Pages/Home/Home'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 import CrearFunda from '../src/Pages/CrearFunda/CrearFunda'
-import Xiaomi from '../src/Components/Xiaomi/Xiaomi'
+import DistribucionImg from './Pages/DistribucionImg/DistribucionImg';
+import Detail from './Pages/Detail/Detail';
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/crear-funda/seleccion' element={<CrearFunda />}/>
           <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer/>} />
-          <Route path='/detail/:item' element={<Xiaomi />} />
+          <Route path='/detail/:id' element={<Detail />} />
+          <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
         </Routes>
       </BrowserRouter>
     </div>

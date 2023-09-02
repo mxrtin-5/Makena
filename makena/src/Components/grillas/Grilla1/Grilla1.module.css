@@ -1,0 +1,27 @@
+.marco {
+    position: relative;
+    height: 500px;
+    width: 240px;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.marcoImg {
+    position: absolute;
+    width: 100%;
+    z-index: 10000; 
+
+}
+
+.imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contenedorImgs{
+    display: grid;
+    grid-template-rows: 50% 50%;
+    width: 100%;
+    height: 100%;
+}
