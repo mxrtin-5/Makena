@@ -1,12 +1,13 @@
 import { useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import img from '/prueba-removebg-previesssssw.png'
-import styles from './Grilla1.module.css'
+import styles from './Grilla3.module.css'
 
 
-const Grilla1 = () => {
-    // const [imgData, setImgData] = useState("")
+const Grilla3 = () => {
+
     const [imagenes, setImagenes] = useState([])
+
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {
             let newState = [...prevState, cloudData]
@@ -14,7 +15,6 @@ const Grilla1 = () => {
         })
     }
 
-    console.log(imagenes);
     return (
         <>
             <div className={styles.marco}>
@@ -26,12 +26,12 @@ const Grilla1 = () => {
                 </div>
 
 
-
             </div>
+
             <UploadWidget getImageData={handleAddImageShow} />
 
         </>
     );
 }
 
-export default Grilla1;
+export default Grilla3;

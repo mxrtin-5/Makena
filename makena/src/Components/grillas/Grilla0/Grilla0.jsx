@@ -1,7 +1,7 @@
 import { useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla0.module.css'
-import img from '../../../../public/prueba-removebg-previesssssw.png'
+import img from '/prueba-removebg-previesssssw.png'
 
 
 const Grilla0 = () => {

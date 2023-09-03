@@ -1,9 +1,10 @@
 import { Link,useLocation } from "react-router-dom";
-import Grilla0 from '../../../public/Grilla0.png'
-import grilla1 from "../../../public/grilla1.png"
-import grilla2 from "../../../public/grilla2.png"
-import grilla3 from "../../../public/grilla3.png"
-
+import Grilla0 from '/Grilla0.png'
+import grilla1 from "/grilla1.png"
+import grilla2 from "/grilla2.png"
+import grilla3 from "/grilla3.png"
+import grilla4 from "/grilla4.png"
+import grilla5 from "/grilla5.png"
 
 
 const DistribucionImg = () => {
@@ -14,7 +15,7 @@ const DistribucionImg = () => {
     return (
         <section>
             <Link to={`/detail/${id}?tipoGrilla=${0}`}>
-                <img src={Grilla0} alt="" />
+                <img src={Grilla0} alt="grillaImage" />
             </Link>
             <Link to= {`/detail/${id}?tipoGrilla=${1}`}>
                 <img src={grilla1} alt="grillaImage" />
@@ -24,6 +25,12 @@ const DistribucionImg = () => {
             </Link>
             <Link to= {`/detail/${id}?tipoGrilla=${3}`}>
                 <img src={grilla3} alt="grillaImage" />
+            </Link>
+            <Link to={`/detail/${id}?tipoGrilla=${4}`}>
+                <img src={grilla4} alt="grillaImage" />
+            </Link>
+            <Link to={`/detail/${id}?tipoGrilla=${5}`}>
+                <img src={grilla5} alt="" />
             </Link>
         </section>
     );
