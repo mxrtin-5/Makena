@@ -5,7 +5,7 @@ import styles from './Grilla1.module.css'
 
 
 const Grilla1 = () => {
-    // const [imgData, setImgData] = useState("")
+
     const [imagenes, setImagenes] = useState([])
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {

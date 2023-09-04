@@ -2,6 +2,7 @@ import { useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla0.module.css'
 import img from '/A13.png'
+import Carrito from "../../Carrito/Carrito";
 
 
 const Grilla0 = () => {
@@ -15,7 +16,9 @@ const Grilla0 = () => {
                 <img className={styles.imagen} src={imgData.url} />
 
             </div>
+
             <UploadWidget getImageData={setImgData} />
+
         </>
     );
 }
