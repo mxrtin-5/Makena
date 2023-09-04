@@ -28,17 +28,17 @@ const Grilla5 = () => {
 
 
                     <div className={styles.parteAbajo}>
-                    {imagenes && imagenes.length > 2 && <img src={imagenes[2].url} className={styles.imagen} />}
+                        {imagenes && imagenes.length > 2 && <img src={imagenes[2].url} className={styles.imagen} />}
                     </div>
 
 
                     <div className={styles.parteArriba}>
-                    {imagenes && imagenes.length > 3 && <img src={imagenes[3].url} className={styles.imagen} />}
-                    {imagenes && imagenes.length > 4 && <img src={imagenes[4].url} className={styles.imagen} />}
+                        {imagenes && imagenes.length > 3 && <img src={imagenes[3].url} className={styles.imagen} />}
+                        {imagenes && imagenes.length > 4 && <img src={imagenes[4].url} className={styles.imagen} />}
                     </div>
                     <div className={styles.parteAbajo}>
-                    {imagenes && imagenes.length > 5 && <img src={imagenes[5].url} className={styles.imagen} />}
-                    
+                        {imagenes && imagenes.length > 5 && <img src={imagenes[5].url} className={styles.imagen} />}
+
                     </div>
                 </div>
             </div>
