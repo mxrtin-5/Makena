@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-
+import styles from './UploadWidget.module.css'
 
 
 const UploadWidget = ({getImageData}) => {
@@ -25,8 +25,8 @@ const UploadWidget = ({getImageData}) => {
         })
     }, [])
     return (
-        <div>
-            <button onClick={() => widgetRef.current.open()}>
+        <div className={styles.containerButton}>
+            <button className={styles.button2} onClick={() => widgetRef.current.open()}>
                 Upload
             </button>
         </div>

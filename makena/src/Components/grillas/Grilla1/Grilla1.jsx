@@ -14,7 +14,7 @@ const Grilla1 = () => {
         })
     }
 
-    console.log(imagenes);
+
     return (
         <>
             <div className={styles.marco}>
@@ -26,8 +26,8 @@ const Grilla1 = () => {
                 </div>
 
 
-
             </div>
+
             <UploadWidget getImageData={handleAddImageShow} />
 
         </>

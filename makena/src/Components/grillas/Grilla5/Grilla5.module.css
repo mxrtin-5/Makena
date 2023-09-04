@@ -23,7 +23,7 @@
 
 .parteArriba {
     display: grid;
-    grid-template-rows: 100%;
+    grid-template-rows: 50% 50%;
     grid-template-columns: 100%;
     width: 100%;
     height: 100%;
