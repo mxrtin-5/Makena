@@ -27,7 +27,7 @@ const UploadWidget = ({getImageData}) => {
     return (
         <div>
             <button onClick={() => widgetRef.current.open()}>
-                puto
+                Upload
             </button>
         </div>
     );
