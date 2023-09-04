@@ -4,6 +4,7 @@ import './Navbar.css'
 import { useEffect, useState } from "react";
 import { AiOutlineMenu } from 'react-icons/ai'
 import Menulist from "./Menu/MenuList";
+import CartIcon from "../CartIcon/CartIcon";
 
 
 
@@ -35,6 +36,8 @@ const Navbar = () => {
                         <img className="img-logo" src='/20230814_105315_0000.png' alt="" />
                     </Link>
                 </h2>
+
+                <CartIcon />
 
                 {isMobile ? <Menu showMenu={showMenu} setShowMenu={setShowMenu} /> : <Menulist />}
 

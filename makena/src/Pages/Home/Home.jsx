@@ -3,7 +3,6 @@ import Presentacion from '../../Components/Presentacion/Presentacion';
 import Solucion from '../../Components/Solucion/Solucion';
 import styles from './Home.module.css'
 
-
 const Home = () => {
 
     return (
@@ -15,6 +14,7 @@ const Home = () => {
                 <Problematica className={styles.componentContainer} />
 
                 <Solucion />
+
             </div>
 
 
