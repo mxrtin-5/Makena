@@ -1,11 +1,11 @@
 import styles from './Detail.module.css'
 import { useLocation, useParams } from "react-router-dom";
-import Grilla1 from '../../Components/grillas/grilla1/Grilla1';
 import Grilla0 from '../../Components/grillas/Grilla0/Grilla0'
 import Grilla2 from '../../Components/grillas/Grilla2/Grilla2';
 import Grilla3 from '../../Components/grillas/Grilla3/Grilla3';
 import Grilla4 from '../../Components/grillas/Grilla4/Grilla4';
 import Grilla5 from '../../Components/grillas/Grilla5/Grilla5';
+import Grilla1 from '../../Components/grillas/Grilla1/Grilla1';
 
 
 const Detail = () => {
@@ -19,6 +19,7 @@ const Detail = () => {
                 return <Grilla0 />
             case "1":
                 return <Grilla1 />
+
             case "2":
                 return <Grilla2 />
             case "3":
