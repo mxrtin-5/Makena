@@ -10,6 +10,16 @@ const Grilla1 = () => {
 
     const [imagenes, setImagenes] = useState([])
 
+    const [isPopupOpen, setPopupOpen] = useState(false)
+
+    const TogglePopup = () => {
+        setPopupOpen(!isPopupOpen);
+    }
+
+
+
+    const open = styles.image
+
 
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {
@@ -34,7 +44,7 @@ const Grilla1 = () => {
                 <div className={styles.contenedorImgs}>
                     {imagenes.map((imgData, index) => (
                         <EditableImage
-                            imagen={styles.imagen}
+                            imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
                             key={imgData.url}
                             src={imgData.url}
                             index={index}
@@ -45,6 +55,8 @@ const Grilla1 = () => {
             </div>
 
             <UploadWidget getImageData={handleAddImageShow} />
+
+            <button className={styles.button2} onClick={TogglePopup}>Editar posiciones</button>
         </ImageProvider>
 
 
