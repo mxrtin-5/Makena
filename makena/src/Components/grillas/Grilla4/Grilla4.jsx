@@ -4,7 +4,7 @@ import img from '/prueba-removebg-previesssssw.png'
 import styles from './Grilla4.module.css'
 
 
-const Grilla4 = () => {
+const Grilla4 = ({ phoneImg }) => {
 
     const [imagenes, setImagenes] = useState([])
 
@@ -19,7 +19,7 @@ const Grilla4 = () => {
     return (
         <>
             <div className={styles.marco}>
-                <img className={styles.marcoImg} src={img} alt="" />
+                <img className={styles.marcoImg} src={phoneImg} alt="" />
 
                 <div className={styles.contenedorImgs}>
                     <div className={styles.image}>

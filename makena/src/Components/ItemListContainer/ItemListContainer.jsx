@@ -23,6 +23,8 @@ const ItemListContainer = () => {
         //1 armo la referencia
         const productosRef = collection(db, "celulares")
 
+        console.log(productosRef);
+
         //2 filtro los datos por la marca
         const q = marca
             ? query(productosRef, where("marca", "==", marca))
@@ -45,8 +47,6 @@ const ItemListContainer = () => {
                 console.log(error);
             })
             .finally(() => setLoading(false))
-
-
 
     }, [marca])
 

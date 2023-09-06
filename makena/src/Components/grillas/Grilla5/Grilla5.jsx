@@ -4,7 +4,7 @@ import img from '/prueba-removebg-previesssssw.png'
 import styles from './Grilla5.module.css'
 
 
-const Grilla5 = () => {
+const Grilla5 = ({ phoneImg }) => {
     const [imagenes, setImagenes] = useState([]);
 
     const handleAddImageShow = (cloudData) => {
@@ -18,7 +18,7 @@ const Grilla5 = () => {
     return (
         <>
             <div className={styles.marco}>
-                <img className={styles.marcoImg} src={img} alt="" />
+                <img className={styles.marcoImg} src={phoneImg} alt="" />
 
                 <div className={styles.contenedorImgs}>
                     <div className={styles.parteArriba}>

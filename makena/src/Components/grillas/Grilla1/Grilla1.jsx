@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
-import img from '/prueba-removebg-previesssssw.png'
 import styles from './Grilla1.module.css'
-import ImageProvider, { ImageContext } from "../../../context/imageContext";
+import ImageProvider from "../../../context/imageContext";
 import EditableImage from "../../EditableImage/EditableImage";
 
 
-const Grilla1 = () => {
+const Grilla1 = ({ phoneImg }) => {
 
     const [imagenes, setImagenes] = useState([])
 
@@ -15,11 +14,6 @@ const Grilla1 = () => {
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
     }
-
-
-
-    const open = styles.image
-
 
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {
@@ -39,7 +33,7 @@ const Grilla1 = () => {
     return (
         <ImageProvider>
             <div className={styles.marco}>
-                <img className={styles.marcoImg} src={img} alt="" />
+                <img className={styles.marcoImg} src={phoneImg} alt="" />
 
                 <div className={styles.contenedorImgs}>
                     {imagenes.map((imgData, index) => (
