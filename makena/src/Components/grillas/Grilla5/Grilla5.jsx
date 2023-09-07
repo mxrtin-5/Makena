@@ -9,6 +9,8 @@ const Grilla5 = ({ phoneImg }) => {
 
     const [imagenes, setImagenes] = useState([]);
 
+    console.log(imagenes);
+
     const [isPopupOpen, setPopupOpen] = useState(false)
 
     const handleAddImageShow = (cloudData) => {

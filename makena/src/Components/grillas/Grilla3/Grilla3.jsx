@@ -11,6 +11,8 @@ const Grilla3 = ({ phoneImg }) => {
 
     const [isPopupOpen, setPopupOpen] = useState(false)
 
+    console.log(imagenes);
+
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {
             let newState = [...prevState, cloudData]

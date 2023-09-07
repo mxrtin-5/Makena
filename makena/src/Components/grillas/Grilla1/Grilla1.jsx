@@ -11,6 +11,8 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [isPopupOpen, setPopupOpen] = useState(false)
 
+    console.log(imagenes);
+    
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
     }

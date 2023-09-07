@@ -18,12 +18,6 @@ const Grilla0 = ({ phoneImg }) => {
 
     console.log(imgData);
 
-    const [isPopupOpen, setPopupOpen] = useState(false)
-
-    const TogglePopup = () => {
-        setPopupOpen(!isPopupOpen);
-    }
-
     const initCanvas = (id) => {
         return new fabric.Canvas(id, {
             width: 240,
@@ -57,11 +51,11 @@ const Grilla0 = ({ phoneImg }) => {
         <>
             <div className={styles.marco}>
                 <img style={{
-                    zIndex: zIndex ? 1000 : 1
+                    zIndex: zIndex && 1000
                 }} className={styles.marcoImg} src={phoneImg} alt="" />
                 <img style={{
-                   transform: `scale(${escala}) translate(${translateX}px, ${translateY}px)`
-                }} className={isPopupOpen ? styles.imagen : styles.imagenConBorde} src={imgData && imgData.url} />
+                    transform: `scale(${escala}) translate(${translateX}px, ${translateY}px)`
+                }} className={ styles.imagen} src={imgData && imgData.url} />
             </div>
 
             <UploadWidget getImageData={setImgData} />
