@@ -26,7 +26,7 @@
     z-index: 1000000;
 }
 
-.contenedorImgs{
+.contenedorImgs {
     display: grid;
     grid-template-rows: 33.3% 33.3% 33.3%;
     width: 100%;
@@ -47,8 +47,8 @@
     border: 1px solid #e8e8e8;
     box-shadow: 6px 6px 12px #c5c5c5,
         -6px -6px 12px #ffffff;
-    top: 80%;
-    right: 40%;
+    top: 90%;
+    left: 44%;
     cursor: pointer;
 }
 
