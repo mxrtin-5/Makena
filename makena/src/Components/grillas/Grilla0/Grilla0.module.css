@@ -1,13 +1,14 @@
 /* el div contenedor siempre vas a tener que ponerle un alto y ancho fijo */
 
 
-.marco { 
+.marco {
     position: relative;
     height: 500px;
     width: 240px;
     border-radius: 30px;
     overflow: hidden;
 }
+
 /* siempre tiene que ocupar el 100% de w y h, ademas tener position absolute */
 
 .marcoImg {
@@ -28,7 +29,46 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    
+    z-index: 100;
+}
+
+.containerEditar {
+    position: absolute;
+    right: 10%;
+
+}
+
+.container{
+    margin-bottom: 20px;
+}
+
+.button {
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 1.1em;
+    background-color: #212121;
+    color: white;
+    padding: 1em 2em;
+    transition: box-shadow ease-in-out 0.3s,
+        background-color ease-in-out 0.1s,
+        letter-spacing ease-in-out 0.1s,
+        transform ease-in-out 0.1s;
+    box-shadow: 5px 5px 5px #1c1c1c,
+        -5px -5px 5px #262626;
+    cursor: pointer;
+}
+
+
+.button:hover {
+    box-shadow: var(--hover-shadows);
+}
+
+.button:active {
+    box-shadow: var(--hover-shadows),
+        var(--accent) 0px 0px 30px 5px;
+    background-color: var(--accent);
+    transform: scale(0.95);
 }
 
 .button2 {
@@ -46,7 +86,7 @@
     box-shadow: 6px 6px 12px #c5c5c5,
         -6px -6px 12px #ffffff;
     top: 90%;
-    left: 44%;
+    left: 46%;
     cursor: pointer;
 }
 
