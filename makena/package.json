@@ -16,11 +16,14 @@
     "fabricjs-react": "^1.2.0",
     "firebase": "^10.3.0",
     "react": "^18.2.0",
+    "react-avatar-editor": "^13.0.0",
+    "react-cropper": "^2.3.3",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
-    "react-router-dom": "^6.15.0"
+    "react-router-dom": "^6.15.0",
+    "vue-cropperjs": "^5.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

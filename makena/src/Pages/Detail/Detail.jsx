@@ -11,15 +11,19 @@ import { useEffect, useState } from 'react';
 import { db } from '../../firebase/config'
 
 const Detail = () => {
+    
     const { id } = useParams() //! despues mira como traer el detalle de firebase solo para este telefono
+
     const { modelo } = useParams()
         
     console.log(id);
+
     const [telefonoInfo, setTelefonoInfo] = useState({});
+
     console.log(telefonoInfo,"<<<----------");
+
     const idGrilla = location.search.split("=")[1]
 
-    const [phoneImg, setPhoneImg] = useState([]);
 
     //! aqui vos vas a tener solamente el mnodelo que lo vamos a sacar de la query
 

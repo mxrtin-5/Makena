@@ -1,85 +1,159 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla0.module.css'
-import { fabric } from 'fabric'
+import Cropper from "react-cropper";
+import { db } from '../../../firebase/config'
+import { addDoc, collection } from "firebase/firestore";
+import 'cropperjs/dist/cropper.css';
 
 
 const Grilla0 = ({ phoneImg }) => {
 
-    const [imgData, setImgData] = useState("");
+    const [imgData, setImgData] = useState(null);
 
-    const [escala, setEscala] = useState(1)
+    const [escala, setEscala] = useState(1);
 
-    const [translateX, setTranslateX] = useState(0)
+    const [translateX, setTranslateX] = useState(0);
 
-    const [translateY, setTranslateY] = useState(0)
+    const [translateY, setTranslateY] = useState(0);
 
-    const [zIndex, setZIndex] = useState(true)
+    const [croppedImage, setCroppedImage] = useState(null);
 
-    console.log(imgData);
+    const [width, setWidth] = useState(0);
 
-    const initCanvas = (id) => {
-        return new fabric.Canvas(id, {
-            width: 240,
-            height: 500,
-        });
-    };
+    const [height, setHeight] = useState(0);
 
-    const setBackground = (url, canvas) => {
-        fabric.Image.fromURL(url, (img) => {
-            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
-        });
-    };
+    const cropperRef = useRef(null);
 
-    const canvas = initCanvas("canvas");
+    const datos = {
+        croppedImage: croppedImage,
+        translateX: translateX,
+        translateY: translateY
+    }
 
-    canvas.on("mouse:move", (event) => {
-        const myEvent = event.e;
-        const delta = new fabric.Point(myEvent.movementX, myEvent.movementY);
-        canvas.relativePan(delta);
-    });
+    const guardarDatos = async(e) =>{
+        e.preventDefault();
 
-    // Mueve la llamada a setBackground dentro de un useEffect para manejar cambios en imgData
-    useEffect(() => {
-        if (imgData && typeof imgData === "string") {
-            setBackground(imgData, canvas);
+        try{
+            await addDoc(collection(db, "pedidos"),{
+                ...datos
+            })
+        } catch{
+            console.log("error");
         }
-    }, [imgData, canvas]);
+        
+    }
 
+    const handleCrop = () => {
+        if (cropperRef.current) {
+            const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
+                width: width * escala,
+                height: height * escala
+            });
+
+            const context = croppedCanvas.getContext("2d");
+
+            context.scale(escala, escala);
+            context.translate(-translateX, -translateY);
+
+            const croppedImageBase64 = croppedCanvas.toDataURL();
+            setCroppedImage(croppedImageBase64);
+            console.log(croppedImage);
+        }
+    };
+    console.log("TranslateX: ", translateX);
+    console.log("TranslateY: ", translateY);
 
     return (
         <>
             <div className={styles.marco}>
-                <img style={{
-                    zIndex: zIndex && 1000
+                {imgData && (
+                    <Cropper
+                        ref={cropperRef}
+                        src={imgData.url}
+
+                        className={styles.croper}
+                        style={{
+                            transform: `scale(${escala}) translate(${translateX}px, ${translateY}px)`,
+                        }}
+                        aspectRatio={NaN}
+                        guides={true}
+                        viewMode={1}
+                        dragMode="move"
+                        autoCropArea={1}
+                        cropBoxResizable={false}
+                    />
+                )}
+                <img onLoad={(e) => {
+                    setWidth(e.target.width);
+                    setHeight(e.target.height);
                 }} className={styles.marcoImg} src={phoneImg} alt="" />
-                <img style={{
-                    transform: `scale(${escala}) translate(${translateX}px, ${translateY}px)`
-                }} className={ styles.imagen} src={imgData && imgData.url} />
             </div>
 
             <UploadWidget getImageData={setImgData} />
 
             <div className={styles.containerEditar}>
                 <div className={styles.container}>
-                    <button className={styles.button} onClick={() => setEscala(escala + 0.1)}>Zoom +</button>
-                    <button className={styles.button} onClick={() => setEscala(escala - 0.1)}>Zoom -</button>
+                    <button
+                        className={styles.button}
+                        onClick={() => setEscala(escala + 0.3)}
+                    >
+                        Zoom +
+                    </button>
+                    <button
+                        className={styles.button}
+                        onClick={() => setEscala(escala - 0.3)}
+                    >
+                        Zoom -
+                    </button>
                 </div>
 
                 <div className={styles.container}>
-                    <button className={styles.button} onClick={() => setTranslateX(translateX + 3)}>{"<="}</button>
-                    <button className={styles.button} onClick={() => setTranslateX(translateX - 3)}>{"=>"}</button>
+                    <button
+                        className={styles.button}
+                        onClick={() => setTranslateY(translateY - 5)}
+                    >
+                        Arriba
+                    </button>
+                    <button
+                        className={styles.button}
+                        onClick={() => setTranslateY(translateY + 5)}
+                    >
+                        Abajo
+                    </button>
+                    <button
+                        className={styles.button}
+                        onClick={() => setTranslateX(translateX + 5)}
+                    >
+                        {"=>"}
+                    </button>
+                    <button
+                        className={styles.button}
+                        onClick={() => setTranslateX(translateX - 5)}
+                    >
+                        {"<="}
+                    </button>
                 </div>
-
-                <div className={styles.container}>
-                    <button className={styles.button} onClick={() => setTranslateY(translateY + 3)}>{"Arriba"}</button>
-                    <button className={styles.button} onClick={() => setTranslateY(translateY - 3)}>{"Abajo"}</button>
-                </div>
-
             </div>
 
+            <button className={styles.button2} onClick={handleCrop}>
+                Recortar
+            </button>
 
-            <button className={styles.button2} onClick={() => setZIndex(!zIndex)}>Ocultar</button>
+            <button style={{
+                marginTop: "80px"
+            }} className={styles.button2} onClick={guardarDatos}>
+                Rrealizar pedido
+            </button>
+
+            {croppedImage && (
+                <div>
+                    <img style={{
+                        display: "none",
+                        transform: ` translate(${translateX}px, ${translateY}px)`
+                    }} src={croppedImage} alt="Imagen recortada" />
+                </div>
+            )}
         </>
     );
 }
