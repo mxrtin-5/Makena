@@ -1,0 +1,126 @@
+.containerCartProducts {
+    position: absolute;
+    top: 80%;
+    right: 5%;
+    background-color: #dbd5d5cc;
+    z-index: 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.containerCartProducts h2{
+    position: absolute;
+    top: 20px;
+    right: 35%;
+    font-size: 1.5em;
+    color: #8a2be2;
+}
+
+.cartProducts{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center; 
+    max-height: 800px;
+    overflow-y: auto;
+    padding-top: 20%;
+}
+
+.cartProducts p{
+    margin-top: 20px;
+}
+
+
+.cartProduct{
+    background-color: #949191ee;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.productImage{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-top: 10%;
+}
+
+.infoCartProduct{
+    margin-top: 8%;
+    flex: 1;
+    gap: 2em;
+}
+
+.tituloProductoCarrito{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.precioProductoCarrito{
+    font-weight: 600;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+.cantidadProductoCarrito{
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.iconClose{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    top: 15px;
+    transition: all .3s;
+}
+
+.iconClose:hover{
+    color: blueviolet;
+}
+
+.cartTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.btnTerminarCompra{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: blueviolet;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btnTerminarCompra:hover{
+    background-color: #8a2be2;
+}
+
+.btnTerminarCompra a{
+    text-decoration: none;
+    color: white;
+}

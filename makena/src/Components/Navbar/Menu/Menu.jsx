@@ -1,9 +1,15 @@
+import { useState } from 'react';
 import './Menu.css'
 import Menulist from './MenuList';
+import Carrito from '../../Carrito/Carrito';
+import CartIcon from '../../CartIcon/CartIcon';
 
 
 
 const Menu = ({ showMenu, setShowMenu}) => {
+
+    
+    const [active, setActive] = useState(false)
 
 
     const handleToggle = () => {
@@ -19,6 +25,12 @@ const Menu = ({ showMenu, setShowMenu}) => {
                     <Menulist cerrar={handleToggle} />
                 </div>
             </div>
+
+            <div onClick={() => setActive(!active)} className='cart-widget-container'>
+                    <CartIcon />
+
+                    {active && <Carrito />}
+                </div>
 
             
         </div>

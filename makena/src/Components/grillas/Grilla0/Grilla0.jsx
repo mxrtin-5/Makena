@@ -1,66 +1,17 @@
-import { useRef, useState } from "react";
+import { useContext, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla0.module.css'
 import Cropper from "react-cropper";
-import { db } from '../../../firebase/config'
-import { addDoc, collection } from "firebase/firestore";
 import 'cropperjs/dist/cropper.css';
+import { GrillasContext } from "../../../context/grillasContext";
 
 
 const Grilla0 = ({ phoneImg }) => {
 
     const [imgData, setImgData] = useState(null);
 
-    const [escala, setEscala] = useState(1);
+    const {translateX, translateY, cropperRef, escala, setEscala, setHeight, setWidth, width, height, setTranslateY, setTranslateX, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
 
-    const [translateX, setTranslateX] = useState(0);
-
-    const [translateY, setTranslateY] = useState(0);
-
-    const [croppedImage, setCroppedImage] = useState(null);
-
-    const [width, setWidth] = useState(0);
-
-    const [height, setHeight] = useState(0);
-
-    const cropperRef = useRef(null);
-
-    const datos = {
-        croppedImage: croppedImage,
-        translateX: translateX,
-        translateY: translateY
-    }
-
-    const guardarDatos = async(e) =>{
-        e.preventDefault();
-
-        try{
-            await addDoc(collection(db, "pedidos"),{
-                ...datos
-            })
-        } catch{
-            console.log("error");
-        }
-        
-    }
-
-    const handleCrop = () => {
-        if (cropperRef.current) {
-            const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
-                width: width * escala,
-                height: height * escala
-            });
-
-            const context = croppedCanvas.getContext("2d");
-
-            context.scale(escala, escala);
-            context.translate(-translateX, -translateY);
-
-            const croppedImageBase64 = croppedCanvas.toDataURL();
-            setCroppedImage(croppedImageBase64);
-            console.log(croppedImage);
-        }
-    };
     console.log("TranslateX: ", translateX);
     console.log("TranslateY: ", translateY);
 

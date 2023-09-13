@@ -37,8 +37,6 @@ const Navbar = () => {
                     </Link>
                 </h2>
 
-                <CartIcon />
-
                 {isMobile ? <Menu showMenu={showMenu} setShowMenu={setShowMenu} /> : <Menulist />}
 
 

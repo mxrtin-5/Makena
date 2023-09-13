@@ -9,6 +9,7 @@ import Detail from './Pages/Detail/Detail';
 import CartProvider from './context/cartContext';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import GrillasProvider from './context/grillasContext';
 
 function App() {
 
@@ -19,18 +20,24 @@ function App() {
 
         <CartProvider>
 
-          <BrowserRouter>
+          <GrillasProvider>
 
-            <Navbar />
+            <BrowserRouter>
 
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/crear-funda/seleccion' element={<CrearFunda />} />
-              <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer />} />
-              <Route path='/detail/:id' element={<Detail />} />
-              <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
-            </Routes>
-          </BrowserRouter>
+              <Navbar />
+
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/crear-funda/seleccion' element={<CrearFunda />} />
+                <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer />} />
+                <Route path='/detail/:id' element={<Detail />} />
+                <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
+              </Routes>
+
+            </BrowserRouter>
+
+          </GrillasProvider>
+
 
         </CartProvider>
 
