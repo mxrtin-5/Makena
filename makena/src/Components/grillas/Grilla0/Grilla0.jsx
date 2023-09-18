@@ -10,7 +10,7 @@ const Grilla0 = ({ phoneImg }) => {
 
     const [imgData, setImgData] = useState(null);
 
-    const {translateX, translateY, cropperRef, escala, setEscala, setHeight, setWidth, width, height, setTranslateY, setTranslateX, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
+    const {translateX, translateY, cropperRef, escala, setEscala, setHeight, setWidth, setTranslateY, setTranslateX, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
 
     console.log("TranslateX: ", translateX);
     console.log("TranslateY: ", translateY);
@@ -22,17 +22,17 @@ const Grilla0 = ({ phoneImg }) => {
                     <Cropper
                         ref={cropperRef}
                         src={imgData.url}
-
                         className={styles.croper}
                         style={{
-                            transform: `scale(${escala}) translate(${translateX}px, ${translateY}px)`,
+                            zIndex: 1000000,
+                            transform: `translate(${translateX}px, ${translateY}px)`,
                         }}
-                        aspectRatio={NaN}
-                        guides={true}
-                        viewMode={1}
-                        dragMode="move"
+                        guides={false}
+                        zoomTo={escala}
+                        dragMode="none"
+                        responsive={true}
                         autoCropArea={1}
-                        cropBoxResizable={false}
+                        cropBoxResizable={true}
                     />
                 )}
                 <img onLoad={(e) => {
@@ -47,13 +47,13 @@ const Grilla0 = ({ phoneImg }) => {
                 <div className={styles.container}>
                     <button
                         className={styles.button}
-                        onClick={() => setEscala(escala + 0.3)}
+                        onClick={() => setEscala(escala + 0.2)}
                     >
                         Zoom +
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setEscala(escala - 0.3)}
+                        onClick={() => setEscala(escala - 0.2)}
                     >
                         Zoom -
                     </button>

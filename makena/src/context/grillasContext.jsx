@@ -6,7 +6,7 @@ import { addDoc, collection } from "firebase/firestore";
 
 export const GrillasContext = createContext()
 
-const GrillasProvider = ( {children} ) => {
+const GrillasProvider = ({ children }) => {
 
     const [translateX, setTranslateX] = useState(0);
 
@@ -42,22 +42,24 @@ const GrillasProvider = ( {children} ) => {
     }
 
     const handleCrop = async (e) => {
-
-        if (cropperRef.current) {
+        if (cropperRef.current && cropperRef.current.cropper) {
             const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
                 width: width * escala,
                 height: height * escala
             });
 
-            const context = croppedCanvas.getContext("2d");
+            if (croppedCanvas) {
+                const context = croppedCanvas.getContext("2d");
 
-            context.scale(escala, escala);
-            context.translate(-translateX, -translateY);
+                if (context) {
+                    context.scale(escala, escala);
+                    context.translate(-translateX, -translateY);
 
-            const croppedImageBase64 = croppedCanvas.toDataURL();
-            setCroppedImage(croppedImageBase64);
-            console.log(croppedImage);
-
+                    const croppedImageBase64 = croppedCanvas.toDataURL();
+                    setCroppedImage(croppedImageBase64);
+                    console.log(croppedImage);
+                }
+            }
         }
     };
 
