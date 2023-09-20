@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla1.module.css'
 import ImageProvider from "../../../context/imageContext";
@@ -9,7 +9,7 @@ import { Cropper } from "react-cropper";
 
 const Grilla1 = ({ phoneImg }) => {
 
-    const { translateX, translateY, cropperRef, escala, setEscala, setHeight, setWidth, width, height, setTranslateY, setTranslateX, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
+    const { translateX, setTranslateY, setTranslateX, translateY, setEscala ,escala, setHeight, setWidth, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
 
     const [imagenes, setImagenes] = useState([])
 
@@ -18,6 +18,8 @@ const Grilla1 = ({ phoneImg }) => {
     const [isPopupOpen, setPopupOpen] = useState(false)
 
     console.log(imagenes);
+
+    const cropperRef = useRef(null);
 
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
@@ -31,7 +33,7 @@ const Grilla1 = ({ phoneImg }) => {
         })
     }
 
-    const moveImage = (fromIndex, toIndex) => {
+    const handleDrop = (fromIndex, toIndex) => {
         const updatedImages = [...imagenes];
         const [movedImage] = updatedImages.splice(fromIndex, 1);
         updatedImages.splice(toIndex, 0, movedImage);
@@ -42,22 +44,22 @@ const Grilla1 = ({ phoneImg }) => {
     return (
         <ImageProvider>
             <div className={styles.marco}>
-                {imagenes && (
+                {imagenes && imagenes.length > 0 && (
                     <Cropper
                         ref={cropperRef}
-                        src={imagenes.url}
-                        style={{
-                            transform: `scale(${escala}) translate(${translateX}px, ${translateY}px)`,
-                        }}
+                        className={styles.cropperCropBox}
+                        src={imagenes[0].url} // Utiliza phoneImg como fuente del Cropper
                         guides={false}
-                        zoomTo={escala}
                         dragMode="none"
                         responsive={true}
                         autoCropArea={1}
-                        cropBoxResizable={true}
+                        cropBoxResizable={false}
+                        zoomable={false}
+                        zoomOnTouch={false}
+                        wheelZoomRatio={0}
+                        cropBoxMovable={false}
                     />
-                )
-                }
+                )}
                 <img onLoad={(e) => {
                     setWidth(e.target.width);
                     setHeight(e.target.height);
@@ -70,19 +72,18 @@ const Grilla1 = ({ phoneImg }) => {
                             key={imgData.url}
                             src={imgData.url}
                             index={index}
-                            moveImage={moveImage}
+                            onDrop={handleDrop}
                             onClick={() => {
-                                if (imagenSeleccionada === index) {
+                                if (imagenSeleccionada === imgData.id) {
                                     setImagenSeleccionada(null);
                                 } else {
-                                    setImagenSeleccionada(index);
+                                    setImagenSeleccionada(imgData.id);
                                 }
                             }}
                         />
                     ))}
                 </div>
             </div>
-
 
             <div className={styles.containerEditar}>
                 <div className={styles.container}>
@@ -129,26 +130,17 @@ const Grilla1 = ({ phoneImg }) => {
             </div>
 
             <div className={styles.containerBotones}>
-
                 <UploadWidget getImageData={handleAddImageShow} />
-
                 <button onClick={handleCrop}>
                     Recortar
                 </button>
-
                 <button onClick={TogglePopup}>toggle</button>
-
                 <button style={{
                     marginTop: "80px"
                 }} onClick={guardarDatos}>
-                    Rrealizar pedido
+                    Realizar pedido
                 </button>
-
             </div>
-
-
-
-
 
             {croppedImage && (
                 <div>
@@ -158,10 +150,7 @@ const Grilla1 = ({ phoneImg }) => {
                     }} src={croppedImage} alt="Imagen recortada" />
                 </div>
             )}
-
         </ImageProvider>
-
-
     );
 }
 
