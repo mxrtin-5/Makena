@@ -68,7 +68,6 @@ const Grilla1 = ({ phoneImg }) => {
                 <div className={styles.contenedorImgs}>
                     {imagenes.map((imgData, index) => (
                         <EditableImage
-                            imagen={imagenSeleccionada === index ? styles.imagenSeleccionada : styles.imagen}
                             key={imgData.url}
                             src={imgData.url}
                             index={index}

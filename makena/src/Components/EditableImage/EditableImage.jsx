@@ -1,10 +1,17 @@
 import { useDrag, useDrop } from "react-dnd";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ImageContext } from "../../context/imageContext";
 import styles from './EditableImagen.module.css';
 
-const EditableImage = ({ src, imagen, id, index, onDrop, onClick }) => {
+const EditableImage = ({ src, id, index, onDrop, onClick }) => {
+
     const { ItemTypes } = useContext(ImageContext);
+
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
 
     const [, drag] = useDrag({
         type: ItemTypes.IMAGE,
@@ -13,32 +20,46 @@ const EditableImage = ({ src, imagen, id, index, onDrop, onClick }) => {
 
     const [, drop] = useDrop({
         accept: ItemTypes.IMAGE,
-        drop: (item) => {
-            onDrop(item.index, index);
+        drop: () => {
+            onDrop(index);
         },
     });
 
+    const imageStyle = {
+        maxWidth: '100%',
+        maxHeight: '100%',
+        display: imageLoaded ? 'block' : 'none',
+    };
+
     return (
-        <div className={styles.div} onClick={onClick} ref={(node) => {
-            drag(drop(node));
-        }}>
-            <img
-                src={src}
-                alt="Editable Image"
-                className={imagen}
-                draggable={true}
-                onClick={onClick}
-                ref={(node) => {
-                    drag(node);
-                    node?.addEventListener('dragover', (e) => {
-                        e.preventDefault();
-                    });
-                    node?.addEventListener('drop', (e) => {
-                        e.preventDefault();
-                        handleDrop();
-                    });
-                }}
-            />
+        <div className={`${styles.div} ${styles.contenedorImagen}`} onClick={onClick}
+            ref={(node) => {
+                drop(node);
+            }}
+            draggable={true}
+        >
+            <div className={`${styles.imagenContainer}`}>
+                <img
+                    src={src}
+                    alt="Editable Image"
+                    className={styles.imagen}
+                    draggable={true}
+                    style={imageStyle}
+                    onLoad={handleImageLoad}
+                    onClick={onClick}
+                    ref={(node) => {
+                        drag(node);
+                        node?.addEventListener('dragover', (e) => {
+                            e.preventDefault();
+                        });
+                        node?.addEventListener('drop', (e) => {
+                            e.preventDefault();
+                            handleDrop();
+                        });
+                    }}
+                />
+            </div>
+
         </div>
     );
 };

@@ -14,7 +14,6 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: -10;
 }
 
 .imagenConBorde {
@@ -40,7 +39,6 @@
     grid-template-rows: 50% 50%;
     width: 100%;
     height: 100%;
-    z-index: 10000000;
 }
 
 .container {
