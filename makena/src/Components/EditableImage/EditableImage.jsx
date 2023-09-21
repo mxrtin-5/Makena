@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { ImageContext } from "../../context/imageContext";
 import styles from './EditableImagen.module.css';
 
-const EditableImage = ({ src, id, index, onDrop, onClick }) => {
+const EditableImage = ({ src, id, index, onDrop, onClick, isSelected }) => {
 
     const { ItemTypes } = useContext(ImageContext);
 
@@ -29,6 +29,7 @@ const EditableImage = ({ src, id, index, onDrop, onClick }) => {
         maxWidth: '100%',
         maxHeight: '100%',
         display: imageLoaded ? 'block' : 'none',
+        border: isSelected ? '6px solid rgb(212, 0, 255)' : 'none'
     };
 
     return (
@@ -65,8 +66,3 @@ const EditableImage = ({ src, id, index, onDrop, onClick }) => {
 };
 
 export default EditableImage;
-
-
-
-
-{/*  */ }

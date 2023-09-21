@@ -9,7 +9,7 @@ import { Cropper } from "react-cropper";
 
 const Grilla1 = ({ phoneImg }) => {
 
-    const { translateX, setTranslateY, setTranslateX, translateY, setEscala ,escala, setHeight, setWidth, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
+    const { translateX, setTranslateY, setTranslateX, translateY, setEscala, escala, setHeight, setWidth, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
 
     const [imagenes, setImagenes] = useState([])
 
@@ -40,6 +40,16 @@ const Grilla1 = ({ phoneImg }) => {
         setImagenes(updatedImages);
     };
 
+    console.log(imagenSeleccionada);
+
+    const handleImageClick = () => {
+        setImagenSeleccionada(imagenSeleccionada === 0 ? 1 : 0);
+    };
+
+    const isImageSelected = () => {
+        return imagenSeleccionada === 1;
+    };
+
 
     return (
         <ImageProvider>
@@ -48,7 +58,7 @@ const Grilla1 = ({ phoneImg }) => {
                     <Cropper
                         ref={cropperRef}
                         className={styles.cropperCropBox}
-                        src={imagenes[0].url} // Utiliza phoneImg como fuente del Cropper
+                        src={imagenes[0].url}
                         guides={false}
                         dragMode="none"
                         responsive={true}
@@ -72,13 +82,16 @@ const Grilla1 = ({ phoneImg }) => {
                             src={imgData.url}
                             index={index}
                             onDrop={handleDrop}
-                            onClick={() => {
-                                if (imagenSeleccionada === imgData.id) {
-                                    setImagenSeleccionada(null);
-                                } else {
-                                    setImagenSeleccionada(imgData.id);
-                                }
-                            }}
+                            onClick={handleImageClick}
+                            isSelected={imagenSeleccionada === index}
+                            className={isImageSelected ? styles.selectedImage : ''}
+                            style={
+                                imagenSeleccionada === index
+                                    ? {
+                                        transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
+                                    }
+                                    : {}
+                            }
                         />
                     ))}
                 </div>
@@ -88,13 +101,21 @@ const Grilla1 = ({ phoneImg }) => {
                 <div className={styles.container}>
                     <button
                         className={styles.button}
-                        onClick={() => setEscala(escala + 0.3)}
+                        onClick={() => {
+                            if (imagenSeleccionada === 1) {
+                                setEscala(escala + 0.3)
+                            }
+                        }}
                     >
                         Zoom +
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setEscala(escala - 0.3)}
+                        onClick={() => {
+                            if (imagenSeleccionada === 1) {
+                                setEscala(escala - 0.3)
+                            }
+                        }}
                     >
                         Zoom -
                     </button>
@@ -103,25 +124,41 @@ const Grilla1 = ({ phoneImg }) => {
                 <div className={styles.container}>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateY(translateY - 5)}
+                        onClick={() => {
+                            if (imagenSeleccionada === 1) {
+                                setTranslateY(translateY - 5);
+                            }
+                        }}
                     >
                         Arriba
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateY(translateY + 5)}
+                        onClick={() => {
+                            if (imagenSeleccionada === 1) {
+                                setTranslateY(translateY + 5);
+                            }
+                        }}
                     >
                         Abajo
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateX(translateX + 5)}
+                        onClick={() => {
+                            if (imagenSeleccionada === 1) {
+                                setTranslateX(translateX + 5);
+                            }
+                        }}
                     >
                         {"=>"}
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateX(translateX - 5)}
+                        onClick={() => {
+                            if (imagenSeleccionada === 1) {
+                                setTranslateX(translateX - 5);
+                            }
+                        }}
                     >
                         {"<="}
                     </button>
