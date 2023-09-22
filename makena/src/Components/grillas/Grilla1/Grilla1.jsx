@@ -8,30 +8,27 @@ import { Cropper } from "react-cropper";
 
 
 const Grilla1 = ({ phoneImg }) => {
+    const { translateX, setTranslateY, setTranslateX, translateY, setEscala, escala, setHeight, setWidth, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext);
 
-    const { translateX, setTranslateY, setTranslateX, translateY, setEscala, escala, setHeight, setWidth, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
-
-    const [imagenes, setImagenes] = useState([])
+    const [imagenes, setImagenes] = useState([]);
 
     const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
-
-    const [isPopupOpen, setPopupOpen] = useState(false)
-
-    console.log(imagenes);
+    
+    const [isPopupOpen, setPopupOpen] = useState(false);
 
     const cropperRef = useRef(null);
 
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
-    }
+    };
 
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {
-            let newState = [...prevState, cloudData]
-            setImagenSeleccionada(newState.length - 1)
+            let newState = [...prevState, cloudData];
+            setImagenSeleccionada(newState.length - 1);
             return newState;
-        })
-    }
+        });
+    };
 
     const handleDrop = (fromIndex, toIndex) => {
         const updatedImages = [...imagenes];
@@ -40,16 +37,13 @@ const Grilla1 = ({ phoneImg }) => {
         setImagenes(updatedImages);
     };
 
-    console.log(imagenSeleccionada);
-
-    const handleImageClick = () => {
-        setImagenSeleccionada(imagenSeleccionada === 0 ? 1 : 0);
+    const handleImageClick = (index) => {
+        setImagenSeleccionada(index);
     };
 
-    const isImageSelected = () => {
-        return imagenSeleccionada === 1;
+    const isImageSelected = (index) => {
+        return index === imagenSeleccionada;
     };
-
 
     return (
         <ImageProvider>
@@ -70,10 +64,18 @@ const Grilla1 = ({ phoneImg }) => {
                         cropBoxMovable={false}
                     />
                 )}
-                <img onLoad={(e) => {
-                    setWidth(e.target.width);
-                    setHeight(e.target.height);
-                }} className={styles.marcoImg} src={phoneImg} alt="" />
+                <img
+                    onLoad={(e) => {
+                        setWidth(e.target.width);
+                        setHeight(e.target.height);
+                    }}
+                    className={styles.marcoImg}
+                    src={phoneImg}
+                    style={{
+                        zIndex: isPopupOpen ? 100000000 : -10000
+                    }}
+                    alt=""
+                />
 
                 <div className={styles.contenedorImgs}>
                     {imagenes.map((imgData, index) => (
@@ -82,11 +84,14 @@ const Grilla1 = ({ phoneImg }) => {
                             src={imgData.url}
                             index={index}
                             onDrop={handleDrop}
-                            onClick={handleImageClick}
-                            isSelected={imagenSeleccionada === index}
-                            className={isImageSelected ? styles.selectedImage : ''}
+                            onClick={() => handleImageClick(index)}
+                            isSelected={isImageSelected(index)}
+                            escala={imagenSeleccionada === index ? escala : 1}
+                            translateX={imagenSeleccionada === index ? translateX : 0}
+                            translateY={imagenSeleccionada === index ? translateY : 0}
+                            className={isImageSelected(index) ? styles.selectedImage : ''}
                             style={
-                                imagenSeleccionada === index
+                                isImageSelected(index)
                                     ? {
                                         transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
                                     }
@@ -102,8 +107,8 @@ const Grilla1 = ({ phoneImg }) => {
                     <button
                         className={styles.button}
                         onClick={() => {
-                            if (imagenSeleccionada === 1) {
-                                setEscala(escala + 0.3)
+                            if (isImageSelected(imagenSeleccionada)) {
+                                setEscala(escala + 0.3);
                             }
                         }}
                     >
@@ -112,8 +117,8 @@ const Grilla1 = ({ phoneImg }) => {
                     <button
                         className={styles.button}
                         onClick={() => {
-                            if (imagenSeleccionada === 1) {
-                                setEscala(escala - 0.3)
+                            if (isImageSelected(imagenSeleccionada)) {
+                                setEscala(escala - 0.3);
                             }
                         }}
                     >
@@ -125,7 +130,7 @@ const Grilla1 = ({ phoneImg }) => {
                     <button
                         className={styles.button}
                         onClick={() => {
-                            if (imagenSeleccionada === 1) {
+                            if (isImageSelected(imagenSeleccionada)) {
                                 setTranslateY(translateY - 5);
                             }
                         }}
@@ -135,7 +140,7 @@ const Grilla1 = ({ phoneImg }) => {
                     <button
                         className={styles.button}
                         onClick={() => {
-                            if (imagenSeleccionada === 1) {
+                            if (isImageSelected(imagenSeleccionada)) {
                                 setTranslateY(translateY + 5);
                             }
                         }}
@@ -145,7 +150,7 @@ const Grilla1 = ({ phoneImg }) => {
                     <button
                         className={styles.button}
                         onClick={() => {
-                            if (imagenSeleccionada === 1) {
+                            if (isImageSelected(imagenSeleccionada)) {
                                 setTranslateX(translateX + 5);
                             }
                         }}
@@ -155,7 +160,7 @@ const Grilla1 = ({ phoneImg }) => {
                     <button
                         className={styles.button}
                         onClick={() => {
-                            if (imagenSeleccionada === 1) {
+                            if (isImageSelected(imagenSeleccionada)) {
                                 setTranslateX(translateX - 5);
                             }
                         }}
@@ -167,27 +172,32 @@ const Grilla1 = ({ phoneImg }) => {
 
             <div className={styles.containerBotones}>
                 <UploadWidget getImageData={handleAddImageShow} />
-                <button onClick={handleCrop}>
-                    Recortar
-                </button>
+                <button onClick={handleCrop}>Recortar</button>
                 <button onClick={TogglePopup}>toggle</button>
-                <button style={{
-                    marginTop: "80px"
-                }} onClick={guardarDatos}>
+                <button
+                    style={{
+                        marginTop: "80px",
+                    }}
+                    onClick={guardarDatos}
+                >
                     Realizar pedido
                 </button>
             </div>
 
             {croppedImage && (
                 <div>
-                    <img style={{
-                        display: "none",
-                        transform: ` translate(${translateX}px, ${translateY}px)`
-                    }} src={croppedImage} alt="Imagen recortada" />
+                    <img
+                        style={{
+                            display: "none",
+                            transform: `translate(${translateX}px, ${translateY}px)`,
+                        }}
+                        src={croppedImage}
+                        alt="Imagen recortada"
+                    />
                 </div>
             )}
         </ImageProvider>
     );
-}
+};
 
 export default Grilla1;

@@ -42,6 +42,7 @@ const GrillasProvider = ({ children }) => {
     }
 
     const handleCrop = async (e) => {
+
         if (cropperRef.current && cropperRef.current.cropper) {
             const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
                 width: width * escala,
@@ -62,7 +63,6 @@ const GrillasProvider = ({ children }) => {
             }
         }
     };
-
 
     return (
         <GrillasContext.Provider value={{
