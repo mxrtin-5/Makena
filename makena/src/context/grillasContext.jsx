@@ -41,7 +41,7 @@ const GrillasProvider = ({ children }) => {
         }
     }
 
-    const handleCrop = async (e) => {
+    const handleCrop = async () => {
 
         if (cropperRef.current && cropperRef.current.cropper) {
             const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
