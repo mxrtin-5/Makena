@@ -1,10 +1,9 @@
-
-
 .divContenedor{
     position: absolute;
-    top: 45%;
-    left: 2%;
+    top: 50%;
+    left: 5%;
     color: rgb(238, 238, 238);
+    z-index: 1000;
 }
 
 .divContenedor h1{

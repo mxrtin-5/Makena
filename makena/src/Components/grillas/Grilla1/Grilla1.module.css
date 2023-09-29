@@ -6,6 +6,17 @@
     overflow: hidden;
 }
 
+.pruebaImages{
+    position: absolute;
+    left: 0%;
+    top:100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pruebaImages img {
+    width: 300px;
+}
 .marco .cropperCropBox{
     display: none;
 }

@@ -6,6 +6,7 @@ import EditableImage from "../../EditableImage/EditableImage";
 import { GrillasContext } from "../../../context/grillasContext";
 import { Cropper } from "react-cropper";
 
+
 const changeValueArray = (arr, indexForChange, newValue) => {
     const newArray = arr.map((element, index) => {
         if (index === indexForChange) return newValue;
@@ -24,11 +25,13 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [isPopupOpen, setPopupOpen] = useState(false);
 
-    const [escalas, setEscalas] = useState([1,1])
+    const [escalas, setEscalas] = useState([1, 1])
 
     const [translateX, setTranslateX] = useState(0);
 
     const [translateY, setTranslateY] = useState(0);
+
+    const [mergedImage, setMergedImage] = useState(null);
 
     const cropperRef = useRef(null);
 
@@ -59,10 +62,15 @@ const Grilla1 = ({ phoneImg }) => {
         return index === imagenSeleccionada;
     };
 
+
+
+
+
+
     return (
         <ImageProvider>
-            <div className={styles.marco}>
-                {/* {imagenes && imagenes.length > 0 && (
+            <div id="grilla-container" className={styles.marco}>
+                {imagenes && imagenes.length > 0 && (
                     <Cropper
                         ref={cropperRef}
                         //escala
@@ -79,24 +87,8 @@ const Grilla1 = ({ phoneImg }) => {
                         wheelZoomRatio={0}
                         cropBoxMovable={false}
                     />
-                )} */}
-                {imagenes && imagenes.length > 0 && (
-                    escalas.map(escalaValue => <Cropper
-                        ref={cropperRef}
-                        className={styles.cropperCropBox}
-                        src={imagenes[0].url}
-                        guides={false}
-                        dragMode="none"
-                        responsive={true}
-                        autoCropArea={1}
-                        zoomTo={escalaValue} 
-                        cropBoxResizable={false}
-                        zoomable={false}
-                        zoomOnTouch={false}
-                        wheelZoomRatio={0}
-                        cropBoxMovable={false}
-                    />)
                 )}
+
                 <img
                     onLoad={(e) => {
                         setWidth(e.target.width);
@@ -109,13 +101,14 @@ const Grilla1 = ({ phoneImg }) => {
                     }}
                     alt=""
                 />
- {/* //!    MODULARIZADO */}
+                {/* //!    MODULARIZADO */}
                 <div className={styles.contenedorImgs}>
                     {imagenes.map((imgData, index) => (
                         <EditableImage
                             key={imgData.url}
                             src={imgData.url}
                             index={index}
+                            referenciaImagenes={index}
                             onDrop={handleDrop}
                             onClick={() => handleImageClick(index)}
                             isSelected={isImageSelected(index)}
@@ -133,13 +126,11 @@ const Grilla1 = ({ phoneImg }) => {
                         />
                     ))}
                 </div>
- {/* //!    MODULARIZADO */}
-
             </div>
 
             <div className={styles.containerEditar}>
                 <div className={styles.container}>
-{/* //! 1 SOLO CUSTOM BUTTON QUE RECIBA LO QUE NECESITA PARA FUNCIONAR */}
+                    {/* //! 1 SOLO CUSTOM BUTTON QUE RECIBA LO QUE NECESITA PARA FUNCIONAR */}
                     <button
                         className={styles.button}
                         onClick={() => {
@@ -150,8 +141,7 @@ const Grilla1 = ({ phoneImg }) => {
                                     const newValue = estadoPrevio[imagenSeleccionada] + 0.3
 
                                     const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
-                                    console.log(newState, "sacacorcho");
-                                    
+
                                     return newState
 
                                 })
@@ -170,7 +160,7 @@ const Grilla1 = ({ phoneImg }) => {
                                     const newValue = estadoPrevio[imagenSeleccionada] - 0.3
 
                                     const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
-                                    
+
                                     console.log(newState, "sacacorcho");
                                     return newState
 
@@ -238,6 +228,7 @@ const Grilla1 = ({ phoneImg }) => {
                 >
                     Realizar pedido
                 </button>
+                {/* <button onClick={mergeImages}>Unir Imágenes</button> */}
             </div>
 
             {croppedImage && (
@@ -257,6 +248,3 @@ const Grilla1 = ({ phoneImg }) => {
 };
 
 export default Grilla1;
-
-
-

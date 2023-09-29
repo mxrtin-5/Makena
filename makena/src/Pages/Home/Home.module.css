@@ -1,7 +1,33 @@
-.backgroundImg{
+.sectionHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.swipper {
     width: 100%;
-    height: auto;
-    filter: brightness(0.8);
+    height: 90vh;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.backgroundImg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    filter: brightness(0.7);
+}
+
+.imagenes {
+    width: 100%;
+    height: 100%;
+}
+
+.imagenes img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .componentContainer {
@@ -9,7 +35,5 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem; 
+    padding: 2rem;
 }
-
-

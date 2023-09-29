@@ -1,9 +1,10 @@
 import { useDrag, useDrop } from "react-dnd";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { ImageContext } from "../../context/imageContext";
+import html2canvas from 'html2canvas'
 import styles from './EditableImagen.module.css';
 
-const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, translateX, translateY, escala }) => {
+const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, referenciaImagenes, translateX, translateY, escala }) => {
 
     const { ItemTypes } = useContext(ImageContext);
 
@@ -35,6 +36,34 @@ const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, translateX
         transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
     };
 
+    const handleImageError = (error) => {
+        console.error('Error al cargar la imagen:', error);
+    };
+
+    const imageRef1 = useRef(null);
+    const imageRef2 = useRef(null);
+
+
+    const mergeImages = () => {
+        html2canvas(imageRef1.current).then(canvas1 => {
+            html2canvas(imageRef2.current).then(canvas2 => {
+                const combinedCanvas = document.createElement('canvas');
+                const ctx = combinedCanvas.current.getContext('2d');
+                ctx.drawImage(canvas1, 0, 0);
+                ctx.drawImage(canvas2, canvas1.width, 0);
+
+                // Convertir el lienzo combinado en una URL de imagen
+                const combinedImageUrl = combinedCanvas.current.toDataURL('image/png');
+                console.log(combinedImageUrl);
+                document.body.appendChild(combinedCanvas);
+            });
+        });
+
+
+
+
+    };
+
     return (
         <div className={`${styles.div} ${styles.contenedorImagen}`} onClick={onClick}
             ref={(node) => {
@@ -42,15 +71,20 @@ const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, translateX
             }}
             draggable={true}
         >
-            <div className={`${styles.imagenContainer}`}>
+            <div ref={referenciaImagenes === 0 ? imageRef1 : imageRef2} className={`${styles.imagenContainer}`}>
                 <img
+                    id={referenciaImagenes}
                     src={src}
                     alt="Editable Image"
                     className={styles.imagen}
                     draggable={true}
                     style={imageStyle}
                     onLoad={handleImageLoad}
-                    onClick={onClick}
+                    onClick={() => {
+                        onClick()
+                        mergeImages()
+                    }}
+                    onError={handleImageError}
                     ref={(node) => {
                         drag(node);
                         node?.addEventListener('dragover', (e) => {
@@ -63,7 +97,6 @@ const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, translateX
                     }}
                 />
             </div>
-
         </div>
     );
 };
