@@ -8,15 +8,19 @@ import { Cropper } from "react-cropper";
 
 
 const Grilla1 = ({ phoneImg }) => {
-    const { translateX, setTranslateY, setTranslateX, translateY, setEscala, escala, setHeight, setWidth, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext);
+    const { setHeight, setWidth, handleCrop, guardarDatos, croppedImage, cropperRef } = useContext(GrillasContext);
 
     const [imagenes, setImagenes] = useState([]);
 
     const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
-    
+
     const [isPopupOpen, setPopupOpen] = useState(false);
 
-    const cropperRef = useRef(null);
+    const [escala, setEscala] = useState([1, 1])
+
+    const [translateX, setTranslateX] = useState(0);
+
+    const [translateY, setTranslateY] = useState(0);
 
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
@@ -45,6 +49,15 @@ const Grilla1 = ({ phoneImg }) => {
         return index === imagenSeleccionada;
     };
 
+    const changeValueArray = (arr, indexForChange, newValue) => {
+        const newArray = arr.map((element, index) => {
+            if (index === indexForChange) return newValue;
+            return element
+        })
+
+        return newArray
+    }
+
     return (
         <ImageProvider>
             <div className={styles.marco}>
@@ -57,6 +70,7 @@ const Grilla1 = ({ phoneImg }) => {
                         dragMode="none"
                         responsive={true}
                         autoCropArea={1}
+                        zoomTo={escala[imagenSeleccionada]}
                         cropBoxResizable={false}
                         zoomable={false}
                         zoomOnTouch={false}
@@ -83,10 +97,11 @@ const Grilla1 = ({ phoneImg }) => {
                             key={imgData.url}
                             src={imgData.url}
                             index={index}
+                            referenciaImagenes={index}
                             onDrop={handleDrop}
                             onClick={() => handleImageClick(index)}
                             isSelected={isImageSelected(index)}
-                            escala={imagenSeleccionada === index ? escala : 1}
+                            escala={escala[index]}
                             translateX={imagenSeleccionada === index ? translateX : 0}
                             translateY={imagenSeleccionada === index ? translateY : 0}
                             className={isImageSelected(index) ? styles.selectedImage : ''}
@@ -108,7 +123,17 @@ const Grilla1 = ({ phoneImg }) => {
                         className={styles.button}
                         onClick={() => {
                             if (isImageSelected(imagenSeleccionada)) {
-                                setEscala(escala + 0.3);
+
+                                setEscala((estadoPrevio) => {
+
+                                    const newValue = estadoPrevio[imagenSeleccionada] + 0.3
+
+                                    const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+
+                                    return newState
+
+                                })
+
                             }
                         }}
                     >
@@ -118,7 +143,16 @@ const Grilla1 = ({ phoneImg }) => {
                         className={styles.button}
                         onClick={() => {
                             if (isImageSelected(imagenSeleccionada)) {
-                                setEscala(escala - 0.3);
+                                setEscala((estadoPrevio) => {
+
+                                    const newValue = estadoPrevio[imagenSeleccionada] - 0.3
+
+                                    const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+
+                                    console.log(newState, "sacacorcho");
+                                    return newState
+
+                                })
                             }
                         }}
                     >
@@ -172,7 +206,10 @@ const Grilla1 = ({ phoneImg }) => {
 
             <div className={styles.containerBotones}>
                 <UploadWidget getImageData={handleAddImageShow} />
-                <button onClick={handleCrop}>Recortar</button>
+                <button onClick={() => {
+                    console.log("Button clicked");
+                    handleCrop();
+                }}>Recortar</button>
                 <button onClick={TogglePopup}>toggle</button>
                 <button
                     style={{

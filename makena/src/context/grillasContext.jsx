@@ -43,11 +43,21 @@ const GrillasProvider = ({ children }) => {
 
     const handleCrop = async (e) => {
 
-        if (cropperRef.current && cropperRef.current.cropper) {
+        console.log("peneeeeeeee");
+        
+        console.log(cropperRef.current);
+        console.log(cropperRef.current?.cropper);
+        console.log(cropperRef.current.cropper);  
+
+        if (cropperRef.current && cropperRef.current.cropper) {  
             const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
                 width: width * escala,
                 height: height * escala
-            });
+            })
+            
+            console.log(croppedCanvas);
+
+            
 
             if (croppedCanvas) {
                 const context = croppedCanvas.getContext("2d");
@@ -58,11 +68,14 @@ const GrillasProvider = ({ children }) => {
 
                     const croppedImageBase64 = croppedCanvas.toDataURL();
                     setCroppedImage(croppedImageBase64);
+                    console.log(croppedImageBase64);
                     console.log(croppedImage);
                 }
             }
         }
     };
+
+    
 
     return (
         <GrillasContext.Provider value={{
