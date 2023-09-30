@@ -5,9 +5,11 @@ import ImageProvider from "../../../context/imageContext";
 import EditableImage from "../../EditableImage/EditableImage";
 import { GrillasContext } from "../../../context/grillasContext";
 import { Cropper } from "react-cropper";
+import html2canvas from 'html2canvas'
 
 
 const Grilla1 = ({ phoneImg }) => {
+
     const { setHeight, setWidth, handleCrop, guardarDatos, croppedImage, cropperRef } = useContext(GrillasContext);
 
     const [imagenes, setImagenes] = useState([]);
@@ -21,6 +23,10 @@ const Grilla1 = ({ phoneImg }) => {
     const [translateX, setTranslateX] = useState(0);
 
     const [translateY, setTranslateY] = useState(0);
+
+    const [combinedImageUrl, setCombinedImageUrl] = useState('');
+
+    const combinedImageRef = useRef(null);
 
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
@@ -57,6 +63,63 @@ const Grilla1 = ({ phoneImg }) => {
 
         return newArray
     }
+
+    const combineImages = () => {
+        // Crear un array de promesas para cargar las imágenes de Cloudinary
+        const imagePromises = imagenes.map((imgData) => {
+            return new Promise((resolve) => {
+                const imgElement = new Image();
+                imgElement.crossOrigin = "anonymous"; // Habilitar el uso de CORS
+                imgElement.src = imgData.url;
+                imgElement.onload = () => {
+                    resolve(imgElement);
+                };
+            });
+        });
+
+        const applyZoom = (imgElement, zoom) => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = imgElement.width * zoom;
+            canvas.height = imgElement.height * zoom;
+            ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+            return canvas;
+        };
+
+        // Aplicar zoom a las imágenes según la escala
+        const zoomedImages = imagenes.map((imgElement, index) => {
+            const zoom = escala[index] || 1; // Obtener la escala correspondiente o 1 si no hay escala
+            return applyZoom(imgElement, zoom);
+        });
+
+        // Calcular el ancho y alto total de las imágenes combinadas
+        const totalWidth = zoomedImages.reduce((width, imgElement) => {
+            return Math.max(width, imgElement.width);
+        }, 0);
+        const totalHeight = zoomedImages.reduce((height, imgElement) => {
+            return height + imgElement.height;
+        }, 0);
+
+        // Establecer las dimensiones del lienzo combinado
+        combinedCanvas.width = totalWidth;
+        combinedCanvas.height = totalHeight;
+
+        // Dibujar las imágenes una encima de la otra en el lienzo
+        let offsetY = 0;
+
+        zoomedImages.forEach((imgElement) => {
+            const x = (combinedCanvas.width - imgElement.width) / 2; // Centrar horizontalmente
+            const y = offsetY; // Apilar verticalmente
+            ctx.drawImage(imgElement, x, y, imgElement.width, imgElement.height);
+            offsetY += imgElement.height;
+        });
+
+        const combinedImageUrl = combinedCanvas.toDataURL("image/png")
+
+        setCombinedImageUrl(combinedImageUrl);
+
+        console.log(combinedImageUrl);
+    };
 
     return (
         <ImageProvider>
@@ -116,6 +179,15 @@ const Grilla1 = ({ phoneImg }) => {
                     ))}
                 </div>
             </div>
+
+            <canvas
+                ref={combinedImageRef}
+                style={{ display: 'none' }}
+                width="240" // Ajusta el ancho del lienzo según tus necesidades
+                height="500" // Ajusta la altura del lienzo según tus necesidades
+            ></canvas>
+
+            {/* <img src={combinedImageUrl} alt="Combined Image" /> */}
 
             <div className={styles.containerEditar}>
                 <div className={styles.container}>
@@ -219,6 +291,7 @@ const Grilla1 = ({ phoneImg }) => {
                 >
                     Realizar pedido
                 </button>
+                <button onClick={combineImages}> Unir</button>
             </div>
 
             {croppedImage && (
@@ -226,7 +299,8 @@ const Grilla1 = ({ phoneImg }) => {
                     <img
                         style={{
                             display: "none",
-                            transform: `translate(${translateX}px, ${translateY}px)`,
+                            transform: `translate(${translateX[imagenSeleccionada]}px, ${translateY[imagenSeleccionada]
+                                }px)`,
                         }}
                         src={croppedImage}
                         alt="Imagen recortada"

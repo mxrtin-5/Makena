@@ -10,6 +10,7 @@ import CartProvider from './context/cartContext';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import GrillasProvider from './context/grillasContext';
+import ImageCombiner from './Components/Prueba/Prueba';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer />} />
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
+                <Route path='/prueba' element={<ImageCombiner />} />
               </Routes>
 
             </BrowserRouter>
