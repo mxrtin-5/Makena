@@ -42,7 +42,6 @@ const GrillasProvider = ({ children }) => {
 
     const handleCrop = async (e) => {
 
-        console.log("peneeeeeeee");
         
         console.log(cropperRef.current);
         console.log(cropperRef.current?.cropper);

@@ -2,6 +2,7 @@ import { useRef} from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import './Menu.css'
+import CartIcon from "../../CartIcon/CartIcon";
 
 
 const Menulist = ({ cerrar }) => {
@@ -32,6 +33,8 @@ const Menulist = ({ cerrar }) => {
                 </button>
 
             </nav>
+
+            <CartIcon />
 
 
 

@@ -4,7 +4,6 @@ import './Navbar.css'
 import { useEffect, useState } from "react";
 import { AiOutlineMenu } from 'react-icons/ai'
 import Menulist from "./Menu/MenuList";
-import CartIcon from "../CartIcon/CartIcon";
 
 
 

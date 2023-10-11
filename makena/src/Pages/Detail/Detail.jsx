@@ -11,16 +11,16 @@ import { useEffect, useState } from 'react';
 import { db } from '../../firebase/config'
 
 const Detail = () => {
-    
+
     const { id } = useParams() //! despues mira como traer el detalle de firebase solo para este telefono
 
     const { modelo } = useParams()
-        
+
     console.log(id);
 
     const [telefonoInfo, setTelefonoInfo] = useState({});
 
-    console.log(telefonoInfo,"<<<----------");
+    console.log(telefonoInfo, "<<<----------");
 
     const idGrilla = location.search.split("=")[1]
 
@@ -40,7 +40,7 @@ const Detail = () => {
                     console.log("Datos del teléfono:", phoneData);
                     setTelefonoInfo(phoneData)
                 } else {
-                    console.log("El documento no existe."); 
+                    console.log("El documento no existe.");
                 }
             })
             .catch((error) => {
@@ -53,18 +53,17 @@ const Detail = () => {
     const selectGrid = (idGrilla) => {
         switch (idGrilla) {
             case "0":
-                return <Grilla0 phoneImg={telefonoInfo.modelo} />
+                return <Grilla0 phoneImg={telefonoInfo.modelo} id={id} />
             case "1":
-                return <Grilla1 phoneImg={telefonoInfo.modelo} />
-
+                return <Grilla1 phoneImg={telefonoInfo.modelo} id={id} />
             case "2":
-                return <Grilla2 phoneImg={telefonoInfo.modelo} />
+                return <Grilla2 phoneImg={telefonoInfo.modelo} id={id} />
             case "3":
-                return <Grilla3 phoneImg={telefonoInfo.modelo} />
+                return <Grilla3 phoneImg={telefonoInfo.modelo} id={id} />
             case "4":
-                return <Grilla4 phoneImg={telefonoInfo.modelo} />
+                return <Grilla4 phoneImg={telefonoInfo.modelo} id={id} />
             case "5":
-                return <Grilla5 phoneImg={telefonoInfo.modelo} />
+                return <Grilla5 phoneImg={telefonoInfo.modelo} id={id} />
             default:
                 return <p>grilla 10</p>;
         }
@@ -75,16 +74,8 @@ const Detail = () => {
     return (
         <section className={styles.container}>
             {selectGrid(idGrilla)}
-
         </section>
     );
 }
 
 export default Detail;
-
-
-
-
-
-
-

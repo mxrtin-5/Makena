@@ -25,6 +25,7 @@
     align-items: center;
     justify-content: center; 
     max-height: 800px;
+    min-width: 400px;
     overflow-y: auto;
     padding-top: 20%;
 }
@@ -32,7 +33,6 @@
 .cartProducts p{
     margin-top: 20px;
 }
-
 
 .cartProduct{
     background-color: #949191ee;

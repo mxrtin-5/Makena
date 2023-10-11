@@ -6,8 +6,8 @@ const CartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([])
 
-    const agregarAlCarrito = (item) => {
-        setCart([...cart, item])
+    const agregarAlCarrito = (item, productName) => {
+        setCart([...cart, { ...item, name: productName }]);
     }
 
     const removerDelCarrito = (id) => {

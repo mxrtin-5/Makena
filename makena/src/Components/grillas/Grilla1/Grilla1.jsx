@@ -8,11 +8,14 @@ import { Cropper } from "react-cropper";
 import html2canvas from 'html2canvas'
 import { db } from "../../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
+import { CartContext } from "../../../context/cartContext";
 
 
-const Grilla1 = ({ phoneImg }) => {
+const Grilla1 = ({ phoneImg, id }) => {
 
     const { setHeight, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
+
+    const { agregarAlCarrito } = useContext(CartContext);
 
     const [imagenes, setImagenes] = useState([]);
 
@@ -28,9 +31,20 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
-    const[loadedImages, setLoadedImages] = useState(null)
+    const [loadedImages, setLoadedImages] = useState(null)
+
+    const [pedidoRealizado, setPedidoRealizado] = useState(false);
 
     const ref = useRef(null);
+
+    const handleAgregarAlCarrito = () => {
+        const product = {
+            name: id,
+            img: combinedImageUrl,
+            price: 0
+        };
+        agregarAlCarrito(product, id);
+    };
 
     const guardarDatos = async () => {
         try {
@@ -39,6 +53,7 @@ const Grilla1 = ({ phoneImg }) => {
                 translateX: translateX,
                 translateY: translateY
             });
+            setPedidoRealizado(true);
             console.log("Datos guardados con éxito");
         } catch (error) {
             console.error("Error al guardar datos en Firebase:", error);
@@ -63,9 +78,7 @@ const Grilla1 = ({ phoneImg }) => {
             return screenshotDataUrl; // Devuelve la URL de la imagen generada
         }).catch((err) => {
             console.log("Error al generar la imagen:", err);
-        }).then((screenshotDataUrl) => {
-            guardarDatos(screenshotDataUrl); // Llama a guardarDatos después de generar la imagen
-        });
+        })
     }, [ref]);
 
 
@@ -75,7 +88,6 @@ const Grilla1 = ({ phoneImg }) => {
             takeScreenshot();
         }
     };
-
 
     console.log(combinedImageUrl);
 
@@ -275,18 +287,21 @@ const Grilla1 = ({ phoneImg }) => {
 
             <div className={styles.containerBotones}>
                 <UploadWidget getImageData={handleAddImageShow} />
-                <button onClick={() => {
-                    console.log("Button clicked");
-                    hancddleCrop();
-                }}>Recortar</button>
-                <button onClick={TogglePopup}>toggle</button>
+                <button onClick={TogglePopup}>Toggle</button>
                 <button
                     style={{
                         marginTop: "80px",
                     }}
                     onClick={guardarDatos}
+                    disabled={pedidoRealizado}
                 >
-                    Realizar pedido
+                    {pedidoRealizado ? "Pedido realizado" : "Realizar pedido"}
+                </button>
+                <button
+                    type="button"
+                    onClick={handleAgregarAlCarrito}
+                >
+                    Agregar al carrito
                 </button>
                 <button type="button" onClick={takeScreenshot}> Unir</button>
             </div>

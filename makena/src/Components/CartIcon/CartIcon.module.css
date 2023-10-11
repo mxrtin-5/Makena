@@ -1,6 +1,8 @@
 .icono{
+    display: flex;
     cursor: pointer;
     color: white;
     position: absolute;
+    top: 40%;
     right: 7%;
 }
