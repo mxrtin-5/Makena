@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { ImageContext } from "../../context/imageContext";
 import styles from './EditableImagen.module.css';
 
-const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, translateX, translateY, escala }) => {
+const EditableImage = ({ src, id, index, onDrop, onImageLoad, onClick, translateX, translateY, escala }) => {
 
     const { ItemTypes } = useContext(ImageContext);
 
@@ -11,6 +11,7 @@ const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, translateX
 
     const handleImageLoad = () => {
         setImageLoaded(true);
+        onImageLoad();
     };
 
     const [, drag] = useDrag({
@@ -31,7 +32,6 @@ const EditableImage = ({ src, id, index, onDrop, onClick, isSelected, translateX
         maxWidth: '100%',
         maxHeight: '100%',
         display: imageLoaded ? 'block' : 'none',
-        border: isSelected ? '6px solid rgb(212, 0, 255)' : 'none',
         transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
     };
 

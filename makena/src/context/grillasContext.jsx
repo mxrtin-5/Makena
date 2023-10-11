@@ -30,7 +30,6 @@ const GrillasProvider = ({ children }) => {
 
     const guardarDatos = async (e) => {
 
-        e.preventDefault();
 
         try {
             await addDoc(collection(db, "pedidos"), {

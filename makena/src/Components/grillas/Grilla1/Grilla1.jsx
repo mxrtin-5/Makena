@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useCallback, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla1.module.css'
 import ImageProvider from "../../../context/imageContext";
@@ -6,11 +6,13 @@ import EditableImage from "../../EditableImage/EditableImage";
 import { GrillasContext } from "../../../context/grillasContext";
 import { Cropper } from "react-cropper";
 import html2canvas from 'html2canvas'
+import { db } from "../../../firebase/config";
+import { addDoc, collection } from "firebase/firestore";
 
 
 const Grilla1 = ({ phoneImg }) => {
 
-    const { setHeight, setWidth, handleCrop, guardarDatos, croppedImage, cropperRef } = useContext(GrillasContext);
+    const { setHeight, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
 
     const [imagenes, setImagenes] = useState([]);
 
@@ -25,6 +27,57 @@ const Grilla1 = ({ phoneImg }) => {
     const [translateY, setTranslateY] = useState(0);
 
     const [combinedImageUrl, setCombinedImageUrl] = useState('');
+
+    const[loadedImages, setLoadedImages] = useState(null)
+
+    const ref = useRef(null);
+
+    const guardarDatos = async () => {
+        try {
+            await addDoc(collection(db, "pedidos"), {
+                croppedImage: combinedImageUrl,
+                translateX: translateX,
+                translateY: translateY
+            });
+            console.log("Datos guardados con éxito");
+        } catch (error) {
+            console.error("Error al guardar datos en Firebase:", error);
+        }
+    }
+
+    const takeScreenshot = useCallback(() => {
+        if (ref.current === null) {
+            return;
+        }
+        html2canvas(ref.current, {
+            allowTaint: true,
+            useCORS: true,
+            scale: 1,
+            logging: true,
+        }).then((canvas) => {
+            const screenshotDataUrl = canvas.toDataURL('image/jpeg', 1);
+            console.log("URL de la imagen generada:", screenshotDataUrl);
+            return screenshotDataUrl; // Devuelve la URL de la imagen generada
+        }).then((screenshotDataUrl) => {
+            setCombinedImageUrl(screenshotDataUrl); // Actualiza combinedImageUrl después de la generación
+            return screenshotDataUrl; // Devuelve la URL de la imagen generada
+        }).catch((err) => {
+            console.log("Error al generar la imagen:", err);
+        }).then((screenshotDataUrl) => {
+            guardarDatos(screenshotDataUrl); // Llama a guardarDatos después de generar la imagen
+        });
+    }, [ref]);
+
+
+    const handleAllImagesLoaded = () => {
+        setLoadedImages(loadedImages + 1);
+        if (loadedImages === imagenes.length - 1) {
+            takeScreenshot();
+        }
+    };
+
+
+    console.log(combinedImageUrl);
 
     const combinedImageRef = useRef(null);
 
@@ -64,66 +117,9 @@ const Grilla1 = ({ phoneImg }) => {
         return newArray
     }
 
-    const combineImages = () => {
-        // Crear un array de promesas para cargar las imágenes de Cloudinary
-        const imagePromises = imagenes.map((imgData) => {
-            return new Promise((resolve) => {
-                const imgElement = new Image();
-                imgElement.crossOrigin = "anonymous"; // Habilitar el uso de CORS
-                imgElement.src = imgData.url;
-                imgElement.onload = () => {
-                    resolve(imgElement);
-                };
-            });
-        });
-
-        const applyZoom = (imgElement, zoom) => {
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-            canvas.width = imgElement.width * zoom;
-            canvas.height = imgElement.height * zoom;
-            ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-            return canvas;
-        };
-
-        // Aplicar zoom a las imágenes según la escala
-        const zoomedImages = imagenes.map((imgElement, index) => {
-            const zoom = escala[index] || 1; // Obtener la escala correspondiente o 1 si no hay escala
-            return applyZoom(imgElement, zoom);
-        });
-
-        // Calcular el ancho y alto total de las imágenes combinadas
-        const totalWidth = zoomedImages.reduce((width, imgElement) => {
-            return Math.max(width, imgElement.width);
-        }, 0);
-        const totalHeight = zoomedImages.reduce((height, imgElement) => {
-            return height + imgElement.height;
-        }, 0);
-
-        // Establecer las dimensiones del lienzo combinado
-        combinedCanvas.width = totalWidth;
-        combinedCanvas.height = totalHeight;
-
-        // Dibujar las imágenes una encima de la otra en el lienzo
-        let offsetY = 0;
-
-        zoomedImages.forEach((imgElement) => {
-            const x = (combinedCanvas.width - imgElement.width) / 2; // Centrar horizontalmente
-            const y = offsetY; // Apilar verticalmente
-            ctx.drawImage(imgElement, x, y, imgElement.width, imgElement.height);
-            offsetY += imgElement.height;
-        });
-
-        const combinedImageUrl = combinedCanvas.toDataURL("image/png")
-
-        setCombinedImageUrl(combinedImageUrl);
-
-        console.log(combinedImageUrl);
-    };
-
     return (
         <ImageProvider>
-            <div className={styles.marco}>
+            <div className={styles.marco} ref={ref}>
                 {imagenes && imagenes.length > 0 && (
                     <Cropper
                         ref={cropperRef}
@@ -175,6 +171,7 @@ const Grilla1 = ({ phoneImg }) => {
                                     }
                                     : {}
                             }
+                            onImageLoad={handleAllImagesLoaded}
                         />
                     ))}
                 </div>
@@ -280,7 +277,7 @@ const Grilla1 = ({ phoneImg }) => {
                 <UploadWidget getImageData={handleAddImageShow} />
                 <button onClick={() => {
                     console.log("Button clicked");
-                    handleCrop();
+                    hancddleCrop();
                 }}>Recortar</button>
                 <button onClick={TogglePopup}>toggle</button>
                 <button
@@ -291,7 +288,7 @@ const Grilla1 = ({ phoneImg }) => {
                 >
                     Realizar pedido
                 </button>
-                <button onClick={combineImages}> Unir</button>
+                <button type="button" onClick={takeScreenshot}> Unir</button>
             </div>
 
             {croppedImage && (
