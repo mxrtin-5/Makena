@@ -6,7 +6,7 @@ import { FaTrashAlt } from "react-icons/fa";
 
 const Carrito = () => {
 
-    const { cart, removerDelCarrito, vaciarCarrito } = useContext(CartContext);
+    const { cart, removerDelCarrito, vaciarCarrito, totalCompra, counter, setCounter } = useContext(CartContext);
 
     return (
         <div className={styles.containerCartProducts}>
@@ -16,18 +16,29 @@ const Carrito = () => {
                 ) : (
                     cart.map((product) => (
                         <div key={product.name} className={styles.cartProduct}>
-                            <img src={product.img} alt={product.name} className={styles.productImage} />
                             <div className={styles.infoCartProduct}>
                                 <div className={styles.tituloProductoCarrito}>{product.name}</div>
                                 <div className={styles.precioProductoCarrito}>${product.price}</div>
-                                <div className={styles.cantidadProductoCarrito}>{product.counter}</div>
+                                <div className={styles.contenedorButtons}>
+                                    <button className={styles.buttones} onClick={() => setCounter(counter + 1)}>+</button>
+                                    <div>{counter}</div>
+                                    <button className={styles.buttones} onClick={() => setCounter(counter > 1 ? counter - 1 : 1)}>-</button>
+                                </div>
+
+
                             </div>
                             <div className={styles.iconClose}>
-                                <FaTrashAlt onClick={() => removerDelCarrito(product.name)} />
+                                <FaTrashAlt onClick={() => removerDelCarrito(product.id)} />
                             </div>
                         </div>
                     ))
                 )}
+                <div>
+                    <h5 style={{
+                        color: "black",
+                        fontSize: "10px"
+                    }}>{totalCompra}</h5>
+                </div>
                 {cart.length > 0 && (
                     <div className={styles.cartTotal}>
                         <button onClick={vaciarCarrito} className={styles.btnTerminarCompra}>

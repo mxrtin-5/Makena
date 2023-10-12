@@ -7,15 +7,19 @@ import { GrillasContext } from "../../../context/grillasContext";
 import { Cropper } from "react-cropper";
 import html2canvas from 'html2canvas'
 import { db } from "../../../firebase/config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { CartContext } from "../../../context/cartContext";
+import { useParams } from "react-router-dom";
 
 
-const Grilla1 = ({ phoneImg, id }) => {
+const Grilla1 = ({ phoneImg }) => {
+
+    const { id } = useParams()
+    console.log(id);
 
     const { setHeight, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
 
-    const { agregarAlCarrito } = useContext(CartContext);
+    const { agregarAlCarrito, counter} = useContext(CartContext)
 
     const [imagenes, setImagenes] = useState([]);
 
@@ -33,18 +37,60 @@ const Grilla1 = ({ phoneImg, id }) => {
 
     const [loadedImages, setLoadedImages] = useState(null)
 
+
     const [pedidoRealizado, setPedidoRealizado] = useState(false);
+
+    const combinedImageRef = useRef(null);
 
     const ref = useRef(null);
 
-    const handleAgregarAlCarrito = () => {
+    //Tomar Screenshot
+
+    const takeScreenshot = useCallback(() => {
+        if (ref.current === null) {
+            return;
+        }
+        html2canvas(ref.current, {
+            allowTaint: true,
+            useCORS: true,
+            scale: 1,
+            logging: true,
+        }).then((canvas) => {
+            const screenshotDataUrl = canvas.toDataURL('image/jpeg', 1);
+            console.log("URL de la imagen generada:", screenshotDataUrl);
+            return screenshotDataUrl;
+        }).then((screenshotDataUrl) => {
+            setCombinedImageUrl(screenshotDataUrl);
+            return screenshotDataUrl;
+        }).catch((err) => {
+            console.log("Error al generar la imagen:", err);
+        })
+    }, [ref]);
+
+
+    const obtenerPrecio = async (ProductID) =>{
+        const docRef = doc(db, "celulares", ProductID);
+
+        console.log(ProductID);
+
+        const documento = await getDoc(docRef);
+
+        const price = documento.data().price
+
         const product = {
             name: id,
             img: combinedImageUrl,
-            price: 0
-        };
-        agregarAlCarrito(product, id);
-    };
+            price: price,
+            counter: counter,
+        }
+
+        if(documento.exists()){
+            agregarAlCarrito(product);
+            return price;
+        }else{
+            throw new Error("Me quiero morir")
+        }
+    }
 
     const guardarDatos = async () => {
         try {
@@ -60,27 +106,6 @@ const Grilla1 = ({ phoneImg, id }) => {
         }
     }
 
-    const takeScreenshot = useCallback(() => {
-        if (ref.current === null) {
-            return;
-        }
-        html2canvas(ref.current, {
-            allowTaint: true,
-            useCORS: true,
-            scale: 1,
-            logging: true,
-        }).then((canvas) => {
-            const screenshotDataUrl = canvas.toDataURL('image/jpeg', 1);
-            console.log("URL de la imagen generada:", screenshotDataUrl);
-            return screenshotDataUrl; // Devuelve la URL de la imagen generada
-        }).then((screenshotDataUrl) => {
-            setCombinedImageUrl(screenshotDataUrl); // Actualiza combinedImageUrl después de la generación
-            return screenshotDataUrl; // Devuelve la URL de la imagen generada
-        }).catch((err) => {
-            console.log("Error al generar la imagen:", err);
-        })
-    }, [ref]);
-
 
     const handleAllImagesLoaded = () => {
         setLoadedImages(loadedImages + 1);
@@ -90,9 +115,7 @@ const Grilla1 = ({ phoneImg, id }) => {
     };
 
     console.log(combinedImageUrl);
-
-    const combinedImageRef = useRef(null);
-
+    //Toggle borde
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
     };
@@ -104,18 +127,18 @@ const Grilla1 = ({ phoneImg, id }) => {
             return newState;
         });
     };
-
+    //DND
     const handleDrop = (fromIndex, toIndex) => {
         const updatedImages = [...imagenes];
         const [movedImage] = updatedImages.splice(fromIndex, 1);
         updatedImages.splice(toIndex, 0, movedImage);
         setImagenes(updatedImages);
     };
-
+    //Click img
     const handleImageClick = (index) => {
         setImagenSeleccionada(index);
     };
-
+    //Condicion de imagen seleccionada
     const isImageSelected = (index) => {
         return index === imagenSeleccionada;
     };
@@ -127,6 +150,7 @@ const Grilla1 = ({ phoneImg, id }) => {
         })
 
         return newArray
+
     }
 
     return (
@@ -297,13 +321,9 @@ const Grilla1 = ({ phoneImg, id }) => {
                 >
                     {pedidoRealizado ? "Pedido realizado" : "Realizar pedido"}
                 </button>
-                <button
-                    type="button"
-                    onClick={handleAgregarAlCarrito}
-                >
-                    Agregar al carrito
-                </button>
                 <button type="button" onClick={takeScreenshot}> Unir</button>
+
+                <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
             </div>
 
             {croppedImage && (
