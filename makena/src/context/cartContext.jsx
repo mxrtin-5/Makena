@@ -9,7 +9,6 @@ const CartProvider = ({ children }) => {
 
     const [counter, setCounter] = useState(1)
 
-
     // const obtenerPrecioDesdeFirebase = async (productID) => {
     //     console.log(productID);
     //     try {
@@ -36,16 +35,13 @@ const CartProvider = ({ children }) => {
 
     const agregarAlCarrito = (product) => {
         setCart((prevCart) => {
-            // Busca si el producto ya está en el carrito
             const existingProduct = prevCart.find((item) => item.id === product.id);
-    
+
             if (existingProduct) {
-                // Si el producto existe, actualiza su cantidad
                 existingProduct.counter += product.counter;
                 return [...prevCart];
             } else {
-                // Si el producto no existe, agrégalo al carrito
-                return [...prevCart, product];
+                return [...prevCart, { ...product, counter: product.counter }];
             }
         });
     };
@@ -90,6 +86,8 @@ const CartProvider = ({ children }) => {
         <CartContext.Provider value={{
             cart,
             agregarAlCarrito,
+            incrementarCantidad,
+            decrementarCantidad,
             counter,    
             setCounter,
             isInCart,
