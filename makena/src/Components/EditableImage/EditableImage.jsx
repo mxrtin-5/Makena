@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { ImageContext } from "../../context/imageContext";
 import styles from './EditableImagen.module.css';
 
-const EditableImage = ({ src, id, index, onDrop, onImageLoad, onClick, translateX, translateY, escala }) => {
+const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY, escala }) => {
 
     const { ItemTypes } = useContext(ImageContext);
 
@@ -11,7 +11,6 @@ const EditableImage = ({ src, id, index, onDrop, onImageLoad, onClick, translate
 
     const handleImageLoad = () => {
         setImageLoaded(true);
-        onImageLoad();
     };
 
     const [, drag] = useDrag({

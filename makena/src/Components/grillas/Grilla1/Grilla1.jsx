@@ -97,13 +97,6 @@ const Grilla1 = ({ phoneImg }) => {
         }
     }
 
-    const handleAllImagesLoaded = () => {
-        setLoadedImages(loadedImages + 1);
-        if (loadedImages === imagenes.length - 1) {
-            takeScreenshot();
-        }
-    };
-
     console.log(combinedImageUrl);
     //Toggle borde
     const TogglePopup = () => {
@@ -197,7 +190,6 @@ const Grilla1 = ({ phoneImg }) => {
                                     }
                                     : {}
                             }
-                            onImageLoad={handleAllImagesLoaded}
                         />
                     ))}
                 </div>
