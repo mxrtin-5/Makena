@@ -35,33 +35,40 @@ const CartProvider = ({ children }) => {
 
     const agregarAlCarrito = (product) => {
         setCart((prevCart) => {
-            const existingProduct = prevCart.find((item) => item.id === product.id);
+
+            const existingProduct = prevCart.find((item) => item.name === product.name);
 
             if (existingProduct) {
-                existingProduct.counter += product.counter;
-                return [...prevCart];
+                const updatedCart = prevCart.map((item) =>
+                    item.name === product.name
+                        ? { ...item, counter: item.counter + product.counter }
+                        : item
+                );
+                return updatedCart;
             } else {
-                return [...prevCart, { ...product, counter: product.counter }];
+                return [...prevCart, { ...product }];
             }
         });
     };
 
-    const incrementarCantidad = (id) => {
+    const incrementarCantidad = (name) => {
         const updatedCart = cart.map((item) =>
-            item.id === id ? { ...item, counter: item.counter + 1 } : item
+            item.name === name ? { ...item, counter: item.counter + 1 } : item
         );
         setCart(updatedCart);
     };
 
-    const decrementarCantidad = (id) => {
+    const decrementarCantidad = (name) => {
         const updatedCart = cart.map((item) =>
-            item.id === id && item.counter > 1 ? { ...item, counter: item.counter - 1 } : item
+            item.name === name && item.counter > 1
+                ? { ...item, counter: item.counter - 1 }
+                : item
         );
         setCart(updatedCart);
     };
 
-    const removerDelCarrito = (id) => {
-        setCart(cart.filter((item) => item.id !== id))
+    const removerDelCarrito = (name) => {
+        setCart(cart.filter((item) => item.name !== name))
     }
 
     const isInCart = (id) => {
@@ -88,7 +95,7 @@ const CartProvider = ({ children }) => {
             agregarAlCarrito,
             incrementarCantidad,
             decrementarCantidad,
-            counter,    
+            counter,
             setCounter,
             isInCart,
             totalCompra,
