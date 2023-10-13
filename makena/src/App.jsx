@@ -11,6 +11,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import GrillasProvider from './context/grillasContext';
 import ImageCombiner from './Components/Prueba/Prueba';
+import Checkout from './Components/Checkout/Checkout';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
                 <Route path='/prueba' element={<ImageCombiner />} />
+                <Route path='/checkout' element={<Checkout />} />
               </Routes>
 
             </BrowserRouter>

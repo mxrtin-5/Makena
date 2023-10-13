@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/cartContext";
 import styles from './Carrito.module.css'
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 const Carrito = () => {
@@ -39,8 +40,8 @@ const Carrito = () => {
                     {cart.length > 0 && (
                         <div className={styles.cartTotal}>
                             <p>Total: ${totalCompra()}</p>
-                            <button onClick={vaciarCarrito} className={styles.btnTerminarCompra}>
-                                Terminar Compra
+                            <button className={styles.btnTerminarCompra}>
+                                <Link to={"/checkout"}>Terminar Compra</Link> 
                             </button>
                         </div>
                     )}

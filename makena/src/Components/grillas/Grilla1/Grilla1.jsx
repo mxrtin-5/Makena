@@ -10,6 +10,7 @@ import { db } from "../../../firebase/config";
 import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { CartContext } from "../../../context/cartContext";
 import { useParams } from "react-router-dom";
+import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
 
 
 const Grilla1 = ({ phoneImg }) => {
@@ -19,7 +20,7 @@ const Grilla1 = ({ phoneImg }) => {
 
     const { setHeight, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
 
-    const { agregarAlCarrito, counter} = useContext(CartContext)
+    const { agregarAlCarrito, counter } = useContext(CartContext)
 
     const [imagenes, setImagenes] = useState([]);
 
@@ -37,16 +38,19 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [loadedImages, setLoadedImages] = useState(null)
 
-
-    const [pedidoRealizado, setPedidoRealizado] = useState(false);
+    const [orderInfo, setOrderInfo] = useState({
+        modelo: id,
+        url: '',
+        precio: 0,
+        cantidad: counter,
+    });
 
     const combinedImageRef = useRef(null);
 
     const ref = useRef(null);
 
-    //Tomar Screenshot
+    const obtenerPrecio = async (ProductID) => {
 
-    const takeScreenshot = useCallback(() => {
         if (ref.current === null) {
             return;
         }
@@ -65,13 +69,8 @@ const Grilla1 = ({ phoneImg }) => {
         }).catch((err) => {
             console.log("Error al generar la imagen:", err);
         })
-    }, [ref]);
 
-
-    const obtenerPrecio = async (ProductID) =>{
         const docRef = doc(db, "celulares", ProductID);
-
-        console.log(ProductID);
 
         const documento = await getDoc(docRef);
 
@@ -84,28 +83,19 @@ const Grilla1 = ({ phoneImg }) => {
             counter: counter,
         }
 
-        if(documento.exists()){
+        setOrderInfo((prevData) =>({
+            ...prevData,
+            url:combinedImageUrl,
+            precio:price
+        }))
+
+        if (documento.exists()) {
             agregarAlCarrito(product);
             return price;
-        }else{
+        } else {
             throw new Error("Me quiero morir")
         }
     }
-
-    const guardarDatos = async () => {
-        try {
-            await addDoc(collection(db, "pedidos"), {
-                croppedImage: combinedImageUrl,
-                translateX: translateX,
-                translateY: translateY
-            });
-            setPedidoRealizado(true);
-            console.log("Datos guardados con éxito");
-        } catch (error) {
-            console.error("Error al guardar datos en Firebase:", error);
-        }
-    }
-
 
     const handleAllImagesLoaded = () => {
         setLoadedImages(loadedImages + 1);
@@ -216,8 +206,8 @@ const Grilla1 = ({ phoneImg }) => {
             <canvas
                 ref={combinedImageRef}
                 style={{ display: 'none' }}
-                width="240" // Ajusta el ancho del lienzo según tus necesidades
-                height="500" // Ajusta la altura del lienzo según tus necesidades
+                width="240"
+                height="500"
             ></canvas>
 
             {/* <img src={combinedImageUrl} alt="Combined Image" /> */}
@@ -312,18 +302,13 @@ const Grilla1 = ({ phoneImg }) => {
             <div className={styles.containerBotones}>
                 <UploadWidget getImageData={handleAddImageShow} />
                 <button onClick={TogglePopup}>Toggle</button>
-                <button
-                    style={{
-                        marginTop: "80px",
-                    }}
-                    onClick={guardarDatos}
-                    disabled={pedidoRealizado}
-                >
-                    {pedidoRealizado ? "Pedido realizado" : "Realizar pedido"}
-                </button>
-                <button type="button" onClick={takeScreenshot}> Unir</button>
-
                 <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+            </div>
+
+            <div style={{ display: "none"}}>
+                {orderInfo.url && (
+                    <CheckoutPayment orderData={orderInfo}/>
+                )}
             </div>
 
             {croppedImage && (

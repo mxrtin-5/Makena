@@ -13,10 +13,6 @@ const DistribucionImg = () => {
     const id = location.search.split("=")[1]
     const modelo = location.search.split("=")[2]
 
-    console.log(location.search);
-
-    console.log(modelo);
-
     return (
         <section>
             <Link to={`/detail/${id}?tipoGrilla=${0}`}>
