@@ -1,6 +1,4 @@
-import Problematica from '../../Components/Ploblematica/Problematica';
 import Presentacion from '../../Components/Presentacion/Presentacion';
-import Solucion from '../../Components/Solucion/Solucion';
 import styles from './Home.module.css'
 import portada from '../../assets/portada.png'
 import portada2 from '../../assets/cambio 1.png'
@@ -10,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
+import Catalogo from '../Catalogo/Catalogo';
 
 
 const Home = () => {
@@ -35,12 +34,7 @@ const Home = () => {
 
         <Presentacion />
 
-        <div>
-            <Problematica className={styles.componentContainer} />
-
-            <Solucion />
-
-        </div>
+        <Catalogo />
 
 
     </section>

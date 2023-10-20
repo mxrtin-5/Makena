@@ -15,22 +15,22 @@ const DistribucionImg = () => {
 
     return (
         <section>
-            <Link to={`/detail/${id}?tipoGrilla=${0}`}>
+            <Link to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${0}`}>
                 <img src={Grilla0} alt="grillaImage" />
             </Link>
-            <Link to={`/detail/${id}?tipoGrilla=${1}`}>
+            <Link to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${1}`}>
                 <img src={grilla1} alt="grillaImage" />
             </Link>
-            <Link to={`/detail/${id}?tipoGrilla=${2}`}>
+            <Link to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${2}`}>
                 <img src={grilla2} alt="grillaImage" />
             </Link>
-            <Link to={`/detail/${id}?tipoGrilla=${3}`}>
+            <Link to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${3}`}>
                 <img src={grilla3} alt="grillaImage" />
             </Link>
-            <Link to={`/detail/${id}?tipoGrilla=${4}`}>
+            <Link to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${4}`}>
                 <img src={grilla4} alt="grillaImage" />
             </Link>
-            <Link to={`/detail/${id}?tipoGrilla=${5}`}>
+            <Link to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${5}`}>
                 <img src={grilla5} alt="" />
             </Link>
         </section>

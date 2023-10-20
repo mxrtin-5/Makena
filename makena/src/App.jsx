@@ -12,6 +12,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import GrillasProvider from './context/grillasContext';
 import ImageCombiner from './Components/Prueba/Prueba';
 import Checkout from './Components/Checkout/Checkout';
+import DetalleProds from './Pages/DetalleProds/DetalleProds';
 
 function App() {
 
@@ -32,10 +33,11 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/crear-funda/seleccion' element={<CrearFunda />} />
                 <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer />} />
-                <Route path='/detail/:id' element={<Detail />} />
+                <Route path='/crear-funda/seleccion/:marca/:id' element={<Detail />} />
                 <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
                 <Route path='/prueba' element={<ImageCombiner />} />
                 <Route path='/checkout' element={<Checkout />} />
+                <Route path='/detail/:id' element={<DetalleProds />}/>
               </Routes>
 
             </BrowserRouter>
