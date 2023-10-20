@@ -42,20 +42,11 @@ const GrillasProvider = ({ children }) => {
 
     const handleCrop = async (e) => {
 
-        
-        console.log(cropperRef.current);
-        console.log(cropperRef.current?.cropper);
-        console.log(cropperRef.current.cropper);  
-
         if (cropperRef.current && cropperRef.current.cropper) {  
             const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
                 width: width * escala,
                 height: height * escala
             })
-            
-            console.log(croppedCanvas);
-
-            
 
             if (croppedCanvas) {
                 const context = croppedCanvas.getContext("2d");

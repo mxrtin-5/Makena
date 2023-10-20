@@ -1,6 +1,4 @@
 /* el div contenedor siempre vas a tener que ponerle un alto y ancho fijo */
-
-
 .marco {
     position: relative;
     height: 500px;
@@ -9,7 +7,9 @@
     overflow: hidden;
 }
 
-/* siempre tiene que ocupar el 100% de w y h, ademas tener position absolute */
+.marco .cropperCropBox{
+    display: none;
+}
 
 .marcoImg {
     position: absolute;
@@ -17,27 +17,45 @@
     height: 100%;
 }
 
-.imagen {
-    position: absolute;
+.imagenConBorde {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: 100;
+    object-fit: contain;
 }
 
-.containerEditar {
-    position: absolute;
-    right: 10%;
-}
-
-.container {
-    margin-bottom: 20px;
+.imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .croper{
     position: absolute;
     width: 100%;
     height: 100%;
+}
+
+.selectedImage {
+    border: 100px solid rgb(212, 0, 255);
+}
+
+.contenedorImgs {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    margin-bottom: 20px;
+}
+
+.containerEditar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    position: absolute;
+    right: 10%;
+    top: 40%;
 }
 
 .button {

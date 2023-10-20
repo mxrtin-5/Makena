@@ -1,4 +1,4 @@
-import { useContext, useRef, useCallback, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla1.module.css'
 import ImageProvider from "../../../context/imageContext";
@@ -7,7 +7,7 @@ import { GrillasContext } from "../../../context/grillasContext";
 import { Cropper } from "react-cropper";
 import html2canvas from 'html2canvas'
 import { db } from "../../../firebase/config";
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { CartContext } from "../../../context/cartContext";
 import { useParams } from "react-router-dom";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
@@ -18,7 +18,7 @@ const Grilla1 = ({ phoneImg }) => {
     const { id } = useParams()
     console.log(id);
 
-    const { setHeight, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
+    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
@@ -36,8 +36,6 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
-    const [loadedImages, setLoadedImages] = useState(null)
-
     const [orderInfo, setOrderInfo] = useState({
         modelo: id,
         url: '',
@@ -50,54 +48,58 @@ const Grilla1 = ({ phoneImg }) => {
     const ref = useRef(null);
 
     const obtenerPrecio = async (ProductID) => {
-
         if (ref.current === null) {
             return;
         }
+
         html2canvas(ref.current, {
             allowTaint: true,
             useCORS: true,
             scale: 1,
             logging: true,
-        }).then((canvas) => {
-            const screenshotDataUrl = canvas.toDataURL('image/jpeg', 1);
-            console.log("URL de la imagen generada:", screenshotDataUrl);
-            return screenshotDataUrl;
-        }).then((screenshotDataUrl) => {
-            setCombinedImageUrl(screenshotDataUrl);
-            return screenshotDataUrl;
-        }).catch((err) => {
-            console.log("Error al generar la imagen:", err);
         })
+            .then((canvas) => {
+                const screenshotDataUrl = canvas.toDataURL('image/png', 1);
+                console.log("URL de la imagen generada:", screenshotDataUrl);
+                return screenshotDataUrl;
+            })
+            .then((screenshotDataUrl) => {
+                setCombinedImageUrl(screenshotDataUrl);
 
-        const docRef = doc(db, "celulares", ProductID);
+                const docRef = doc(db, "celulares", ProductID);
+                return getDoc(docRef);
+            })
+            .then((documento) => {
+                const price = documento.data().price;
 
-        const documento = await getDoc(docRef);
+                const product = {
+                    name: id,
+                    img: combinedImageUrl,
+                    price: price,
+                    counter: counter,
+                };
 
-        const price = documento.data().price
+                setOrderInfo((prevData) => ({
+                    ...prevData,
+                    url: combinedImageUrl,
+                    precio: price,
+                }));
 
-        const product = {
-            name: id,
-            img: combinedImageUrl,
-            price: price,
-            counter: counter,
-        }
+                if (documento.exists()) {
+                    agregarAlCarrito(product);
+                    return price;
+                } else {
+                    throw new Error("Me quiero morir");
+                }
+            })
+            .catch((err) => {
+                console.log("Error al generar la imagen:", err);
+            });
+    };
 
-        setOrderInfo((prevData) =>({
-            ...prevData,
-            url:combinedImageUrl,
-            precio:price
-        }))
-
-        if (documento.exists()) {
-            agregarAlCarrito(product);
-            return price;
-        } else {
-            throw new Error("Me quiero morir")
-        }
-    }
 
     console.log(combinedImageUrl);
+
     //Toggle borde
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
@@ -154,6 +156,7 @@ const Grilla1 = ({ phoneImg }) => {
                         zoomOnTouch={false}
                         wheelZoomRatio={0}
                         cropBoxMovable={false}
+                        style={{ width: 600, height: 1200 }}
                     />
                 )}
                 <img
@@ -172,6 +175,7 @@ const Grilla1 = ({ phoneImg }) => {
                 <div className={styles.contenedorImgs}>
                     {imagenes.map((imgData, index) => (
                         <EditableImage
+                        imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
                             key={imgData.url}
                             src={imgData.url}
                             index={index}
@@ -198,8 +202,8 @@ const Grilla1 = ({ phoneImg }) => {
             <canvas
                 ref={combinedImageRef}
                 style={{ display: 'none' }}
-                width="240"
-                height="500"
+                width={width} // Utilizamos la variable setWidth aquí
+                height={height} // Utilizamos la variable setHeight aquí
             ></canvas>
 
             {/* <img src={combinedImageUrl} alt="Combined Image" /> */}
@@ -235,8 +239,6 @@ const Grilla1 = ({ phoneImg }) => {
                                     const newValue = estadoPrevio[imagenSeleccionada] - 0.3
 
                                     const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
-
-                                    console.log(newState, "sacacorcho");
                                     return newState
 
                                 })
@@ -297,9 +299,9 @@ const Grilla1 = ({ phoneImg }) => {
                 <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
             </div>
 
-            <div style={{ display: "none"}}>
+            <div style={{ display: "none" }}>
                 {orderInfo.url && (
-                    <CheckoutPayment orderData={orderInfo}/>
+                    <CheckoutPayment orderData={orderInfo} />
                 )}
             </div>
 

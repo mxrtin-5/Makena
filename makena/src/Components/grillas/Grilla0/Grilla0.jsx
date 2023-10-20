@@ -1,59 +1,247 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla0.module.css'
 import Cropper from "react-cropper";
 import 'cropperjs/dist/cropper.css';
 import { GrillasContext } from "../../../context/grillasContext";
-
+import { useParams } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { db } from "../../../firebase/config";
+import { doc, getDoc } from "firebase/firestore";
+import { CartContext } from "../../../context/cartContext";
+import EditableImage from "../../EditableImage/EditableImage";
+import ImageProvider from "../../../context/imageContext";
+import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
+import image from '../../../../public/a01.png'
 
 const Grilla0 = ({ phoneImg }) => {
 
-    const [imgData, setImgData] = useState(null);
+    const { id } = useParams()
 
-    const {translateX, translateY, cropperRef, escala, setEscala, setHeight, setWidth, setTranslateY, setTranslateX, handleCrop, guardarDatos, croppedImage } = useContext(GrillasContext)
+    const [imgData, setImgData] = useState([]);
+
+    const [isPopupOpen, setPopupOpen] = useState(false);
+
+    const { agregarAlCarrito, counter } = useContext(CartContext)
+
+    const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
+
+    const [escala, setEscala] = useState([1, 1])
+
+    const [translateX, setTranslateX] = useState(0);
+
+    const [translateY, setTranslateY] = useState(0);
+
+    const [combinedImageUrl, setCombinedImageUrl] = useState('');
+
+    const [orderInfo, setOrderInfo] = useState({
+        modelo: id,
+        url: '',
+        precio: 0,
+        cantidad: counter,
+    });
+
+    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext)
+
+    const ref = useRef(null);
+
+    const combinedImageRef = useRef(null);
 
     console.log("TranslateX: ", translateX);
     console.log("TranslateY: ", translateY);
 
+    const TogglePopup = () => {
+        setPopupOpen(!isPopupOpen);
+    }
+
+    //DND
+    const handleDrop = (fromIndex, toIndex) => {
+        const updatedImages = [...imagenes];
+        const [movedImage] = updatedImages.splice(fromIndex, 1);
+        updatedImages.splice(toIndex, 0, movedImage);
+        setImagenes(updatedImages);
+    };
+    //Click img
+    const handleImageClick = (index) => {
+        setImagenSeleccionada(index);
+    };
+    //Condicion de imagen seleccionada
+    const isImageSelected = (index) => {
+        return index === imagenSeleccionada;
+    };
+
+    const changeValueArray = (arr, indexForChange, newValue) => {
+        const newArray = arr.map((element, index) => {
+            if (index === indexForChange) return newValue;
+            return element
+        })
+
+        return newArray
+
+    }
+
+    const handleAddImageShow = (cloudData) => {
+        setImgData((prevState) => {
+            let newState = [cloudData, ...prevState];
+            return newState;
+        });
+    };
+
+    const obtenerPrecio = async (ProductID) => {
+        if (ref.current === null) {
+            return;
+        }
+
+        try {
+            const canvas = await html2canvas(ref.current, {
+                allowTaint: true,
+                useCORS: true,
+                scale: 1,
+                logging: true,
+            });
+
+            const screenshotDataUrl = canvas.toDataURL('image/png', 1);
+            console.log("URL de la imagen generada:", screenshotDataUrl);
+
+            setCombinedImageUrl(screenshotDataUrl);
+
+            const docRef = doc(db, "celulares", ProductID);
+            const documento = await getDoc(docRef);
+
+            if (documento.exists()) {
+                const price = documento.data().price;
+
+                const product = {
+                    name: id,
+                    img: screenshotDataUrl,
+                    price: price,
+                    counter: counter,
+                };
+
+                setOrderInfo((prevData) => ({
+                    ...prevData,
+                    url: screenshotDataUrl,
+                    precio: price,
+                }));
+
+                agregarAlCarrito(product);
+
+                // Resto de la lógica de manejo del precio y carrito
+            } else {
+                throw new Error("Me quiero morir");
+            }
+        } catch (error) {
+            console.log("Error al generar la imagen:", error);
+        }
+    };
+
     return (
-        <>
-            <div className={styles.marco}>
+        <ImageProvider>
+            <div className={styles.marco} ref={ref}>
                 {imgData && (
                     <Cropper
                         ref={cropperRef}
                         src={imgData.url}
-                        className={styles.croper}
-                        style={{
-                            zIndex: 1000000,
-                            transform: `translate(${translateX}px, ${translateY}px)`,
-                        }}
+                        className={styles.cropperCropBox}
                         guides={false}
                         zoomTo={escala}
                         dragMode="none"
                         responsive={true}
                         autoCropArea={1}
                         cropBoxResizable={true}
+                        zoomable={false}
+                        zoomOnTouch={false}
+                        wheelZoomRatio={0}
+                        cropBoxMovable={false}
+                        style={{ width: 600, height: 1200 }}
                     />
                 )}
-                <img onLoad={(e) => {
-                    setWidth(e.target.width);
-                    setHeight(e.target.height);
-                }} className={styles.marcoImg} src={phoneImg} alt="" />
+
+                <img
+                    onLoad={(e) => {
+                        setWidth(e.target.width)
+                        setHeight(e.target.height)
+                        document.querySelector('.marco').style.height = `${e.target.height}px`;
+                    }}
+                    style={{
+                        zIndex: isPopupOpen ? 100000000 : -10000
+                    }}
+                    className={styles.marcoImg}
+                    src={phoneImg}
+                    alt=""
+                />
+
+                <div className={styles.contenedorImgs}>
+                    {imgData.map((imgData, index) => (
+                        <EditableImage
+                            imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
+                            key={imgData.url}
+                            src={imgData.url}
+                            index={index}
+                            referenciaImagenes={index}
+                            onDrop={handleDrop}
+                            onClick={() => handleImageClick(index)}
+                            isSelected={isImageSelected(index)}
+                            escala={escala[index]}
+                            translateX={imagenSeleccionada === index ? translateX : 0}
+                            translateY={imagenSeleccionada === index ? translateY : 0}
+                            className={isImageSelected(index) ? styles.selectedImage : ''}
+                            style={
+                                isImageSelected(index)
+                                    ? {
+                                        transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
+                                    }
+                                    : {}
+                            }
+                        />
+                    ))}
+                </div>
+
             </div>
 
-            <UploadWidget getImageData={setImgData} />
+            <canvas
+                ref={combinedImageRef}
+                style={{ display: 'none' }}
+                width={width} // Utilizamos la variable setWidth aquí
+                height={height} // Utilizamos la variable setHeight aquí
+            ></canvas>
 
             <div className={styles.containerEditar}>
                 <div className={styles.container}>
                     <button
                         className={styles.button}
-                        onClick={() => setEscala(escala + 0.2)}
+                        onClick={() => {
+                            if (isImageSelected(imagenSeleccionada)) {
+
+                                setEscala((estadoPrevio) => {
+
+                                    const newValue = estadoPrevio[imagenSeleccionada] + 0.3
+
+                                    const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+
+                                    return newState
+
+                                })
+
+                            }
+                        }}
                     >
                         Zoom +
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setEscala(escala - 0.2)}
+                        onClick={() => {
+                            if (isImageSelected(imagenSeleccionada)) {
+                                setEscala((estadoPrevio) => {
+
+                                    const newValue = estadoPrevio[imagenSeleccionada] - 0.3
+
+                                    const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                    return newState
+
+                                })
+                            }
+                        }}
                     >
                         Zoom -
                     </button>
@@ -62,50 +250,74 @@ const Grilla0 = ({ phoneImg }) => {
                 <div className={styles.container}>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateY(translateY - 5)}
+                        onClick={() => {
+                            if (isImageSelected(imagenSeleccionada)) {
+                                setTranslateY(translateY - 5);
+                            }
+                        }}
                     >
                         Arriba
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateY(translateY + 5)}
+                        onClick={() => {
+                            if (isImageSelected(imagenSeleccionada)) {
+                                setTranslateY(translateY + 5);
+                            }
+                        }}
                     >
                         Abajo
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateX(translateX + 5)}
+                        onClick={() => {
+                            if (isImageSelected(imagenSeleccionada)) {
+                                setTranslateX(translateX + 5);
+                            }
+                        }}
                     >
                         {"=>"}
                     </button>
                     <button
                         className={styles.button}
-                        onClick={() => setTranslateX(translateX - 5)}
+                        onClick={() => {
+                            if (isImageSelected(imagenSeleccionada)) {
+                                setTranslateX(translateX - 5);
+                            }
+                        }}
                     >
                         {"<="}
                     </button>
                 </div>
             </div>
 
-            <button className={styles.button2} onClick={handleCrop}>
-                Recortar
-            </button>
+            <div className={styles.containerBotones}>
+                <UploadWidget getImageData={handleAddImageShow} />
+                <button onClick={TogglePopup}>Toggle</button>
+                <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+            </div>
 
-            <button style={{
-                marginTop: "80px"
-            }} className={styles.button2} onClick={guardarDatos}>
-                Rrealizar pedido
-            </button>
+            <div style={{ display: "none" }}>
+                {orderInfo.url && (
+                    <CheckoutPayment orderData={orderInfo} />
+                )}
+            </div>
 
             {croppedImage && (
                 <div>
-                    <img style={{
-                        display: "none",
-                        transform: ` translate(${translateX}px, ${translateY}px)`
-                    }} src={croppedImage} alt="Imagen recortada" />
+                    <img
+                        style={{
+                            display: "none",
+                            transform: `translate(${translateX[imagenSeleccionada]}px, ${translateY[imagenSeleccionada]
+                                }px)`,
+                        }}
+                        src={croppedImage}
+                        alt="Imagen recortada"
+                    />
                 </div>
             )}
-        </>
+        </ImageProvider>
+
     );
 }
 
