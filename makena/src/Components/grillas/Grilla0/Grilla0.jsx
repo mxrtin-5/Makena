@@ -12,17 +12,18 @@ import { CartContext } from "../../../context/cartContext";
 import EditableImage from "../../EditableImage/EditableImage";
 import ImageProvider from "../../../context/imageContext";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
-import image from '../../../../public/a01.png'
 
 const Grilla0 = ({ phoneImg }) => {
 
     const { id } = useParams()
 
+    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
+
+    const { agregarAlCarrito, counter } = useContext(CartContext)
+
     const [imgData, setImgData] = useState([]);
 
     const [isPopupOpen, setPopupOpen] = useState(false);
-
-    const { agregarAlCarrito, counter } = useContext(CartContext)
 
     const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
 
@@ -41,8 +42,6 @@ const Grilla0 = ({ phoneImg }) => {
         cantidad: counter,
     });
 
-    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext)
-
     const ref = useRef(null);
 
     const combinedImageRef = useRef(null);
@@ -56,7 +55,7 @@ const Grilla0 = ({ phoneImg }) => {
 
     //DND
     const handleDrop = (fromIndex, toIndex) => {
-        const updatedImages = [...imagenes];
+        const updatedImages = [...imgData];
         const [movedImage] = updatedImages.splice(fromIndex, 1);
         updatedImages.splice(toIndex, 0, movedImage);
         setImagenes(updatedImages);
@@ -153,7 +152,6 @@ const Grilla0 = ({ phoneImg }) => {
                         zoomOnTouch={false}
                         wheelZoomRatio={0}
                         cropBoxMovable={false}
-                        style={{ width: 600, height: 1200 }}
                     />
                 )}
 
@@ -164,7 +162,7 @@ const Grilla0 = ({ phoneImg }) => {
                         document.querySelector('.marco').style.height = `${e.target.height}px`;
                     }}
                     style={{
-                        zIndex: isPopupOpen ? 100000000 : -10000
+                        zIndex: isPopupOpen ? 1000 : -1000
                     }}
                     className={styles.marcoImg}
                     src={phoneImg}
@@ -196,7 +194,6 @@ const Grilla0 = ({ phoneImg }) => {
                         />
                     ))}
                 </div>
-
             </div>
 
             <canvas
@@ -212,17 +209,11 @@ const Grilla0 = ({ phoneImg }) => {
                         className={styles.button}
                         onClick={() => {
                             if (isImageSelected(imagenSeleccionada)) {
-
                                 setEscala((estadoPrevio) => {
-
                                     const newValue = estadoPrevio[imagenSeleccionada] + 0.3
-
                                     const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
-
                                     return newState
-
                                 })
-
                             }
                         }}
                     >
@@ -233,12 +224,9 @@ const Grilla0 = ({ phoneImg }) => {
                         onClick={() => {
                             if (isImageSelected(imagenSeleccionada)) {
                                 setEscala((estadoPrevio) => {
-
                                     const newValue = estadoPrevio[imagenSeleccionada] - 0.3
-
                                     const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
                                     return newState
-
                                 })
                             }
                         }}
