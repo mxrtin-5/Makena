@@ -14,6 +14,7 @@ const Catalogo = () => {
 
 
     useEffect(() => {
+        console.log('Ejecutando useEffect');
 
         const productosRef = collection(db, 'catalogo')
 
