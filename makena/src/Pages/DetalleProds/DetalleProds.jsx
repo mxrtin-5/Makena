@@ -2,11 +2,11 @@ import ItemDetailContainer from "../../Components/ItemDetailContainer/ItemDetail
 
 
 const DetalleProds = () => {
-    return ( 
+    return (
         <div>
             <ItemDetailContainer />
         </div>
-     );
+    );
 }
- 
+
 export default DetalleProds;

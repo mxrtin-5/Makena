@@ -3,3 +3,15 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
 }
+
+.section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.section h1{
+    margin-bottom: 20px;
+}

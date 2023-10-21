@@ -12,9 +12,7 @@ import { db } from '../../firebase/config'
 
 const Detail = () => {
 
-    const { id } = useParams() //! despues mira como traer el detalle de firebase solo para este telefono
-
-    const { modelo } = useParams()
+    const { id } = useParams()
 
     console.log(id);
 

@@ -9,30 +9,6 @@ const CartProvider = ({ children }) => {
 
     const [counter, setCounter] = useState(1)
 
-    // const obtenerPrecioDesdeFirebase = async (productID) => {
-    //     console.log(productID);
-    //     try {
-    //         
-    //         if (typeof productID !== 'string' || productID.trim() === '') {
-    //             throw new Error("productID no es una cadena válida.");
-    //         }
-
-    //       
-    //         const docRef = doc(db, "celulares", productID);
-    //         const docSnapshot = await getDoc(docRef);
-
-    //         if (docSnapshot.exists()) {
-    //            
-    //             return docSnapshot.data().price;
-    //         } else {
-    //             throw new Error("Producto no encontrado en Firebase.");
-    //         }
-    //     } catch (error) {
-    //         console.error("Error al obtener precio desde Firebase:", error);
-    //         throw error;
-    //     }
-    // };
-
     const agregarAlCarrito = (product) => {
         setCart((prevCart) => {
 

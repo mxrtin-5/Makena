@@ -9,7 +9,7 @@ const ItemCard = ({ id, image, name, price}) => {
                 <h4 className={styles.titulo}>{name}</h4>
                 <img className={styles.image} src={image} alt="Imagen" />
                 <p><span>Precio:</span> ${price}</p>
-                <Link to={`/detail/${id}`}><button>Ver detalles</button></Link>
+                <button className={styles.button2} ><Link className={styles.link} to={`/detail/${id}`}>Ver Detalles</Link></button>
             </div>
         </section>
     );

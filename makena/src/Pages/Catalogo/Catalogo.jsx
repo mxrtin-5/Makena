@@ -35,8 +35,8 @@ const Catalogo = () => {
     }, [id])
 
     return (
-        <section>
-            <h1>Tetas</h1>
+        <section className={styles.section}>
+            <h1>Productos Destacados</h1>
 
             <div className={styles.divPadre}>
                 {

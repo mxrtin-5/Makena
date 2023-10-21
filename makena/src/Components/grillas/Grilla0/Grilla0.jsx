@@ -17,6 +17,8 @@ const Grilla0 = ({ phoneImg }) => {
 
     const { id } = useParams()
 
+    console.log(id);
+
     const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
@@ -38,7 +40,7 @@ const Grilla0 = ({ phoneImg }) => {
     const [orderInfo, setOrderInfo] = useState({
         modelo: id,
         url: '',
-        precio: 0,
+        price: 0,
         cantidad: counter,
     });
 
@@ -113,19 +115,17 @@ const Grilla0 = ({ phoneImg }) => {
                 const product = {
                     name: id,
                     img: screenshotDataUrl,
-                    price: price,
+                    price: price, // Set the correct price here
                     counter: counter,
                 };
 
                 setOrderInfo((prevData) => ({
                     ...prevData,
                     url: screenshotDataUrl,
-                    precio: price,
+                    price: price, // Set the correct price in orderInfo
                 }));
 
-                agregarAlCarrito(product);
-
-                // Resto de la lógica de manejo del precio y carrito
+                agregarAlCarrito(product);;
             } else {
                 throw new Error("Me quiero morir");
             }
@@ -133,6 +133,8 @@ const Grilla0 = ({ phoneImg }) => {
             console.log("Error al generar la imagen:", error);
         }
     };
+
+    console.log(orderInfo);
 
     return (
         <ImageProvider>
