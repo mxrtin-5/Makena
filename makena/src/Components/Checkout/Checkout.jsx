@@ -5,6 +5,7 @@ import CheckoutPayment from '../CheckoutComponents/CheckoutPayment/CheckoutPayme
 import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces';
 
 
+
 const Checkout = () => {
 
     const [page, setPage] = useState(0)

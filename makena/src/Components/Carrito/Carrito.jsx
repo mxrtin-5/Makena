@@ -3,6 +3,7 @@ import { CartContext } from "../../context/cartContext";
 import styles from './Carrito.module.css'
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import CheckoutData from "../CheckoutComponents/CheckoutData/CheckoutData";
 
 
 const Carrito = () => {
@@ -50,6 +51,14 @@ const Carrito = () => {
                         </div>
                     )}
                 </div>
+            </div>
+
+            <div style={{
+                display: "none"
+            }}>
+                <CheckoutData data={cart.map((product) => {
+        console.log("Product:", product);
+})}/>
             </div>
         </div>
     );

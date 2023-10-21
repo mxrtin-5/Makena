@@ -161,7 +161,6 @@ const Grilla0 = ({ phoneImg }) => {
                     onLoad={(e) => {
                         setWidth(e.target.width)
                         setHeight(e.target.height)
-                        document.querySelector('.marco').style.height = `${e.target.height}px`;
                     }}
                     style={{
                         zIndex: isPopupOpen ? 1000 : -1000

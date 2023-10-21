@@ -47,6 +47,7 @@ const Grilla1 = ({ phoneImg }) => {
 
     const ref = useRef(null);
 
+
     const obtenerPrecio = async (ProductID) => {
         if (ref.current === null) {
             return;
@@ -84,6 +85,9 @@ const Grilla1 = ({ phoneImg }) => {
                     url: combinedImageUrl,
                     precio: price,
                 }));
+
+
+                console.log(orderInfo);
 
                 if (documento.exists()) {
                     agregarAlCarrito(product);

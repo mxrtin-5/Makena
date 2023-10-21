@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import styles from './CheckoutData.module.css'
 
-const CheckoutData = ({ setOrderData, nextPage }) => {
+
+const CheckoutData = ({ setOrderData, nextPage, data }) => {
+
 
     const [nombre, setNombre] = useState("");
 
@@ -21,6 +23,9 @@ const CheckoutData = ({ setOrderData, nextPage }) => {
         return nombre && apellido && email && codigoPostal && direccion;
     };
 
+    console.log(data);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -32,8 +37,13 @@ const CheckoutData = ({ setOrderData, nextPage }) => {
             codigoPostal,
             direccion,
             opcionesEnvio,
-        };
+            prodName: data.name,
+            price: data.price,
+            cantidad: data.counter,
+            modelo:data.modelo
 
+        };
+        console.log(orderData);
         setOrderData(orderData)
         nextPage()
     };
