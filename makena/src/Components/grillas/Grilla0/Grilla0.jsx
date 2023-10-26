@@ -12,6 +12,9 @@ import { CartContext } from "../../../context/cartContext";
 import EditableImage from "../../EditableImage/EditableImage";
 import ImageProvider from "../../../context/imageContext";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
+import { FaBasketShopping } from "react-icons/fa6";
+
+
 
 const Grilla0 = ({ phoneImg }) => {
 
@@ -19,7 +22,7 @@ const Grilla0 = ({ phoneImg }) => {
 
     console.log(id);
 
-    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
+    const { width, height, croppedImage, cropperRef } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
@@ -158,10 +161,7 @@ const Grilla0 = ({ phoneImg }) => {
                 )}
 
                 <img
-                    onLoad={(e) => {
-                        setWidth(e.target.width)
-                        setHeight(e.target.height)
-                    }}
+                    
                     style={{
                         zIndex: isPopupOpen ? 1000 : -1000
                     }}
@@ -282,8 +282,8 @@ const Grilla0 = ({ phoneImg }) => {
 
             <div className={styles.containerBotones}>
                 <UploadWidget getImageData={handleAddImageShow} />
-                <button onClick={TogglePopup}>Toggle</button>
-                <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+                <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
+                <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
             </div>
 
             <div style={{ display: "none" }}>

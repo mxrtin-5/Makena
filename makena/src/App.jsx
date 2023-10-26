@@ -13,6 +13,7 @@ import GrillasProvider from './context/grillasContext';
 import ImageCombiner from './Components/Prueba/Prueba';
 import Checkout from './Components/Checkout/Checkout';
 import DetalleProds from './Pages/DetalleProds/DetalleProds';
+import Contacto from './Pages/Contacto/Contacto';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path='/prueba' element={<ImageCombiner />} />
                 <Route path='/checkout' element={<Checkout />} />
                 <Route path='/detail/:id' element={<DetalleProds />}/>
+                <Route path='/contacto' element={<Contacto />} />
               </Routes>
 
             </BrowserRouter>

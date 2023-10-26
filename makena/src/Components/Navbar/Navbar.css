@@ -1,7 +1,7 @@
 .header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .header_container {
@@ -22,7 +22,6 @@
 }
 
 @media (max-width: 1400px) {
-
     .menu-icon{
         color: white;
         opacity: 1;

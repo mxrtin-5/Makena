@@ -8,9 +8,9 @@ import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces'
 
 const Checkout = () => {
 
-    const [page, setPage] = useState(0)
-
-    const [orderData, setOrderData] = useState(null);
+    const [page, setPage] = useState(0);
+    
+    const [orderData, setOrderData] = useState('');
 
     const FormTitles = ["Datos Personales", "Pago", "Completado"]
 
@@ -19,15 +19,12 @@ const Checkout = () => {
         setPage(page + 1);
     };
 
-    // Función para retroceder a la página anterior (si es necesario)
-    const prevPage = () => {
-        setPage(page - 1);
-    };
+    console.log(orderData)
 
     return (
         <div className={styles.form}>
             <div className={styles.progressBar}><div style={{
-                width: page === 0 ? "33.3%" : page == 1 ? "66.6%" : "100%"
+                width: page === 0 ? "33.3%" : page === 1 ? "66.6%" : "100%"
             }}></div></div>
             <div className={styles.formContainer}>
                 <div className={styles.header}>
@@ -36,6 +33,7 @@ const Checkout = () => {
                 <div className={styles.body}>
                     {page === 0 && (
                         <CheckoutData
+                            data={orderData}
                             nextPage={nextPage}
                             setOrderData={setOrderData}
                         />

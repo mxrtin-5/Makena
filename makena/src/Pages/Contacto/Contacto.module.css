@@ -1,0 +1,84 @@
+.containerContact {
+    display: grid;
+    place-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    height: 50vh;
+    margin-top: 100px;
+    background-color: rgb(180, 182, 182);
+}
+
+.containerContact h2 {
+    font-size: 3em;
+}
+
+.formontact {
+    display: grid;
+    place-items: center;
+    width: 60%;
+    color: black;
+    margin-top: 20px;
+}
+
+input {
+    border-radius: 100px;
+    border: 2px solid blueviolet;
+    transition: all .3s ease;
+    width: 100%;
+    height: 40px;
+    color: black;
+}
+
+input:focus {
+    border: none;
+    box-shadow: 0 0 10px white;
+    border: 2px solid black;
+}
+
+.formontact .error{
+    color: antiquewhite;
+    background-color: black;
+}
+
+.formontact:focus {
+    border: none;
+    outline: none;
+}
+
+.divForm {
+    display: flex;
+    width: 100%;
+}
+
+.errorMsjContact {
+    color: rgb(221, 34, 34);
+}
+
+.errorMsjContact1{
+    position: absolute;
+    top: 20%;
+}
+
+.buttons {
+    height: 50px;
+    width: 80px;
+    border-radius: 10px;
+    transition: .3s ease;
+    margin-right: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.buttons:hover {
+    background-color: rgb(111, 36, 182);
+    color: white;
+}
+
+.formontactMsj {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100px;
+    color: black;
+    margin-top: 20px;
+}

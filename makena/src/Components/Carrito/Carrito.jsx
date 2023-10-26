@@ -3,11 +3,11 @@ import { CartContext } from "../../context/cartContext";
 import styles from './Carrito.module.css'
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import CheckoutData from "../CheckoutComponents/CheckoutData/CheckoutData";
 
 
 const Carrito = () => {
-    const { cart, removerDelCarrito, vaciarCarrito, totalCompra, incrementarCantidad, decrementarCantidad  } = useContext(CartContext);
+
+    const { cart, removerDelCarrito, totalCompra, incrementarCantidad, decrementarCantidad  } = useContext(CartContext);
 
     const handleProductClick = (event) => {
         event.stopPropagation();
@@ -15,7 +15,11 @@ const Carrito = () => {
 
     cart.map((product) => {
         console.log("Product:", product);
-})
+    })
+
+    console.log(cart.img);
+
+    console.log(cart);
 
     return (
         <div>
@@ -53,13 +57,7 @@ const Carrito = () => {
                 </div>
             </div>
 
-            <div style={{
-                display: "none"
-            }}>
-                <CheckoutData data={cart.map((product) => {
-        console.log("Product:", product);
-})}/>
-            </div>
+            
         </div>
     );
 };
