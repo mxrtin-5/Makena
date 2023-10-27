@@ -161,7 +161,7 @@ const Grilla0 = ({ phoneImg }) => {
                 )}
 
                 <img
-                    
+
                     style={{
                         zIndex: isPopupOpen ? 1000 : -1000
                     }}
@@ -281,7 +281,9 @@ const Grilla0 = ({ phoneImg }) => {
             </div>
 
             <div className={styles.containerBotones}>
-                <UploadWidget getImageData={handleAddImageShow} />
+                <div className={styles.containerUpload}>
+                    <UploadWidget getImageData={handleAddImageShow} />
+                </div>
                 <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
                 <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
             </div>

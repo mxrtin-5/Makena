@@ -55,16 +55,24 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
-    right: 5%; /* Adjust the percentage as needed */
-    top: 40%; /* Adjust the percentage as needed */
+    right: 5%;
+    /* Adjust the percentage as needed */
+    top: 40%;
+    /* Adjust the percentage as needed */
 }
 
-.containerBotones{
+.containerBotones {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
     gap: 20px;
+}
+
+.containerUpload {
+    position: absolute;
+    top: 80%;
+    left: 47%;
 }
 
 .button {
@@ -219,8 +227,55 @@
 @media (max-width: 1050px) {
     .containerEditar {
         .button {
-            font-size: 1.2vw; /* Adjust font size as needed for smaller screens */
-            padding: 1vh 1.5vw; /* Adjust padding as needed for smaller screens */
+            font-size: 1.2vw;
+            /* Adjust font size as needed for smaller screens */
+            padding: 1vh 1.5vw;
+            /* Adjust padding as needed for smaller screens */
         }
+    }
+}
+
+@media (max-width: 800px) {
+    .marcoImg {
+        left: 0;
+        /* La imagen del celular se moverá a la izquierda */
+    }
+
+    .containerEditar {
+        position: absolute;
+    }
+
+    .button {
+        width: 100%;
+        /* Los botones de edición ocuparán todo el ancho disponible */
+        margin-bottom: 10px;
+        /* Agregar un margen entre los botones */
+    }
+}
+
+/* Estilos para pantallas más estrechas (menores a 600px) */
+@media (max-width: 600px) {
+    .marco {
+        position: absolute;
+        /* Mover la imagen a la izquierda */
+        left: 0;
+    }
+
+    .button{
+        width: 80px;
+        display: block;
+        height: 35px;
+    }
+
+    .containerBotones {
+        position: absolute;
+        top: 70%;
+        left: 20%;
+    }
+
+    .containerUpload {
+        position: absolute;
+        top: 200%;
+        left: 30%;
     }
 }
