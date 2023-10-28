@@ -10,6 +10,9 @@ import { CartContext } from "../../../context/cartContext";
 import html2canvas from "html2canvas";
 import { db } from "../../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
+import { FaBasketShopping } from "react-icons/fa6";
+
+
 
 
 const Grilla4 = ({ phoneImg }) => {
@@ -206,97 +209,99 @@ const Grilla4 = ({ phoneImg }) => {
                         height={height} // Utilizamos la variable setHeight aquí
                     ></canvas>
 
-                    <div className={styles.containerEditar}>
-                        <div className={styles.container}>
-                            <button
-                                className={styles.button}
-                                onClick={() => {
-                                    if (isImageSelected(imagenSeleccionada)) {
+                </div>
 
-                                        setEscala((estadoPrevio) => {
+                <div className={styles.containerEditar}>
+                    <div className={styles.container}>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
 
-                                            const newValue = estadoPrevio[imagenSeleccionada] + 0.3
+                                    setEscala((estadoPrevio) => {
 
-                                            const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                        const newValue = estadoPrevio[imagenSeleccionada] + 0.3
 
-                                            return newState
+                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
 
-                                        })
+                                        return newState
 
-                                    }
-                                }}
-                            >
-                                Zoom +
-                            </button>
-                            <button
-                                className={styles.button}
-                                onClick={() => {
-                                    if (isImageSelected(imagenSeleccionada)) {
-                                        setEscala((estadoPrevio) => {
+                                    })
 
-                                            const newValue = estadoPrevio[imagenSeleccionada] - 0.3
+                                }
+                            }}
+                        >
+                            Zoom +
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setEscala((estadoPrevio) => {
 
-                                            const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
-                                            return newState
+                                        const newValue = estadoPrevio[imagenSeleccionada] - 0.3
 
-                                        })
-                                    }
-                                }}
-                            >
-                                Zoom -
-                            </button>
-                        </div>
+                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                        return newState
 
-                        <div className={styles.container}>
-                            <button
-                                className={styles.button}
-                                onClick={() => {
-                                    if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateY(translateY - 5);
-                                    }
-                                }}
-                            >
-                                Arriba
-                            </button>
-                            <button
-                                className={styles.button}
-                                onClick={() => {
-                                    if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateY(translateY + 5);
-                                    }
-                                }}
-                            >
-                                Abajo
-                            </button>
-                            <button
-                                className={styles.button}
-                                onClick={() => {
-                                    if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateX(translateX + 5);
-                                    }
-                                }}
-                            >
-                                {"=>"}
-                            </button>
-                            <button
-                                className={styles.button}
-                                onClick={() => {
-                                    if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateX(translateX - 5);
-                                    }
-                                }}
-                            >
-                                {"<="}
-                            </button>
-                        </div>
+                                    })
+                                }
+                            }}
+                        >
+                            Zoom -
+                        </button>
                     </div>
 
+                    <div className={styles.container}>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateY(translateY - 5);
+                                }
+                            }}
+                        >
+                            Arriba
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateY(translateY + 5);
+                                }
+                            }}
+                        >
+                            Abajo
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateX(translateX + 5);
+                                }
+                            }}
+                        >
+                            {"=>"}
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateX(translateX - 5);
+                                }
+                            }}
+                        >
+                            {"<="}
+                        </button>
+                    </div>
                 </div>
 
                 <div className={styles.containerBotones}>
-                    <UploadWidget getImageData={handleAddImageShow} />
-                    <button onClick={TogglePopup}>Toggle</button>
-                    <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+                    <div className={styles.containerUpload}>
+                        <UploadWidget getImageData={handleAddImageShow} />
+                    </div>
+                    <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
+                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
                 </div>
 
                 <div style={{ display: "none" }}>

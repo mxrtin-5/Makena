@@ -11,6 +11,9 @@ import { CartContext } from "../../../context/cartContext";
 import { db } from "../../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import html2canvas from "html2canvas";
+import { FaBasketShopping } from "react-icons/fa6";
+
+
 
 
 const Grilla3 = ({ phoneImg }) => {
@@ -292,9 +295,11 @@ const Grilla3 = ({ phoneImg }) => {
 
 
                 <div className={styles.containerBotones}>
-                    <UploadWidget getImageData={handleAddImageShow} />
-                    <button onClick={TogglePopup}>Toggle</button>
-                    <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+                    <div className={styles.containerUpload}>
+                        <UploadWidget getImageData={handleAddImageShow} />
+                    </div>
+                    <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
+                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
                 </div>
 
                 <div style={{ display: "none" }}>

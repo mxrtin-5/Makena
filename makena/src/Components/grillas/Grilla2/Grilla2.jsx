@@ -11,6 +11,9 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { Cropper } from 'react-cropper';
 import CheckoutPayment from '../../CheckoutComponents/CheckoutPayment/CheckoutPayment';
+import { FaBasketShopping } from "react-icons/fa6";
+
+
 
 const Grilla2 = ({ phoneImg }) => {
 
@@ -130,7 +133,6 @@ const Grilla2 = ({ phoneImg }) => {
         }
     };
 
-    console.log(combinedImageUrl);
 
 
     return (
@@ -162,7 +164,7 @@ const Grilla2 = ({ phoneImg }) => {
                 }}
                     className={styles.marcoImg}
                     style={{
-                        zIndex: isPopupOpen ? 100000000 : -10000
+                        zIndex: isPopupOpen ? 1000 : -10000
                     }}
                     src={phoneImg} alt="" />
 
@@ -285,10 +287,13 @@ const Grilla2 = ({ phoneImg }) => {
                 </div>
             </div>
 
+
             <div className={styles.containerBotones}>
-                <UploadWidget getImageData={handleAddImageShow} />
-                <button onClick={TogglePopup}>Toggle</button>
-                <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+                <div className={styles.containerUpload}>
+                    <UploadWidget getImageData={handleAddImageShow} />
+                </div>
+                <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
+                <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
             </div>
 
             <div style={{ display: "none" }}>

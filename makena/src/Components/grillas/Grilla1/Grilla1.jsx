@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla1.module.css'
 import ImageProvider from "../../../context/imageContext";
@@ -11,6 +11,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { CartContext } from "../../../context/cartContext";
 import { useParams } from "react-router-dom";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
+import { FaBasketShopping } from "react-icons/fa6";
+
 
 
 const Grilla1 = ({ phoneImg }) => {
@@ -179,7 +181,7 @@ const Grilla1 = ({ phoneImg }) => {
                 <div className={styles.contenedorImgs}>
                     {imagenes.map((imgData, index) => (
                         <EditableImage
-                        imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
+                            imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
                             key={imgData.url}
                             src={imgData.url}
                             index={index}
@@ -298,9 +300,11 @@ const Grilla1 = ({ phoneImg }) => {
             </div>
 
             <div className={styles.containerBotones}>
+            <div className={styles.containerUpload}>
                 <UploadWidget getImageData={handleAddImageShow} />
-                <button onClick={TogglePopup}>Toggle</button>
-                <button onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+            </div>
+                <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
+                <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
             </div>
 
             <div style={{ display: "none" }}>
