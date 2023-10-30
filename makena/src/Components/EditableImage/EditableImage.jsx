@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { ImageContext } from "../../context/imageContext";
 import styles from './EditableImagen.module.css';
 
-const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY, escala }) => {
+const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY, escala, isSelected }) => {
 
     const { ItemTypes } = useContext(ImageContext);
 
@@ -35,7 +35,7 @@ const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY
     };
 
     return (
-        <div className={`${styles.div} ${styles.contenedorImagen}`} onClick={onClick}
+        <div className={`${styles.div} ${styles.contenedorImagen} ${isSelected ? styles.selectedImage : ''}`} 
             ref={(node) => {
                 drop(node);
             }}
@@ -57,7 +57,6 @@ const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY
                         });
                         node?.addEventListener('drop', (e) => {
                             e.preventDefault();
-                            handleDrop();
                         });
                     }}
                 />

@@ -46,6 +46,32 @@ const Grilla5 = ({ phoneImg }) => {
 
     const combinedImageRef = useRef(null)
 
+    //DND
+    const handleDrop = (fromIndex, toIndex) => {
+        const updatedImages = [...imagenes];
+        const [movedImage] = updatedImages.splice(fromIndex, 1);
+        updatedImages.splice(toIndex, 0, movedImage);
+        setImagenes(updatedImages);
+    };
+    //Click img
+    const handleImageClick = (index) => {
+        setImagenSeleccionada(index);
+    };
+    //Condicion de imagen seleccionada
+    const isImageSelected = (index) => {
+        return index === imagenSeleccionada;
+    };
+
+    const changeValueArray = (arr, indexForChange, newValue) => {
+        const newArray = arr.map((element, index) => {
+            if (index === indexForChange) return newValue;
+            return element
+        })
+
+        return newArray
+
+    }
+
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {
             let newState = [...prevState, cloudData];
@@ -143,53 +169,53 @@ const Grilla5 = ({ phoneImg }) => {
 
                     <div className={styles.contenedorImgs}>
                         <div className={styles.parteAbajo}>
-                            {imagenes.slice(2, 3).map((imgData, index) => (
+                            {imagenes.slice(1, 3).map((imgData, index) => (
                                 <EditableImage
-                                imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
-                                key={imgData.url}
-                                src={imgData.url}
-                                index={index}
-                                referenciaImagenes={index}
-                                onDrop={handleDrop}
-                                onClick={() => handleImageClick(index)}
-                                isSelected={isImageSelected(index)}
-                                escala={escala[index]}
-                                translateX={imagenSeleccionada === index ? translateX : 0}
-                                translateY={imagenSeleccionada === index ? translateY : 0}
-                                className={isImageSelected(index) ? styles.selectedImage : ''}
-                                style={
-                                    isImageSelected(index)
-                                        ? {
-                                            transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-                                        }
-                                        : {}
-                                }
+                                    imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
+                                    key={imgData.url}
+                                    src={imgData.url}
+                                    index={index}
+                                    referenciaImagenes={index}
+                                    onDrop={handleDrop}
+                                    onClick={() => handleImageClick(index)}
+                                    isSelected={isImageSelected(index)}
+                                    escala={escala[index]}
+                                    translateX={imagenSeleccionada === index ? translateX : 0}
+                                    translateY={imagenSeleccionada === index ? translateY : 0}
+                                    className={isImageSelected(index) ? styles.selectedImage : ''}
+                                    style={
+                                        isImageSelected(index)
+                                            ? {
+                                                transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
+                                            }
+                                            : {}
+                                    }
                                 />
                             ))}
                         </div>
 
                         <div className={styles.parteArriba}>
-                            {imagenes.slice(3, 5).map((imgData, index) => (
+                            {imagenes.slice(4, 5).map((imgData, index) => (
                                 <EditableImage
-                                imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
-                                key={imgData.url}
-                                src={imgData.url}
-                                index={index}
-                                referenciaImagenes={index}
-                                onDrop={handleDrop}
-                                onClick={() => handleImageClick(index)}
-                                isSelected={isImageSelected(index)}
-                                escala={escala[index]}
-                                translateX={imagenSeleccionada === index ? translateX : 0}
-                                translateY={imagenSeleccionada === index ? translateY : 0}
-                                className={isImageSelected(index) ? styles.selectedImage : ''}
-                                style={
-                                    isImageSelected(index)
-                                        ? {
-                                            transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-                                        }
-                                        : {}
-                                }
+                                    imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
+                                    key={imgData.url}
+                                    src={imgData.url}
+                                    index={index}
+                                    referenciaImagenes={index}
+                                    onDrop={handleDrop}
+                                    onClick={() => handleImageClick(index)}
+                                    isSelected={isImageSelected(index)}
+                                    escala={escala[index]}
+                                    translateX={imagenSeleccionada === index ? translateX : 0}
+                                    translateY={imagenSeleccionada === index ? translateY : 0}
+                                    className={isImageSelected(index) ? styles.selectedImage : ''}
+                                    style={
+                                        isImageSelected(index)
+                                            ? {
+                                                transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
+                                            }
+                                            : {}
+                                    }
                                 />
                             ))}
                         </div>

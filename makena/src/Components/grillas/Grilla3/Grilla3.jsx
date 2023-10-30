@@ -49,14 +49,16 @@ const Grilla3 = ({ phoneImg }) => {
 
     const combinedImageRef = useRef(null)
 
-    console.log(imagenes);
+    const TogglePopup = () => {
+        setPopupOpen(!isPopupOpen);
+    };
 
     const handleAddImageShow = (cloudData) => {
         setImagenes((prevState) => {
-            let newState = [...prevState, cloudData]
+            let newState = [...prevState, cloudData];
             return newState;
-        })
-    }
+        });
+    };
 
     //DND
     const handleDrop = (fromIndex, toIndex) => {
@@ -82,11 +84,6 @@ const Grilla3 = ({ phoneImg }) => {
 
         return newArray
 
-    }
-
-
-    const TogglePopup = () => {
-        setPopupOpen(!isPopupOpen);
     }
 
     const obtenerPrecio = async (ProductID) => {
@@ -142,7 +139,7 @@ const Grilla3 = ({ phoneImg }) => {
     return (
         <ImageProvider>
             <>
-                <div className={styles.marco} ref={ref}>
+                <div ref={ref} className={styles.marco} >
 
                     {imagenes && imagenes.length > 0 && (
                         <Cropper
@@ -172,7 +169,6 @@ const Grilla3 = ({ phoneImg }) => {
                             zIndex: isPopupOpen ? 100000000 : -10000
                         }}
                         src={phoneImg} alt="" />
-
 
                     <div className={styles.contenedorImgs}>
                         {imagenes.map((imgData, index) => (

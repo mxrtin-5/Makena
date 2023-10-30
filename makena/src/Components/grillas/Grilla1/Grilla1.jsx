@@ -18,7 +18,6 @@ import { FaBasketShopping } from "react-icons/fa6";
 const Grilla1 = ({ phoneImg }) => {
 
     const { id } = useParams()
-    console.log(id);
 
     const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
 
