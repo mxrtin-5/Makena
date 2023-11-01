@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { collection, addDoc} from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
 import { db } from '../../firebase/config'
-import { Formik, Form, Field, ErrorMessage} from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import styles  from './Contacto.module.css'
+import styles from './Contacto.module.css'
 
 
 const Contacto = () => {
@@ -14,36 +14,36 @@ const Contacto = () => {
 
     const schema = Yup.object().shape({
         nombre: Yup.string()
-                    .min(1, "El nombre es demasiado corto")
-                    .max(20, "Máximo 20 caracteres")
-                    .required("Obligatorio"),
+            .min(1, "El nombre es demasiado corto")
+            .max(20, "Máximo 20 caracteres")
+            .required("Obligatorio"),
         apellido: Yup.string()
-                    .min(1, "La direccion es demasiado corta")
-                    .max(20, "Máximo 20 caracteres")
-                    .required("Obligatorio"),
+            .min(1, "La direccion es demasiado corta")
+            .max(20, "Máximo 20 caracteres")
+            .required("Obligatorio"),
         email: Yup.string()
-                    .email("El email es inválido")
-                    .required("Obligatorio"),
+            .email("El email es inválido")
+            .required("Obligatorio"),
         telefono: Yup.string()
-                    .min(1, 'El telefono es demasiado corto')
-                    .max(20, 'El numero es demasiado largo'),
+            .min(1, 'El telefono es demasiado corto')
+            .max(20, 'El numero es demasiado largo'),
         mensaje: Yup.string()
-                    .min(3, 'El mensaje es demasido corto')
-                    .max(2000,'El mensaje es muy largo')
-                    .required("Obligatorio"),
+            .min(3, 'El mensaje es demasido corto')
+            .max(2000, 'El mensaje es muy largo')
+            .required("Obligatorio"),
     })
-    
-    
+
+
     const initialValues = {
-                nombre: '',
-                apellido: '',
-                email:'',
-                telefono:'',
-                mensaje:''
+        nombre: '',
+        apellido: '',
+        email: '',
+        telefono: '',
+        mensaje: ''
     }
 
 
-    const  handleSubmit = async (values) =>{
+    const handleSubmit = async (values) => {
 
 
         const coment = collection(db, "mensajes")
@@ -68,48 +68,49 @@ const Contacto = () => {
         <div className={styles.containerContact}>
             <h2>Contacto</h2>
 
-            <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={schema} >
-                {() => (
-                    <Form className="form-contacto">
-                        <div className={styles.divForm}>
-                            <Field
-                                className={styles.formontact}
-                                placeholder="Tu nombre"
-                                type="text"
-                                name="nombre" />
-                            <ErrorMessage name="nombre" component="p" />
-                            <Field
-                                className={styles.formontact}
-                                placeholder="Apellido"
-                                type="text"
-                                name="apellido" />
-                            <ErrorMessage name="apellido" component="p" />
+            <div>
+                <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={schema} >
+                    {() => (
+                        <div  className={styles.container}>
+                            <Form className={styles.formContact}>
+
+                                <div className={styles.divForm}>
+                                    <label className={styles.labelName} htmlFor="">Tu nombre*</label>
+                                    <Field
+                                        className={styles.formontact}
+                                        type="text"
+                                        name="nombre" />
+                                    <label className={styles.label} htmlFor="">Tu apellido*</label>
+                                    <Field
+                                        className={styles.formontact}
+                                        type="text"
+                                        name="apellido" />
+                                </div>
+                                <label className={styles.sorete} htmlFor="">Tu Email*</label>
+                                <Field
+                                    className={styles.formontact}
+                                    type="email"
+                                    name="email" />
+                                <label className={styles.sorete1} htmlFor="">Tu numero</label>
+                                <Field
+                                    className={styles.formontact}
+                                    type="text"
+                                    name="telefono" />
+                                <label className={styles.sorete1} htmlFor="">Tu mensaje*</label>
+                                <Field
+                                    className={styles.formontactMsj}
+                                    type="textarea"
+                                    name="mensaje" />
+
+                                <div className="buttons-reset-submit">
+                                    <button type="submit" className={styles.buttons} disabled={loading} >Enviar</button>
+                                    <button type="reset" className={styles.buttons}>Reset</button>
+                                </div>
+                            </Form>
                         </div>
-                        <Field
-                            className={styles.formontact}
-                            placeholder="Tu email"
-                            type="email"
-                            name="email" />
-                        <ErrorMessage name="email" component="p" />
-                        <Field
-                            className={styles.formontact}
-                            placeholder="Telefono"
-                            type="text"
-                            name="telefono" />
-                        <ErrorMessage name="telefono" component="p" />
-                        <Field
-                            className={styles.formontactMsj}
-                            placeholder="Mensaje"
-                            type="textarea"
-                            name="mensaje" />
-                        <ErrorMessage name="mensaje" component="p" />
-                        <div className="buttons-reset-submit">
-                            <button type="submit" className={styles.buttons} disabled={loading} >Enviar</button>
-                            <button type="reset" className={styles.buttons}>Reset</button>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
+                    )}
+                </Formik>
+            </div>
 
 
         </div>

@@ -1,11 +1,11 @@
 .containerContact {
+    position: relative;
     display: grid;
     place-items: center;
-    font-family: 'Times New Roman', Times, serif;
     height: 50vh;
     margin-top: 100px;
-    background-color: rgb(180, 182, 182);
-}
+    background-color: rgb(32, 32, 32);
+};
 
 .containerContact h2 {
     font-size: 3em;
@@ -13,14 +13,18 @@
 
 .formontact {
     display: grid;
+    width: 100%;
+    padding: 20px;
     place-items: center;
-    width: 60%;
     color: black;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 input {
-    border-radius: 100px;
+    border-top-right-radius:100px;
+    border-bottom-right-radius:100px;
+    border-top-left-radius:50px;
     border: 2px solid blueviolet;
     transition: all .3s ease;
     width: 100%;
@@ -31,7 +35,27 @@ input {
 input:focus {
     border: none;
     box-shadow: 0 0 10px white;
-    border: 2px solid black;
+}
+
+.label{
+    display: flex;
+    position: absolute;
+    left: 50%;
+}
+
+.labelName{
+    display: flex;
+    position: absolute;
+    right: 71%;
+}
+
+.sorete{
+    position: absolute;
+}
+
+.sorete1{
+    position: absolute;
+    margin-top: -20px;
 }
 
 .formontact .error{
@@ -45,6 +69,7 @@ input:focus {
 }
 
 .divForm {
+    position: relative;
     display: flex;
     width: 100%;
 }
@@ -81,4 +106,10 @@ input:focus {
     height: 100px;
     color: black;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.formontactMsj:focus{
+    border: none;
+    box-shadow: 0 0 10px white;
 }
