@@ -18,4 +18,82 @@ body{
   color: rgb(223, 223, 223);
 }
 
+.wpp{
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25d366;
+  color: #fff;
+  border: 3px solid white;
+  padding: 10px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 2px 2px 3px #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
 
+.joinchat{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 7px;
+  right: 60px;
+  width: auto;
+  height: 35px;
+  padding: 5px 10px 5px 5px;
+  border: none;
+  border-radius: 50px;
+  background-color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-out 0.4s;
+  filter: drop-shadow(0 1px 4px rgba(0, 0,0,0.4));
+}
+
+.joinchat::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: -6px;
+  border: 8px solid transparent;
+  border-width: 6px 0 6px 8px;
+  border-left-color: #fff;
+}
+
+.wpp .text{
+  color: #525252;
+  font-size: 16px;
+}
+.wpp:hover{
+  transition: all 0.5s ease-in-out;
+  animation: bounce 1.6s infinite;
+}
+
+@keyframes bounce{
+  0%, 20%, 50%, 80%, 100%{
+    transform: translateY(0);
+  }
+  40%{
+    transform: translateY(-5px);
+  }
+  60%{
+    transform: translateY(-5px);
+  }
+}
+
+@media (hover: hover){
+  .wpp:hover .joinchat{
+    opacity: 1;
+    animation: none;
+    transition: opacity 0.2s;
+  }
+}

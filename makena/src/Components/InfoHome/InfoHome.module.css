@@ -1,10 +1,10 @@
-.section{
+.section {
     position: relative;
     width: 100%;
     height: 50vh;
 }
 
-.envios{
+.envios {
     display: flex;
     position: absolute;
     top: 30%;
@@ -12,11 +12,11 @@
     font-size: 200px;
 }
 
-.p{
+.p {
     font-size: 20px;
 }
 
-.infoPerso{
+.infoPerso {
     display: flex;
     position: absolute;
     top: 30%;
@@ -24,10 +24,38 @@
     font-size: 200px;
 }
 
-.happy{
+.happy {
     display: flex;
     position: absolute;
     top: 100%;
     left: 10%;
     font-size: 200px;
+}
+
+@media (max-width: 900px) {
+    .section {
+        position: relative;
+        width: 100%;
+        height: 50vh;
+    }
+
+    .envios {
+        display: flex;
+        position: absolute;
+        top: 30%;
+        left: 10%;
+        font-size: 20vw;
+    }
+
+    .p {
+        font-size: 1.6vw;
+    }
+
+    .infoPerso {
+        display: flex;
+        position: absolute;
+        top: 30%;
+        right: 10%;
+        font-size: 20vw;
+    }
 }
