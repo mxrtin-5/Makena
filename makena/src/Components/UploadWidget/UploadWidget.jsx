@@ -12,8 +12,8 @@ const UploadWidget = ({getImageData}) => {
         cloudinaryRef.current = window.cloudinary;
         console.log(cloudinaryRef.current);
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
-            cloudName: 'djkwdbi2z',
-            uploadPreset: 'gly1rbcq'
+            cloudName: 'druiqihxp',
+            uploadPreset: 'Makena'
         }, function (error, result) {
             if( result.event === "success"){
                 getImageData({
