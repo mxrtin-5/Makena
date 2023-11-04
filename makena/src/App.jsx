@@ -16,6 +16,7 @@ import DetalleProds from './Pages/DetalleProds/DetalleProds';
 import Contacto from './Pages/Contacto/Contacto';
 import Footer from './Components/Footer/Footer';
 import { BsWhatsapp } from "react-icons/bs";
+import ActualizarDatos from './Components/ActualizadDatos/ActualizarDatos';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                 <Route path='/checkout' element={<Checkout />} />
                 <Route path='/detail/:id' element={<DetalleProds />} />
                 <Route path='/contacto' element={<Contacto />} />
+                <Route path='/admin' element={<ActualizarDatos />} />
               </Routes>
 
               <a className="wpp" target='_blank' href="https://api.whatsapp.com/send?phone=5491122444188"><BsWhatsapp/><div className='joinchat'><div className='text'>Podemos ayudarte?</div></div></a>
