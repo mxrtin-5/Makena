@@ -16,6 +16,98 @@
     margin-bottom: 20px;
 }
 
+.nav {
+    max-width: 900px;
+    margin: auto;
+    font-size: 20px;
+    margin-top: 50px;
+    color: black;
+}
+
+.menuHorizontal {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    color: black;
+    gap: 40px;
+}
+
+.menuHorizontal>li>a {
+    display: block;
+    padding: 15px 20px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+
+}
+
+.menuHorizontal>li:hover {
+    background-color: rgb(169, 21, 199);
+}
+
+.menuVertical {
+    display: none;
+    list-style: none;
+    color: black;
+    width: 200px;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.menuHorizontal li:hover .menuVertical {
+    display: block;
+}
+
+.menuHorizontal li {
+    position: relative;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.arrowIcon {
+    margin-left: 5px;
+}
+
+.menuHorizontal li a {
+    display: block;
+    padding: 15px 20px;
+    color: black;
+    text-decoration: none;
+}
+
+.menuHorizontal li:hover>a {
+    background-color: #f0f0f0;
+}
+
+.menuVertical li a:hover {
+    background-color: #ddd;
+}
+
+.menuVertical li a {
+    display: block;
+    color: black;
+    padding: 15px 15px 15px 20px;
+}
+
+.menuFootball {
+    display: none;
+    list-style: none;
+    width: 200px;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.menuHorizontal li:hover .menuFootball {
+    display: block;
+}
+
 @media (max-width: 900px) {
     .divPadre {
         display: grid;
