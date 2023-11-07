@@ -1,111 +1,41 @@
-.divPadre {
+.prods{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:repeat(4, 1fr);
     gap: 40px;
 }
 
-.section {
+.section{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 20px;
 }
 
-.section h1 {
-    margin-bottom: 20px;
-}
-
-.nav {
-    max-width: 900px;
-    margin: auto;
-    font-size: 20px;
-    margin-top: 50px;
-    color: black;
-}
-
-.menuHorizontal {
-    list-style: none;
+.div{
     display: flex;
-    justify-content: space-around;
-    color: black;
-    gap: 40px;
+    gap: 30px;
 }
 
-.menuHorizontal>li>a {
-    display: block;
-    padding: 15px 20px;
+.ul{
+    display: flex;
+    list-style: none;
+}
+
+.a{
+    color: white;
+    transition: all .3s ease;
+    border: none;
+    padding: 15px;
+    border-radius: 30px;
+    background-color: blueviolet;
+}
+
+.a:hover{
     color: rgb(0, 0, 0);
-    text-decoration: none;
-
 }
 
-.menuHorizontal>li:hover {
-    background-color: rgb(169, 21, 199);
-}
-
-.menuVertical {
-    display: none;
-    list-style: none;
-    color: black;
-    width: 200px;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-}
-
-.menuHorizontal li:hover .menuVertical {
-    display: block;
-}
-
-.menuHorizontal li {
-    position: relative;
-}
-
-.menuItem {
-    display: flex;
-    align-items: center;
+.icon{
     cursor: pointer;
-}
-
-.arrowIcon {
-    margin-left: 5px;
-}
-
-.menuHorizontal li a {
-    display: block;
-    padding: 15px 20px;
-    color: black;
-    text-decoration: none;
-}
-
-.menuHorizontal li:hover>a {
-    background-color: #f0f0f0;
-}
-
-.menuVertical li a:hover {
-    background-color: #ddd;
-}
-
-.menuVertical li a {
-    display: block;
-    color: black;
-    padding: 15px 15px 15px 20px;
-}
-
-.menuFootball {
-    display: none;
-    list-style: none;
-    width: 200px;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
-
-.menuHorizontal li:hover .menuFootball {
-    display: block;
 }
 
 @media (max-width: 900px) {

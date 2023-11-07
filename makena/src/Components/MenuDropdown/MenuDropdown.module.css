@@ -1,0 +1,9 @@
+.div{
+    width: 400px;
+    height: 400px;
+    background-color: rgb(183, 0, 255);
+}
+
+.li{
+    list-style: none;
+}
