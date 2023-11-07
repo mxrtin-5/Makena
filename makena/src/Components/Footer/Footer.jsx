@@ -9,7 +9,7 @@ import { BiLogoInstagram } from "react-icons/bi";
 
 const Footer = () => {
     return (
-        <div className={styles.containerFooter}>
+        
             <footer className={styles.footer}>
                 <div className={styles.categories}>
                     <h4 className={styles.categoriasTitle}>Categorias</h4>
@@ -25,7 +25,7 @@ const Footer = () => {
                         <p><BiLogoGmail className={styles.icons}/>ejemplo@gmail.com</p>
                 </div>
             </footer>
-        </div>
+        
     );
 }
 
