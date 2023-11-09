@@ -1,16 +1,14 @@
 import styles from './MenuDropdown.module.css'
 
 
-const MenuDropdown = ({ subCategoriasAnime }) => {
+const MenuDropdown = ({ categorias, filterCategory }) => {
     return (
         <div className={styles.div}>
             {
-                subCategoriasAnime.map((subCategoria) =>(
-                    <ul>
-                        <li className={styles.li}>
-                            <a href="">{subCategoria}</a>
-                        </li>
-                    </ul>
+                categorias.map(category => (
+                    <button type='button' className={styles.btnCategory} onClick={() => filterCategory(category)} key={category}>
+                        {category}
+                    </button>
                 ))
             }
         </div>

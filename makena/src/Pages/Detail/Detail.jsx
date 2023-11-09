@@ -5,7 +5,6 @@ import Grilla0 from '../../Components/grillas/Grilla0/Grilla0'
 import Grilla2 from '../../Components/grillas/Grilla2/Grilla2';
 import Grilla3 from '../../Components/grillas/Grilla3/Grilla3';
 import Grilla4 from '../../Components/grillas/Grilla4/Grilla4';
-import Grilla5 from '../../Components/grillas/Grilla5/Grilla5';
 import Grilla1 from '../../Components/grillas/Grilla1/Grilla1';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase/config'
@@ -60,8 +59,6 @@ const Detail = () => {
                 return <Grilla3 phoneImg={telefonoInfo.modelo} id={id} />
             case "4":
                 return <Grilla4 phoneImg={telefonoInfo.modelo} id={id} />
-            case "5":
-                return <Grilla5 phoneImg={telefonoInfo.modelo} id={id} />
             default:
                 return <p>grilla 10</p>;
         }

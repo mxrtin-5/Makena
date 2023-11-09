@@ -1,4 +1,9 @@
 /* el div contenedor siempre vas a tener que ponerle un alto y ancho fijo */
+
+.divContainer{
+    height: 70vh;
+}
+
 .marco {
     position: relative;
     height: 500px;

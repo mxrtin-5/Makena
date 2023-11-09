@@ -1,8 +1,12 @@
+.divPadre{
+    height: 70vh;
+}
+
 .marco {
     position: relative;
     height: 500px;
     width: 240px;
-    border-radius: 30px;
+    border-radius: 1.5rem;
     overflow: hidden;
 }
 
@@ -45,9 +49,7 @@
     flex-direction: column;
     position: absolute;
     right: 5%;
-    /* Adjust the percentage as needed */
     top: 40%;
-    /* Adjust the percentage as needed */
 }
 
 .contenedorImgs {
@@ -166,7 +168,6 @@
 @media (max-width: 800px) {
     .marcoImg {
         left: 0;
-        /* La imagen del celular se moverá a la izquierda */
     }
 
     .containerEditar {
@@ -176,9 +177,7 @@
 
     .button {
         width: 100%;
-        /* Los botones de edición ocuparán todo el ancho disponible */
         margin-bottom: 10px;
-        /* Agregar un margen entre los botones */
     }
 }
 
@@ -186,7 +185,6 @@
 @media (max-width: 600px) {
     .marco {
         position: absolute;
-        /* Mover la imagen a la izquierda */
         left: 0;
     }
 

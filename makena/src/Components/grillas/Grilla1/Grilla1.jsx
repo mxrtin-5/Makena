@@ -4,7 +4,6 @@ import styles from './Grilla1.module.css'
 import ImageProvider from "../../../context/imageContext";
 import EditableImage from "../../EditableImage/EditableImage";
 import { GrillasContext } from "../../../context/grillasContext";
-import { Cropper } from "react-cropper";
 import html2canvas from 'html2canvas'
 import { db } from "../../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
@@ -144,171 +143,171 @@ const Grilla1 = ({ phoneImg }) => {
     }
 
     return (
-        <ImageProvider>
-            <div className={styles.marco} ref={ref}>
-                
-                <img
-                    onLoad={(e) => {
-                        setWidth(e.target.width);
-                        setHeight(e.target.height);
-                    }}
-                    className={styles.marcoImg}
-                    src={phoneImg}
-                    style={{
-                        zIndex: isPopupOpen ? 100000000 : -10000
-                    }}
-                    alt=""
-                />
-
-                <div className={styles.contenedorImgs}>
-                    {imagenes.map((imgData, index) => (
-                        <EditableImage
-                            imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
-                            key={imgData.url}
-                            src={imgData.url}
-                            index={index}
-                            referenciaImagenes={index}
-                            onDrop={handleDrop}
-                            onClick={() => handleImageClick(index)}
-                            isSelected={isImageSelected(index)}
-                            escala={escala[index]}
-                            translateX={imagenSeleccionada === index ? translateX : 0}
-                            translateY={imagenSeleccionada === index ? translateY : 0}
-                            className={isImageSelected(index) ? styles.selectedImage : ''}
-                            style={
-                                isImageSelected(index)
-                                    ? {
-                                        transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-                                    }
-                                    : {}
-                            }
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <canvas
-                ref={combinedImageRef}
-                style={{ display: 'none' }}
-                width={width} // Utilizamos la variable setWidth aquí
-                height={height} // Utilizamos la variable setHeight aquí
-            ></canvas>
-
-            {/* <img src={combinedImageUrl} alt="Combined Image" /> */}
-
-            <div className={styles.containerEditar}>
-                <div className={styles.container}>
-                    <button
-                        className={styles.button}
-                        onClick={() => {
-                            if (isImageSelected(imagenSeleccionada)) {
-
-                                setEscala((estadoPrevio) => {
-
-                                    const newValue = estadoPrevio[imagenSeleccionada] + 0.3
-
-                                    const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
-
-                                    return newState
-
-                                })
-
-                            }
-                        }}
-                    >
-                        Zoom +
-                    </button>
-                    <button
-                        className={styles.button}
-                        onClick={() => {
-                            if (isImageSelected(imagenSeleccionada)) {
-                                setEscala((estadoPrevio) => {
-
-                                    const newValue = estadoPrevio[imagenSeleccionada] - 0.3
-
-                                    const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
-                                    return newState
-
-                                })
-                            }
-                        }}
-                    >
-                        Zoom -
-                    </button>
-                </div>
-
-                <div className={styles.container}>
-                    <button
-                        className={styles.button}
-                        onClick={() => {
-                            if (isImageSelected(imagenSeleccionada)) {
-                                setTranslateY(translateY - 5);
-                            }
-                        }}
-                    >
-                        Arriba
-                    </button>
-                    <button
-                        className={styles.button}
-                        onClick={() => {
-                            if (isImageSelected(imagenSeleccionada)) {
-                                setTranslateY(translateY + 5);
-                            }
-                        }}
-                    >
-                        Abajo
-                    </button>
-                    <button
-                        className={styles.button}
-                        onClick={() => {
-                            if (isImageSelected(imagenSeleccionada)) {
-                                setTranslateX(translateX + 5);
-                            }
-                        }}
-                    >
-                        {"=>"}
-                    </button>
-                    <button
-                        className={styles.button}
-                        onClick={() => {
-                            if (isImageSelected(imagenSeleccionada)) {
-                                setTranslateX(translateX - 5);
-                            }
-                        }}
-                    >
-                        {"<="}
-                    </button>
-                </div>
-            </div>
-
-            <div className={styles.containerBotones}>
-            <div className={styles.containerUpload}>
-                <UploadWidget getImageData={handleAddImageShow} />
-            </div>
-                <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
-                <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
-            </div>
-
-            <div style={{ display: "none" }}>
-                {orderInfo.url && (
-                    <CheckoutPayment orderData={orderInfo} />
-                )}
-            </div>
-
-            {croppedImage && (
-                <div>
+        <div className={styles.divPadre}>
+            <ImageProvider>
+                <div className={styles.marco} ref={ref}>
                     <img
-                        style={{
-                            display: "none",
-                            transform: `translate(${translateX[imagenSeleccionada]}px, ${translateY[imagenSeleccionada]
-                                }px)`,
+                        onLoad={(e) => {
+                            setWidth(e.target.width);
+                            setHeight(e.target.height);
                         }}
-                        src={croppedImage}
-                        alt="Imagen recortada"
+                        className={styles.marcoImg}
+                        src={phoneImg}
+                        style={{
+                            zIndex: isPopupOpen ? 1000 : -10000
+                        }}
+                        alt=""
                     />
+
+                    <div className={styles.contenedorImgs}>
+                        {imagenes.map((imgData, index) => (
+                            <EditableImage
+                                imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
+                                key={imgData.url}
+                                src={imgData.url}
+                                index={index}
+                                referenciaImagenes={index}
+                                onDrop={handleDrop}
+                                onClick={() => handleImageClick(index)}
+                                isSelected={isImageSelected(index)}
+                                escala={escala[index]}
+                                translateX={imagenSeleccionada === index ? translateX : 0}
+                                translateY={imagenSeleccionada === index ? translateY : 0}
+                                className={isImageSelected(index) ? styles.selectedImage : ''}
+                                style={
+                                    isImageSelected(index)
+                                        ? {
+                                            transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
+                                        }
+                                        : {}
+                                }
+                            />
+                        ))}
+                    </div>
                 </div>
-            )}
-        </ImageProvider>
+
+                <canvas
+                    ref={combinedImageRef}
+                    style={{ display: 'none' }}
+                    width={width}
+                    height={height}
+                ></canvas>
+
+                <div className={styles.containerEditar}>
+                    <div className={styles.container}>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+
+                                    setEscala((estadoPrevio) => {
+
+                                        const newValue = estadoPrevio[imagenSeleccionada] + 0.3
+
+                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+
+                                        return newState
+
+                                    })
+
+                                }
+                            }}
+                        >
+                            Zoom +
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setEscala((estadoPrevio) => {
+
+                                        const newValue = estadoPrevio[imagenSeleccionada] - 0.3
+
+                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                        return newState
+
+                                    })
+                                }
+                            }}
+                        >
+                            Zoom -
+                        </button>
+                    </div>
+
+                    <div className={styles.container}>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateY(translateY - 5);
+                                }
+                            }}
+                        >
+                            Arriba
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateY(translateY + 5);
+                                }
+                            }}
+                        >
+                            Abajo
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateX(translateX + 5);
+                                }
+                            }}
+                        >
+                            {"=>"}
+                        </button>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                if (isImageSelected(imagenSeleccionada)) {
+                                    setTranslateX(translateX - 5);
+                                }
+                            }}
+                        >
+                            {"<="}
+                        </button>
+                    </div>
+                </div>
+
+                <div className={styles.containerBotones}>
+                    <div className={styles.containerUpload}>
+                        <UploadWidget getImageData={handleAddImageShow} />
+                    </div>
+                    <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
+                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
+                </div>
+
+                <div style={{ display: "none" }}>
+                    {orderInfo.url && (
+                        <CheckoutPayment orderData={orderInfo} />
+                    )}
+                </div>
+
+                {croppedImage && (
+                    <div>
+                        <img
+                            style={{
+                                display: "none",
+                                transform: `translate(${translateX[imagenSeleccionada]}px, ${translateY[imagenSeleccionada]
+                                    }px)`,
+                            }}
+                            src={croppedImage}
+                            alt="Imagen recortada"
+                        />
+                    </div>
+                )}
+            </ImageProvider>
+        </div>
+
     );
 };
 

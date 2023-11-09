@@ -1,7 +1,6 @@
 .prods {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* Mostrar 4 productos por fila en pantallas grandes */
     gap: 20px;
 }
 

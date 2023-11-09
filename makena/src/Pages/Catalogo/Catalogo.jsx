@@ -12,11 +12,9 @@ const Catalogo = () => {
 
     const [productos, setProductos] = useState([]);
 
-    const[categorias, setCategorias] = useState(["Todo", "Anime", "Deporte"]);
+    const [categorias, setCategorias] = useState(["Todo", "Anime", "Deporte"])
 
-    const subCategoriasAnime = ["One Piece", "Naruto", "Dragon Ball"];
-
-    const[menu, setMenu] = useState(null)
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         const fetchProductos = async () => {
@@ -34,36 +32,19 @@ const Catalogo = () => {
         fetchProductos();
     }, []);
 
-    const toggleMenu = () =>{
-        setMenu(!menu)
-    }
+    const filterCategory = (categoria) => {
+        setSelectedCategory(categoria);
+        console.log(selectedCategory);
+    };
 
 
     return (
         <section className={styles.section} >
             <h1>Productos Destacados</h1>
 
-            <div className={styles.div}>
-                {
-                    categorias.map((cat) =>(
-                        <div className={styles.divMap}>
-                            <ul className={styles.ul}>
-                                <li key={cat}>
-                                    <button className={styles.a} href="">
-                                        {cat}
-                                    </button>
-                                    <AiOutlineArrowDown className={styles.icon} onClick={toggleMenu}   />
-                                </li>
-                            </ul>
-                        </div>
-                    ) )
-                }
-            </div>
 
-            {
-                menu ? <MenuDropdown subCategoriasAnime={subCategoriasAnime} />
-                    : null
-            }
+
+            <MenuDropdown filterCategory={filterCategory} categorias={categorias} />
 
             <div className={styles.prods}>
                 {productos.map((elemento) => (
@@ -72,6 +53,7 @@ const Catalogo = () => {
                         name={elemento.name}
                         price={elemento.price}
                         image={elemento.image}
+                        key={elemento.id}
                     />
                 ))}
             </div>

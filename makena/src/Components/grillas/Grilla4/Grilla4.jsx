@@ -166,13 +166,26 @@ const Grilla4 = ({ phoneImg }) => {
                     }}
                         className={styles.marcoImg}
                         style={{
-                            zIndex: isPopupOpen ? 100000000 : -10000
+                            zIndex: isPopupOpen ? 1000 : -10000
                         }}
                         src={phoneImg} alt="" />
 
                     <div className={styles.contenedorImgs}>
-                        <div className={isPopupOpen ? styles.imagen : styles.imagenConBorde}>
-                            {imagenes.length > 0 && <img src={imagenes[0].url} className={styles.imagen1} />}
+                        <div>
+                            {imagenes.slice(0).map((imgData, index) => (
+                                <EditableImage
+                                    imagen={isPopupOpen ? styles.imagen1 : styles.imagenConBorde1}
+                                    src={imgData.url}
+                                    isSelected={isImageSelected(index)}
+                                    style={
+                                        isImageSelected(index)
+                                            ? {
+                                                transform: `translate(${translateX}px, ${translateY}px) scale(${escala[index]})`,
+                                            }
+                                            : {}
+                                    }
+                                />
+                            ))}
                         </div>
 
                         <div className={styles.parteAbajo}>

@@ -25,6 +25,8 @@ const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY
         },
     });
 
+    console.log("isSelected:", isSelected);
+
     console.log(index);
 
     const imageStyle = {

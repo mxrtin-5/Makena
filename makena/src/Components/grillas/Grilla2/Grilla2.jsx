@@ -9,7 +9,6 @@ import { GrillasContext } from '../../../context/grillasContext';
 import { db } from '../../../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
-import { Cropper } from 'react-cropper';
 import CheckoutPayment from '../../CheckoutComponents/CheckoutPayment/CheckoutPayment';
 import { FaBasketShopping } from "react-icons/fa6";
 
@@ -59,15 +58,19 @@ const Grilla2 = ({ phoneImg }) => {
         });
     };
 
+    console.log(imagenes);
+
     //DND
     const handleDrop = (fromIndex, toIndex) => {
         const updatedImages = [...imagenes];
+        console.log("handleDrop called with fromIndex:", fromIndex, "toIndex:", toIndex);
         const [movedImage] = updatedImages.splice(fromIndex, 1);
         updatedImages.splice(toIndex, 0, movedImage);
         setImagenes(updatedImages);
     };
     //Click img
     const handleImageClick = (index) => {
+        console.log("Imagen seleccionada:", index);
         setImagenSeleccionada(index);
     };
     //Condicion de imagen seleccionada
@@ -124,7 +127,6 @@ const Grilla2 = ({ phoneImg }) => {
 
                 agregarAlCarrito(product);
 
-                // Resto de la lógica de manejo del precio y carrito
             } else {
                 throw new Error("Me quiero morir");
             }
@@ -135,30 +137,12 @@ const Grilla2 = ({ phoneImg }) => {
 
 
 
+
     return (
-        <ImageProvider>
-            <>
+
+        <div className={styles.divPadre}>
+            <ImageProvider>
                 <div className={styles.marco} ref={ref}>
-
-                    {imagenes && imagenes.length > 0 && (
-                        <Cropper
-                            ref={cropperRef}
-                            className={styles.cropperCropBox}
-                            src={imagenes[0].url}
-                            guides={false}
-                            dragMode="none"
-                            responsive={true}
-                            autoCropArea={1}
-                            zoomTo={escala[imagenSeleccionada]}
-                            cropBoxResizable={false}
-                            zoomable={false}
-                            zoomOnTouch={false}
-                            wheelZoomRatio={0}
-                            cropBoxMovable={false}
-                            style={{ width: 600, height: 1200 }}
-                        />
-                    )}
-
                     <img onLoad={(e) => {
                         setWidth(e.target.width);
                         setHeight(e.target.height);
@@ -172,8 +156,8 @@ const Grilla2 = ({ phoneImg }) => {
                     <div className={styles.contenedorImgs}>
                         {imagenes.map((imgData, index) => (
                             <EditableImage
+                                key={index.url} // Asegúrate de que la clave sea única
                                 imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
-                                key={imgData.url}
                                 src={imgData.url}
                                 index={index}
                                 referenciaImagenes={index}
@@ -187,7 +171,7 @@ const Grilla2 = ({ phoneImg }) => {
                                 style={
                                     isImageSelected(index)
                                         ? {
-                                            transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
+                                            transform: `translate(${translateX}px, ${translateY}px) scale(${escala[index]})`,
                                         }
                                         : {}
                                 }
@@ -199,8 +183,8 @@ const Grilla2 = ({ phoneImg }) => {
                 <canvas
                     ref={combinedImageRef}
                     style={{ display: 'none' }}
-                    width={width} // Utilizamos la variable setWidth aquí
-                    height={height} // Utilizamos la variable setHeight aquí
+                    width={width}
+                    height={height}
                 ></canvas>
 
                 <div className={styles.containerEditar}>
@@ -316,10 +300,11 @@ const Grilla2 = ({ phoneImg }) => {
                         />
                     </div>
                 )}
-            </>
 
 
-        </ImageProvider>
+            </ImageProvider>
+        </div>
+
     );
 };
 
