@@ -3,7 +3,6 @@ import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla3.module.css'
 import EditableImage from "../../EditableImage/EditableImage";
 import ImageProvider from "../../../context/imageContext";
-import { Cropper } from "react-cropper";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
 import { useParams } from "react-router-dom";
 import { GrillasContext } from "../../../context/grillasContext";

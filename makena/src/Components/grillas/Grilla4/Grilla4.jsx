@@ -3,7 +3,6 @@ import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla4.module.css'
 import ImageProvider from "../../../context/imageContext";
 import EditableImage from "../../EditableImage/EditableImage";
-import { Cropper } from "react-cropper";
 import { useParams } from "react-router-dom";
 import { GrillasContext } from "../../../context/grillasContext";
 import { CartContext } from "../../../context/cartContext";

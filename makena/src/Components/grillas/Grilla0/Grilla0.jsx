@@ -1,8 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla0.module.css'
-import Cropper from "react-cropper";
-import 'cropperjs/dist/cropper.css';
 import { GrillasContext } from "../../../context/grillasContext";
 import { useParams } from "react-router-dom";
 import html2canvas from "html2canvas";
@@ -144,23 +142,7 @@ const Grilla0 = ({ phoneImg }) => {
         <ImageProvider>
             <div className={styles.divContainer}>
                 <div className={styles.marco} ref={ref}>
-                    {imgData && (
-                        <Cropper
-                            ref={cropperRef}
-                            src={imgData.url}
-                            className={styles.cropperCropBox}
-                            guides={false}
-                            zoomTo={escala}
-                            dragMode="none"
-                            responsive={true}
-                            autoCropArea={1}
-                            cropBoxResizable={true}
-                            zoomable={false}
-                            zoomOnTouch={false}
-                            wheelZoomRatio={0}
-                            cropBoxMovable={false}
-                        />
-                    )}
+                    
 
                     <img
 

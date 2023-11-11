@@ -1,20 +1,54 @@
-.div{
-    width: 200px;
+.div {
     height: 100%;
     background-color: rgb(183, 0, 255);
     padding: 1rem;
     border-radius: 40px;
+    display: flex;
 }
 
-.li{
-    list-style: none;
+.select {
+    width: 100%;
 }
 
-.link{
-    color: white;
-    transition: .3s ease;
+.divBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.link:hover{
-    color: black;
+.button {
+    background-color: rgb(226, 227, 228);
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    gap: 10px;
+}
+
+.AiOutlineArrowDown {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.subCategories {
+    display: none;
+    position: absolute;
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.showSubCategories .subCategories {
+    display: block;
+}
+
+.subCategory {
+    margin-bottom: 5px;
+}
+
+.subCategorySelected {
+    background-color: #007bff;
+    color: #fff;
 }
