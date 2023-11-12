@@ -1,3 +1,7 @@
+.divPadre{
+    height: 70vh;
+}
+
 .marco {
     position: relative;
     height: 500px;

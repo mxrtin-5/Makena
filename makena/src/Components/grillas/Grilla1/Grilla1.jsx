@@ -18,7 +18,7 @@ const Grilla1 = ({ phoneImg }) => {
 
     const { id } = useParams()
 
-    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
+    const { setHeight, width, height, setWidth, croppedImage } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
@@ -34,7 +34,7 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [translateY, setTranslateY] = useState(0);
 
-    const [combinedImageUrl, setCombinedImageUrl] = useState('');
+    // const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
     const [orderInfo, setOrderInfo] = useState({
         modelo: id,
@@ -47,62 +47,47 @@ const Grilla1 = ({ phoneImg }) => {
 
     const ref = useRef(null);
 
+    console.log(ref);
 
-    const obtenerPrecio = async (ProductID) => {
+    console.log(imagenes);
+
+    const obtenerPrecio = async () => {
         if (ref.current === null) {
             return;
         }
 
-        html2canvas(ref.current, {
-            allowTaint: true,
-            useCORS: true,
-            scale: 1,
-            logging: true,
+        const celularesRef = doc(db, "celulares", id);
+
+        const docRef = getDoc(celularesRef, id);
+        docRef.then((documento) => {
+            const price = documento.data().price;
+            console.log(documento);
+
+            const product = {
+                name: id,
+                img: imagenes,
+                price: price,
+                counter: counter,
+            };
+
+            setOrderInfo((prevData) => ({
+                ...prevData,
+                url: imagenes,
+                precio: price,
+            }));
+
+            if (documento.exists()) {
+                agregarAlCarrito(product);
+                return price;
+            } else {
+                throw new Error("Me quiero morir");
+            }
         })
-            .then((canvas) => {
-                const screenshotDataUrl = canvas.toDataURL('image/png', 1);
-                console.log("URL de la imagen generada:", screenshotDataUrl);
-                return screenshotDataUrl;
-            })
-            .then((screenshotDataUrl) => {
-                setCombinedImageUrl(screenshotDataUrl);
-
-                const docRef = doc(db, "celulares", ProductID);
-                return getDoc(docRef);
-            })
-            .then((documento) => {
-                const price = documento.data().price;
-
-                const product = {
-                    name: id,
-                    img: combinedImageUrl,
-                    price: price,
-                    counter: counter,
-                };
-
-                setOrderInfo((prevData) => ({
-                    ...prevData,
-                    url: combinedImageUrl,
-                    precio: price,
-                }));
-
-
-                console.log(orderInfo);
-
-                if (documento.exists()) {
-                    agregarAlCarrito(product);
-                    return price;
-                } else {
-                    throw new Error("Me quiero morir");
-                }
-            })
-            .catch((err) => {
-                console.log("Error al generar la imagen:", err);
-            });
     };
 
 
-    console.log(combinedImageUrl);
+
+    console.log(orderInfo);
 
     //Toggle borde
     const TogglePopup = () => {
@@ -312,3 +297,58 @@ const Grilla1 = ({ phoneImg }) => {
 };
 
 export default Grilla1;
+
+
+
+// const obtenerPrecio = async (ProductID) => {
+//     if (ref.current === null) {
+//         return;
+//     }
+
+//     html2canvas(ref.current, {
+//         allowTaint: true,
+//         useCORS: true,
+//         scale: 1,
+//         logging: true,
+//     })
+//         .then((canvas) => {
+//             const screenshotDataUrl = canvas.toDataURL('image/png', 1);
+//             console.log("URL de la imagen generada:", screenshotDataUrl);
+//             return screenshotDataUrl;
+//         })
+//         .then((screenshotDataUrl) => {
+//             setCombinedImageUrl(screenshotDataUrl);
+
+//             const docRef = doc(db, "celulares", ProductID);
+//             return getDoc(docRef);
+//         })
+//         .then((documento) => {
+//             const price = documento.data().price;
+
+//             const product = {
+//                 name: id,
+//                 img: combinedImageUrl,
+//                 price: price,
+//                 counter: counter,
+//             };
+
+//             setOrderInfo((prevData) => ({
+//                 ...prevData,
+//                 url: combinedImageUrl,
+//                 precio: price,
+//             }));
+
+
+//             console.log(orderInfo);
+
+//             if (documento.exists()) {
+//                 agregarAlCarrito(product);
+//                 return price;
+//             } else {
+//                 throw new Error("Me quiero morir");
+//             }
+//         })
+//         .catch((err) => {
+//             console.log("Error al generar la imagen:", err);
+//         });
+// };

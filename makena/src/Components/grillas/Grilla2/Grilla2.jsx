@@ -34,7 +34,7 @@ const Grilla2 = ({ phoneImg }) => {
 
     const [translateY, setTranslateY] = useState(0);
 
-    const [combinedImageUrl, setCombinedImageUrl] = useState('');
+    // const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
     const [orderInfo, setOrderInfo] = useState({
         modelo: id,
@@ -88,55 +88,39 @@ const Grilla2 = ({ phoneImg }) => {
 
     }
 
-    const obtenerPrecio = async (ProductID) => {
+    const obtenerPrecio = async () => {
         if (ref.current === null) {
             return;
         }
 
-        try {
-            const canvas = await html2canvas(ref.current, {
-                allowTaint: true,
-                useCORS: true,
-                scale: 1,
-                logging: true,
-            });
+        const celularesRef = doc(db, "celulares", id);
 
-            const screenshotDataUrl = canvas.toDataURL('image/png', 1);
-            console.log("URL de la imagen generada:", screenshotDataUrl);
+        const docRef = getDoc(celularesRef, id);
+        docRef.then((documento) => {
+            const price = documento.data().price;
+            console.log(documento);
 
-            setCombinedImageUrl(screenshotDataUrl);
+            const product = {
+                name: id,
+                img: imagenes,
+                price: price,
+                counter: counter,
+            };
 
-            const docRef = doc(db, "celulares", ProductID);
-            const documento = await getDoc(docRef);
+            setOrderInfo((prevData) => ({
+                ...prevData,
+                url: imagenes,
+                precio: price,
+            }));
 
             if (documento.exists()) {
-                const price = documento.data().price;
-
-                const product = {
-                    name: id,
-                    img: screenshotDataUrl,
-                    price: price,
-                    counter: counter,
-                };
-
-                setOrderInfo((prevData) => ({
-                    ...prevData,
-                    url: screenshotDataUrl,
-                    precio: price,
-                }));
-
                 agregarAlCarrito(product);
-
+                return price;
             } else {
                 throw new Error("Me quiero morir");
             }
-        } catch (error) {
-            console.log("Error al generar la imagen:", error);
-        }
+        })
     };
-
-
-
 
     return (
 
@@ -309,3 +293,51 @@ const Grilla2 = ({ phoneImg }) => {
 };
 
 export default Grilla2;
+
+
+// const obtenerPrecio = async (ProductID) => {
+//     if (ref.current === null) {
+//         return;
+//     }
+
+//     try {
+//         const canvas = await html2canvas(ref.current, {
+//             allowTaint: true,
+//             useCORS: true,
+//             scale: 1,
+//             logging: true,
+//         });
+
+//         const screenshotDataUrl = canvas.toDataURL('image/png', 1);
+//         console.log("URL de la imagen generada:", screenshotDataUrl);
+
+//         setCombinedImageUrl(screenshotDataUrl);
+
+//         const docRef = doc(db, "celulares", ProductID);
+//         const documento = await getDoc(docRef);
+
+//         if (documento.exists()) {
+//             const price = documento.data().price;
+
+//             const product = {
+//                 name: id,
+//                 img: screenshotDataUrl,
+//                 price: price,
+//                 counter: counter,
+//             };
+
+//             setOrderInfo((prevData) => ({
+//                 ...prevData,
+//                 url: screenshotDataUrl,
+//                 precio: price,
+//             }));
+
+//             agregarAlCarrito(product);
+
+//         } else {
+//             throw new Error("Me quiero morir");
+//         }
+//     } catch (error) {
+//         console.log("Error al generar la imagen:", error);
+//     }
+// };
