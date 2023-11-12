@@ -9,7 +9,7 @@ import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces'
 const Checkout = () => {
 
     const [page, setPage] = useState(0);
-    
+
     const [orderData, setOrderData] = useState('');
 
     const FormTitles = ["Datos Personales", "Pago", "Completado"]
