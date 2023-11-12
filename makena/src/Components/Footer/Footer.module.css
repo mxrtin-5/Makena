@@ -40,3 +40,8 @@
     align-items: flex-end;
     margin-right: 100px;
 }
+
+.p{
+    display:flex;
+    gap: 5px;
+}

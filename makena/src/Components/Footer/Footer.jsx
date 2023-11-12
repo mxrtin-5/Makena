@@ -22,7 +22,7 @@ const Footer = () => {
                     <h4 className={styles.categoriasTitle}>Contacto</h4>
                         <p><SiWhatsapp className={styles.icons}/> 1122444188</p>
                         <p><BsTelephoneFill className={styles.icons}/>1122444188</p>
-                        <p><BiLogoGmail className={styles.icons}/>ejemplo@gmail.com</p>
+                        <p className={styles.p}><BiLogoGmail className={styles.icons}/>ventas@makenafundas.com</p>
                 </div>
             </footer>
         
