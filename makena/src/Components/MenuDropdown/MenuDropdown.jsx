@@ -1,23 +1,20 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import styles from './MenuDropdown.module.css'
 import { AiOutlineArrowDown } from "react-icons/ai";
 
-const MenuDropdown = ({ categorias, subCategorySelected, setSubCategorySelected }) => {
-
+const MenuDropdown = ({ 
+            categorias, 
+            subCategorySelected, 
+            setSubCategorySelected, 
+            handleCategoryClick 
+}) => {
+    const [open, setOpen] = useState(false)
     const [showSubCategories, setShowSubCategories] = useState(false);
 
-    const handleCategoryClick = (category) => {
-        setValueSelected(category.nombre);
-        filterCategory(category.nombre);
-        setShowSubCategories(category.subcategorias.length > 0);
-        setSubCategorySelected("");
-    };
-
     const handleSubCategoryClick = (subCategory, category) => {
-        setValueSelected(subCategory.nombre);
         setSubCategorySelected(subCategory.nombre);
-        filterCategory(subCategory.nombre, category.nombre);
-        setShowSubCategories(false);
+        setShowSubCategories(!showSubCategories);
     };
 
     return (
@@ -27,15 +24,18 @@ const MenuDropdown = ({ categorias, subCategorySelected, setSubCategorySelected 
                     <button className={styles.button} onClick={() => handleCategoryClick(category)}>
                         {category.nombre}
                     </button>
-                    {category.subcategorias.length > 0 && (
+                    {
+                    category.subcategorias.length > 0 && (
                         <AiOutlineArrowDown
-                            onClick={handleArrowClick}
+                            onClick={() => setOpen(!open)}
                             className={styles.AiOutlineArrowDown}
                         />
                     )}
-                    {showSubCategories && category.subcategorias.length > 0 ? (
+                    {/* {
+                    open && category.subcategorias.length > 0 ? (
                         <div className={styles.subCategories}>
-                            {category.subcategorias.map((subCategory) => (
+                            {
+                            category.subcategorias.map((subCategory) => (
                                 <button
                                     key={subCategory.nombre}
                                     className={
@@ -49,7 +49,8 @@ const MenuDropdown = ({ categorias, subCategorySelected, setSubCategorySelected 
                                 </button>
                             ))}
                         </div>
-                    ) : null}
+                    ) : null
+                    } */}
                 </div>
             ))}
         </div>
