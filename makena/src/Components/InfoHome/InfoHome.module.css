@@ -9,11 +9,43 @@
     position: absolute;
     top: 30%;
     left: 10%;
-    font-size: 200px;
+    font-size: 10vw;
 }
 
-.p {
+.titulo {
     font-size: 1.6vw;
+}
+
+.titulo2{
+    font-size: 1.6vw;
+}
+
+.icon{
+    font-size: 10rem;
+}
+
+.divP{
+    display: flex;
+    margin: 0 -100px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.p{
+    font-size: 1vw;
+    margin-left: 10px;
+}
+
+.divC{
+    display: flex;
+    margin: 0 -1rem;
+    justify-content: center;
+    flex-direction: column;
+    text-align: end;
+}
+
+.pContacto{
+    font-size: 0.8vw;
 }
 
 .infoPerso {
@@ -44,7 +76,6 @@
         position: absolute;
         top: 30%;
         left: 10%;
-        font-size: 20vw;
     }
 
     .p {
@@ -57,5 +88,45 @@
         top: 30%;
         right: 10%;
         font-size: 20vw;
+    }
+}
+
+@media (max-width: 1500px) {
+    .p{
+        font-size: 1vw;
+        margin-left: 30px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .titulo {
+        margin: 10px 10px;
+    }
+
+    .p{
+        font-size: 1.5vw;
+    }
+
+    .pContacto{
+        font-size: 1.5vw;
+    }
+}
+
+@media (max-width:850px){
+    .section div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+@media (max-width:650px){
+    .p{
+        font-size: 1.9vw;
+    }
+
+    .pContacto{
+        font-size: 1.9vw;
     }
 }

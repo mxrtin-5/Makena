@@ -48,7 +48,7 @@ function App() {
 
               <a className="wpp" target='_blank' href="https://api.whatsapp.com/send?phone=5491122444188"><BsWhatsapp/><div className='joinchat'><div className='text'>Podemos ayudarte?</div></div></a>
 
-              <Footer />
+              {/* <Footer /> */}
 
             </BrowserRouter>
 

@@ -1,7 +1,6 @@
 .sectionContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     padding: 10rem;
     height: 80vh;
     gap: 2rem;
