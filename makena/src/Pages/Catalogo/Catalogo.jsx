@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-/* eslint-disable react-hooks/exhaustive-deps */
-
->>>>>>> 914d9bde88490199a5494393b5c318ac94051354
 import ItemCard from "../../Components/ItemCard/ItemCard";
 import styles from './Catalogo.module.css'
 import MenuDropdown from "../../Components/MenuDropdown/MenuDropdown";
@@ -22,11 +17,7 @@ const Catalogo = () => {
     const [category, setCategory] = useState('')
 
     const handleCategoryClick = (category) => {
-<<<<<<< HEAD
         if (!category) {
-=======
-        if(!category) {
->>>>>>> 914d9bde88490199a5494393b5c318ac94051354
             filterCategory()
         } else filterCategory(category);
     };
@@ -34,11 +25,7 @@ const Catalogo = () => {
     const handleSubCategoryClick = (subCat) => {
         filterSubCategory(subCat);
     };
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 914d9bde88490199a5494393b5c318ac94051354
 
     return (
         <section className={styles.section} >

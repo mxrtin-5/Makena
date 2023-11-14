@@ -2,13 +2,13 @@
 
 
 const FormularioCheckout = () => {
-    return ( 
+    return (
         <section>
             <form action="">
-                
+
             </form>
         </section>
-     );
+    );
 }
- 
+
 export default FormularioCheckout;
