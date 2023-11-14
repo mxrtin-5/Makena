@@ -3,6 +3,7 @@
     background-color: rgb(183, 0, 255);
     padding: 1rem;
     border-radius: 40px;
+    gap: 0 5px;
     display: flex;
 }
 
@@ -21,8 +22,13 @@
     background-color: rgb(226, 227, 228);
     border-radius: 10px;
     border: none;
+    white-space: nowrap;
     padding: 5px;
     gap: 10px;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 .AiOutlineArrowDown {

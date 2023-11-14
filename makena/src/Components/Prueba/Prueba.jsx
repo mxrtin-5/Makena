@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas'
 import image from '/public/a03.png'
 import image2 from '/public/a02.png'
