@@ -46,7 +46,8 @@ input:focus {
 .labelName{
     display: flex;
     position: absolute;
-    right: 77%;
+    left: 0%;
+    width: 100%;
 }
 
 .sorete{
