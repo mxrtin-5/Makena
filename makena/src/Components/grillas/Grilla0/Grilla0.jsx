@@ -142,12 +142,9 @@ const Grilla0 = ({ phoneImg }) => {
         <ImageProvider>
             <div className={styles.divContainer}>
                 <div className={styles.marco} ref={ref}>
-                    
-
                     <img
-
                         style={{
-                            zIndex: isPopupOpen ? 1000 : -1000
+                            zIndex: isPopupOpen ? -1000 : 1000
                         }}
                         className={styles.marcoImg}
                         src={phoneImg}
