@@ -66,9 +66,8 @@ const Contacto = () => {
 
     return (
         <div className={styles.containerContact}>
-            <h2>Contacto</h2>
-
             <div>
+            <h2>Contacto</h2>
                 <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={schema} >
                     {() => (
                         <div  className={styles.container}>
