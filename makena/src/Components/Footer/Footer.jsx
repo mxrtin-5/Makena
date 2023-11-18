@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.css'
 import { BsTelephoneFill } from "react-icons/bs";
-import { FaFacebook } from "react-icons/fa6";
 import { SiWhatsapp } from "react-icons/si";
 import { BiLogoGmail } from "react-icons/bi";
-import { BiLogoInstagram } from "react-icons/bi";
 
 
 const Footer = () => {
