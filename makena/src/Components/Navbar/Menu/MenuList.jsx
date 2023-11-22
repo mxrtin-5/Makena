@@ -36,9 +36,6 @@ const Menulist = ({ cerrar }) => {
 
             <CartIcon />
 
-
-
-
         </div>
     );
 }

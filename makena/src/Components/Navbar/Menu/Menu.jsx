@@ -1,3 +1,4 @@
+import CartIcon from '../../CartIcon/CartIcon';
 import './Menu.css'
 import Menulist from './MenuList';
 
@@ -19,6 +20,9 @@ const Menu = ({ showMenu, setShowMenu}) => {
                 </div>
 
             </div>
+
+            <CartIcon />
+
         </div>
 
     );
