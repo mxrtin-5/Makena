@@ -46,25 +46,14 @@
 }
 
 @media (max-width: 630px) {
-    .categories{
-        margin: 0;
-    }
-
-    .container{
-        margin: 0;
-    }
-}
-
-@media (max-width: 430px) {
     .footer{
         display: flex;
-        align-items: center;
         justify-content: center;
         flex-direction: column;
     }
 
-    .categories{
-        margin: 10px;
+        .categories{
+            margin: 10px;
         align-items: center;
     }
 
@@ -72,3 +61,4 @@
         align-items: center;
     }
 }
+
