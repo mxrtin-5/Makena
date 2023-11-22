@@ -6,3 +6,9 @@
     top: 40%;
     right: 7%;
 }
+
+@media (max-width: 1000px) {
+    .icono{
+        right: 5rem;
+    }
+}
