@@ -1,6 +1,7 @@
 import { db } from '../../../firebase/config'
 import { addDoc, collection } from 'firebase/firestore';
 import styles from './CheckoutPayment.module.css'
+import ButtonMP from '../../buttonMP/ButtonMP';
 
 const CheckoutPayment = ({ orderData }) => {
 
@@ -24,6 +25,7 @@ const CheckoutPayment = ({ orderData }) => {
     return (
         <div className={styles.payment}>
             <button onClick={handlePago}>Realizar Pago</button>
+            <ButtonMP />
         </div>
     );
 };
