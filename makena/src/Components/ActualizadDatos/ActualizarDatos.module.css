@@ -1,5 +1,9 @@
 .section{
     height: 73vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 input{

@@ -5,11 +5,10 @@ import styles from './ActualizarDatos.module.css'
 
 
 const ActualizarDatos = () => {
-
     const [newPrice, setNewPrice] = useState('');
 
     const handlePriceChange = (event) => {
-        setNewPrice(event.target.value); // Actualiza el estado del nuevo precio cuando cambia el input
+        setNewPrice(event.target.value);
     };
 
     // Define una función asincrónica para actualizar los precios en una colección
