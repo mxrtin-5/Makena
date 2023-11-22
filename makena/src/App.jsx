@@ -18,6 +18,10 @@ import Footer from './Components/Footer/Footer';
 import { BsWhatsapp } from "react-icons/bs";
 import ActualizarDatos from './Components/ActualizadDatos/ActualizarDatos';
 import DataProvider from './context/dataContext';
+import ButtonMP from './Components/buttonMP/ButtonMP';
+import Login from './Pages/Login/Login';
+import Admin from './Pages/Admin/Admin';
+import { UserProvider } from './context/userContext';
 
 
 function App() {
@@ -30,32 +34,40 @@ function App() {
 
           <DataProvider>
 
-            <GrillasProvider>
+            <UserProvider>
 
-              <BrowserRouter>
+              <GrillasProvider>
 
-                <Navbar />
+                <BrowserRouter>
 
-                <Routes>
-                  <Route path='/' element={<Home />} />
-                  <Route path='/crear-funda/seleccion' element={<CrearFunda />} />
-                  <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer />} />
-                  <Route path='/crear-funda/seleccion/:marca/:id' element={<Detail />} />
-                  <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
-                  <Route path='/prueba' element={<ImageCombiner />} />
-                  <Route path='/checkout' element={<Checkout />} />
-                  <Route path='/detail/:id' element={<DetalleProds />} />
-                  <Route path='/contacto' element={<Contacto />} />
-                  <Route path='/admin' element={<ActualizarDatos />} />
-                </Routes>
+                  <Navbar />
 
-                <a className="wpp" target='_blank' href="https://api.whatsapp.com/send?phone=5491122444188"><BsWhatsapp /><div className='joinchat'><div className='text'>Podemos ayudarte?</div></div></a>
+                  <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/crear-funda/seleccion' element={<CrearFunda />} />
+                    <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer />} />
+                    <Route path='/crear-funda/seleccion/:marca/:id' element={<Detail />} />
+                    <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
+                    <Route path='/prueba' element={<ImageCombiner />} />
+                    <Route path='/checkout' element={<Checkout />} />
+                    <Route path='/detail/:id' element={<DetalleProds />} />
+                    <Route path='/contacto' element={<Contacto />} />
+                    <Route path='/prueba2' element={<ButtonMP />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path='/admin' element={<Admin />} />
 
-                <Footer />
 
-              </BrowserRouter>
+                  </Routes>
 
-            </GrillasProvider>
+                  <a className="wpp" target='_blank' href="https://api.whatsapp.com/send?phone=5491122444188"><BsWhatsapp /><div className='joinchat'><div className='text'>Podemos ayudarte?</div></div></a>
+
+                  <Footer />
+
+                </BrowserRouter>
+
+              </GrillasProvider>
+
+            </UserProvider>
 
           </DataProvider>
 
@@ -65,7 +77,7 @@ function App() {
 
 
 
-    </div>
+    </div >
   )
 }
 

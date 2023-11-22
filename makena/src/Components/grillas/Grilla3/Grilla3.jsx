@@ -125,26 +125,6 @@ const Grilla3 = ({ phoneImg }) => {
             <ImageProvider>
                 <>
                     <div ref={ref} className={styles.marco} >
-
-                        {imagenes && imagenes.length > 0 && (
-                            <Cropper
-                                ref={cropperRef}
-                                className={styles.cropperCropBox}
-                                src={imagenes[0].url}
-                                guides={false}
-                                dragMode="none"
-                                responsive={true}
-                                autoCropArea={1}
-                                zoomTo={escala[imagenSeleccionada]}
-                                cropBoxResizable={false}
-                                zoomable={false}
-                                zoomOnTouch={false}
-                                wheelZoomRatio={0}
-                                cropBoxMovable={false}
-                                style={{ width: 600, height: 1200 }}
-                            />
-                        )}
-
                         <img onLoad={(e) => {
                             setWidth(e.target.width);
                             setHeight(e.target.height);

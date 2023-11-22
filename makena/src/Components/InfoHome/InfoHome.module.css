@@ -123,10 +123,18 @@
 
 @media (max-width:650px){
     .p{
-        font-size: 1.9vw;
+        font-size: 2.3vw;
     }
 
     .pContacto{
-        font-size: 1.9vw;
+        font-size: 2.3vw;
+    }
+
+    .titulo{
+        font-size: 4vw;
+    }
+
+    .titulo2{
+        font-size: 4vw;
     }
 }
