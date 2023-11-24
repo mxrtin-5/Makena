@@ -22,6 +22,7 @@ import ButtonMP from './Components/buttonMP/ButtonMP';
 import Login from './Pages/Login/Login';
 import Admin from './Pages/Admin/Admin';
 import { UserProvider } from './context/userContext';
+import Devs from './Components/Devs/Devs';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                     <Route path='/prueba2' element={<ButtonMP />} />
                     <Route path="/login" element={<Login />} />
                     <Route path='/admin' element={<Admin />} />
+                    <Route path="/devs" element={<Devs />} />
 
 
                   </Routes>

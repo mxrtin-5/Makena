@@ -34,15 +34,17 @@ const ButtonMP = () => {
     }, []);
 
     const getPreference = async () => {
-        const response = await fetch('http://localhost:3001/createOrder', {
+        const result = await fetch('http://localhost:3001/createOrder', {
             method: "POST",
             headers: {
                 "Content-Type": 'application/json'
             },
             body: JSON.stringify({ items: staticData.items })
-        }).then(res => res.json()).then(res => res);
-        console.log(response.response.id);
-        setIdPreference(response.response.id);
+        })
+        console.log(result);
+        const id = await result.json()
+        console.log(id);
+        setIdPreference(id);
     };
     return (
         <div>
