@@ -10,11 +10,23 @@ const ButtonMP = () => {
 
     const { cart } = useContext(CartContext)
 
-    const cartNoImg = cart.map((prod) =>{
-        const { img , ...newItem} = prod
+    // const cartNoImg = cart.map((prod) => {
+    //     const { img, ...newItem } = prod
 
-        return newItem
-    })
+    //     return newItem
+    // })
+
+    const staticData = {
+        items: [
+            {
+                id: 0,
+                title: 'GALAXY-A01',
+                quantity: 1,
+                unit_price: 5000
+            }
+        ],
+        // Resto de los campos...
+    };
 
 
     useEffect(() => {
@@ -24,21 +36,19 @@ const ButtonMP = () => {
     const getPreference = async () => {
         const response = await fetch('http://localhost:3001/createOrder', {
             method: "POST",
-            headers:{
+            headers: {
                 "Content-Type": 'application/json'
             },
-            body: {
-                "items": cartNoImg
-            }
-        }).then(res => res.json()).then(res => res)
-        console.log(response.ressponse);
-        setIdPreference(response.ressponse.id)
-    }
+            body: JSON.stringify({ items: staticData.items })
+        }).then(res => res.json()).then(res => res);
+        console.log(response.response.id);
+        setIdPreference(response.response.id);
+    };
     return (
         <div>
             <button onClick={getPreference}>Crear Preferencia</button>
-            {idPreference ? <Wallet initialization={{ preferenceId: idPreference }} />:<></>}
-            <pre>{JSON.stringify(idPreference) }</pre>
+            {idPreference ? <Wallet initialization={{ preferenceId: idPreference }} /> : <></>}
+            <pre>{JSON.stringify(idPreference)}</pre>
             <button onClick={() => cartNoImg}>pene</button>
         </div>
     );
