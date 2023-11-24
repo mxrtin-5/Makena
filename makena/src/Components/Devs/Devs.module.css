@@ -1,0 +1,35 @@
+.divDevs{
+    height: 76vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.divLinks{
+    display: flex;
+    gap: 1rem;
+    margin-top:20px ;
+    font-size: 2rem;
+}
+
+.links{
+    color: white;
+    transition: all .3s ease;
+}
+
+.links:hover{
+    color: blueviolet;
+}
+
+.dev{
+    font-size: 3rem;
+}
+
+.titulo{
+    font-size: 2rem;
+}
+
+.developer{
+    font-size: 4rem;
+}
