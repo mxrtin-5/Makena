@@ -22,8 +22,6 @@ const Detail = () => {
     const idGrilla = location.search.split("=")[1]
 
 
-    //! aqui vos vas a tener solamente el mnodelo que lo vamos a sacar de la query
-
     useEffect(() => {
         // Crea una referencia al documento en la colección "celulares" con el ID especificado
         const phoneRef = doc(db, "celulares", id)

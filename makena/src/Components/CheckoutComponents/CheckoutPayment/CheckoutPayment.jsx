@@ -24,8 +24,7 @@ const CheckoutPayment = ({ orderData }) => {
 
     return (
         <div className={styles.payment}>
-            <button onClick={handlePago}>Realizar Pago</button>
-            <ButtonMP />
+            <ButtonMP handlePago={handlePago} />
         </div>
     );
 };
