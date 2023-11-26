@@ -4,13 +4,13 @@ import styles from './Grilla1.module.css'
 import ImageProvider from "../../../context/imageContext";
 import EditableImage from "../../EditableImage/EditableImage";
 import { GrillasContext } from "../../../context/grillasContext";
-import html2canvas from 'html2canvas'
 import { db } from "../../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { CartContext } from "../../../context/cartContext";
 import { useParams } from "react-router-dom";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
 import { FaBasketShopping } from "react-icons/fa6";
+import Cropper from "react-cropper";
 
 
 
@@ -18,7 +18,7 @@ const Grilla1 = ({ phoneImg }) => {
 
     const { id } = useParams()
 
-    const { setHeight, width, height, setWidth, croppedImage } = useContext(GrillasContext);
+    const { setHeight, width, height, setWidth, cropperRef, croppedImage, handleCrop } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
@@ -30,38 +30,28 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [escala, setEscala] = useState([1, 1])
 
-    const [translateX, setTranslateX] = useState(0);
+    const [translateX, setTranslateX] = useState([0, 0]);
 
-    const [translateY, setTranslateY] = useState(0);
+    const [translateY, setTranslateY] = useState([0, 0]);
 
     // const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
     const [orderInfo, setOrderInfo] = useState({
         modelo: id,
-        url: '',
+        url: [],
         precio: 0,
         cantidad: counter,
     });
 
     const combinedImageRef = useRef(null);
 
-    const ref = useRef(null);
-
-    console.log(ref);
-
-    console.log(imagenes);
-
     const obtenerPrecio = async () => {
-        if (ref.current === null) {
-            return;
-        }
 
         const celularesRef = doc(db, "celulares", id);
 
         const docRef = getDoc(celularesRef, id);
         docRef.then((documento) => {
             const price = documento.data().price;
-            console.log(documento);
 
             const product = {
                 name: id,
@@ -73,6 +63,9 @@ const Grilla1 = ({ phoneImg }) => {
             setOrderInfo((prevData) => ({
                 ...prevData,
                 url: imagenes,
+                escala,
+                translateX,
+                translateY,
                 precio: price,
             }));
 
@@ -86,8 +79,6 @@ const Grilla1 = ({ phoneImg }) => {
     };
 
 
-
-    console.log(orderInfo);
 
     //Toggle borde
     const TogglePopup = () => {
@@ -130,7 +121,13 @@ const Grilla1 = ({ phoneImg }) => {
     return (
         <div className={styles.divPadre}>
             <ImageProvider>
-                <div className={styles.marco} ref={ref}>
+                <div className={styles.marco}>
+                    <Cropper
+                        initialAspectRatio={16 / 9}
+                        guides={false}
+                        crop={handleCrop}
+                        ref={cropperRef}
+                    />
                     <img
                         onLoad={(e) => {
                             setWidth(e.target.width);
@@ -156,16 +153,9 @@ const Grilla1 = ({ phoneImg }) => {
                                 onClick={() => handleImageClick(index)}
                                 isSelected={isImageSelected(index)}
                                 escala={escala[index]}
-                                translateX={imagenSeleccionada === index ? translateX : 0}
-                                translateY={imagenSeleccionada === index ? translateY : 0}
+                                translateX={translateX}
+                                translateY={translateY}
                                 className={isImageSelected(index) ? styles.selectedImage : ''}
-                                style={
-                                    isImageSelected(index)
-                                        ? {
-                                            transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-                                        }
-                                        : {}
-                                }
                             />
                         ))}
                     </div>
@@ -224,7 +214,12 @@ const Grilla1 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateY(translateY - 5);
+                                    setTranslateY(prev => {
+                                        const newValue = prev[imagenSeleccionada] - 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+
+                                        return newState
+                                    });
                                 }
                             }}
                         >
@@ -234,7 +229,11 @@ const Grilla1 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateY(translateY + 5);
+                                    setTranslateY(prev => {
+                                        const newValue = prev[imagenSeleccionada] + 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+                                        return newState
+                                    });
                                 }
                             }}
                         >
@@ -244,7 +243,12 @@ const Grilla1 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateX(translateX + 5);
+                                    setTranslateX(prev => {
+                                        const newValue = prev[imagenSeleccionada] + 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+
+                                        return newState
+                                    });
                                 }
                             }}
                         >
@@ -254,7 +258,12 @@ const Grilla1 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateX(translateX - 5);
+                                    setTranslateX(prev => {
+                                        const newValue = prev[imagenSeleccionada] - 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+
+                                        return newState
+                                    });
                                 }
                             }}
                         >

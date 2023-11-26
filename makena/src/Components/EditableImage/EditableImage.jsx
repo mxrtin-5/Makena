@@ -25,19 +25,10 @@ const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY
         },
     });
 
-    console.log("isSelected:", isSelected);
-
-    console.log(index);
-
-    const imageStyle = {
-        maxWidth: '100%',
-        maxHeight: '100%',
-        display: imageLoaded ? 'block' : 'none',
-        transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-    };
+    console.log('en editable image', translateY[index])
 
     return (
-        <div className={`${styles.div} ${styles.contenedorImagen} ${isSelected ? styles.selectedImage : ''}`} 
+        <div className={`${styles.div} ${styles.contenedorImagen} ${isSelected ? styles.selectedImage : ''}`}
             ref={(node) => {
                 drop(node);
             }}
@@ -49,7 +40,12 @@ const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY
                     alt="Editable Image"
                     className={styles.imagen}
                     draggable={true}
-                    style={imageStyle}
+                    style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        display: imageLoaded ? 'block' : 'none',
+                        transform: `translate(${translateX[index]}px, ${translateY[index]}px) scale(${escala})`,
+                    }}
                     onLoad={handleImageLoad}
                     onClick={onClick}
                     ref={(node) => {

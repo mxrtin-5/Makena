@@ -40,7 +40,7 @@ const GrillasProvider = ({ children }) => {
         }
     }
 
-    const handleCrop = async (e) => {
+    const handleCrop = async () => {
 
         if (cropperRef.current && cropperRef.current.cropper) {  
             const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas({
@@ -57,8 +57,6 @@ const GrillasProvider = ({ children }) => {
 
                     const croppedImageBase64 = croppedCanvas.toDataURL();
                     setCroppedImage(croppedImageBase64);
-                    console.log(croppedImageBase64);
-                    console.log(croppedImage);
                 }
             }
         }
@@ -77,7 +75,6 @@ const GrillasProvider = ({ children }) => {
             translateY,
             width,
             height,
-            escala,
             croppedImage,
             cropperRef,
             setEscala,
