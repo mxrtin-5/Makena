@@ -18,7 +18,11 @@ const Grilla1 = ({ phoneImg }) => {
 
     const { id } = useParams()
 
+<<<<<<< HEAD
     const { setHeight, setEscala, escala, setTranslateX, translateX, setTranslateY, translateY, width, height, setWidth, cropperRef, croppedImage, handleCrop } = useContext(GrillasContext);
+=======
+    const { setHeight, width, height, setWidth, cropperRef, croppedImage, handleCrop } = useContext(GrillasContext);
+>>>>>>> 98844948ed10b378b4a6e9229a28094bae172450
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
@@ -28,6 +32,14 @@ const Grilla1 = ({ phoneImg }) => {
 
     const [isPopupOpen, setPopupOpen] = useState(false);
 
+<<<<<<< HEAD
+=======
+    const [escala, setEscala] = useState([1, 1])
+
+    const [translateX, setTranslateX] = useState([0, 0]);
+
+    const [translateY, setTranslateY] = useState([0, 0]);
+>>>>>>> 98844948ed10b378b4a6e9229a28094bae172450
 
     // const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
