@@ -8,17 +8,17 @@ export const GrillasContext = createContext()
 
 const GrillasProvider = ({ children }) => {
 
-    const [translateX, setTranslateX] = useState(0);
-
-    const [translateY, setTranslateY] = useState(0);
-
-    const [croppedImage, setCroppedImage] = useState(null);
+    const [croppedImage, setCroppedImage] = useState();
 
     const [width, setWidth] = useState(0);
 
     const [height, setHeight] = useState(0);
 
-    const [escala, setEscala] = useState(1);
+    const [escala, setEscala] = useState([1, 1]);
+
+    const [translateX, setTranslateX] = useState([0, 0]);
+
+    const [translateY, setTranslateY] = useState([0, 0]);
 
     const cropperRef = useRef(null);
 
@@ -28,7 +28,7 @@ const GrillasProvider = ({ children }) => {
         translateY: translateY
     }
 
-    const guardarDatos = async (e) => {
+    const guardarDatos = async () => {
 
 
         try {
@@ -57,8 +57,6 @@ const GrillasProvider = ({ children }) => {
 
                     const croppedImageBase64 = croppedCanvas.toDataURL();
                     setCroppedImage(croppedImageBase64);
-                    console.log(croppedImageBase64);
-                    console.log(croppedImage);
                 }
             }
         }
@@ -77,7 +75,6 @@ const GrillasProvider = ({ children }) => {
             translateY,
             width,
             height,
-            escala,
             croppedImage,
             cropperRef,
             setEscala,

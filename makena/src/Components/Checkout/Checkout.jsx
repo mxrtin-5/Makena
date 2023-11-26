@@ -40,7 +40,7 @@ const Checkout = () => {
                     )}
                     {page === 1 && (
                         <CheckoutPayment
-                            orderData={orderData}
+                        orderData={orderData}
                         />
                     )}
                     {page === 2 && (

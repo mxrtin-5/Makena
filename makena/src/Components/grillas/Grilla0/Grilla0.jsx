@@ -20,7 +20,7 @@ const Grilla0 = ({ phoneImg }) => {
 
     console.log(id);
 
-    const { width, height, croppedImage, cropperRef } = useContext(GrillasContext);
+    const { width, height, croppedImage } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
@@ -222,7 +222,11 @@ const Grilla0 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateY(translateY - 5);
+                                    setTranslateY((estadoPrevio) => {
+                                        const newValue = estadoPrevio[imagenSeleccionada] + 3
+                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                        return newState
+                                    });
                                 }
                             }}
                         >
@@ -232,7 +236,11 @@ const Grilla0 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateY(translateY + 5);
+                                    setTranslateY((estadoPrevio) => {
+                                        const newValue = estadoPrevio[imagenSeleccionada] - 3
+                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                        return newState
+                                    });
                                 }
                             }}
                         >

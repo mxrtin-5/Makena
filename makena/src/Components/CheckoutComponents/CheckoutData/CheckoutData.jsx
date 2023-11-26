@@ -1,11 +1,14 @@
 import { useContext, useState } from 'react';
 import styles from './CheckoutData.module.css'
 import { CartContext } from '../../../context/cartContext';
+import { GrillasContext } from '../../../context/grillasContext';
 
 
 const CheckoutData = ({ setOrderData, nextPage, data }) => {
 
     const { cart } = useContext(CartContext); 
+
+    const { translateX, translateY, escala } = useContext(GrillasContext)
 
     const [nombre, setNombre] = useState("");
 
@@ -39,6 +42,9 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
             codigoPostal,
             direccion,
             opcionesEnvio,
+            translateX,
+            translateY,
+            escala
         };
 
         console.log(ordenData);

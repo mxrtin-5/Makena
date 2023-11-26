@@ -5,12 +5,9 @@ import ButtonMP from '../../buttonMP/ButtonMP';
 
 const CheckoutPayment = ({ orderData }) => {
 
-
-    const pedido ={
-        ...orderData,
-    }
-
-    console.log(orderData);
+const pedido = {
+    ...orderData
+}
 
     const handlePago = async () => {
         try {

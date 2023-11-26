@@ -6,7 +6,7 @@ import { CartContext } from '../../context/cartContext';
 
 const ButtonMP = ({ handlePago }) => {
 
-    const [idPreference, setIdPreference] = useState()
+    const [idPreference, setIdPreference] = useState(null)
 
     const { cart } = useContext(CartContext)
 

@@ -17,9 +17,6 @@ const Carrito = () => {
         console.log("Product:", product);
     })
 
-    console.log(cart.img);
-
-    console.log(cart);
 
     return (
         <div>
