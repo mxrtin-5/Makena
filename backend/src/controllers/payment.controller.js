@@ -22,11 +22,14 @@ MercadoPago.post("/", async (req, res) => {
         };
 
         const respuesta = await mercadopago.preferences.create(preference);
+        if(respuesta.status === 201) return res.status(201).json(respuesta.response.id);
         console.log(respuesta);
-        res.status(200).json(respuesta.response.id);
+        return res.status(400).json({
+            msg: 'Ha ocurrido un error con el pago'
+        });
     } catch (error) {
         console.error(error.message);
-        res.status(500).json(error.message);
+        throw res.status(500).json(error.message);
     }
 });
 
