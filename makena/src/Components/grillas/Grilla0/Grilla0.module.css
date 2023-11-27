@@ -199,13 +199,13 @@
 
     .containerBotones {
         position: absolute;
-        top: 70%;
+        top: 80%;
         left: 20%;
     }
 
     .containerUpload{
         position: absolute;
-        top: 75%;
+        top: 85%;
         left: 20%;
     }
 
