@@ -16,7 +16,7 @@ MercadoPago.post("/", async (req, res) => {
             items,
             back_urls: {
                 success: "http://localhost:5173/",
-                failure: "http://62.72.63.229:3001/createOrder",
+                failure: "http://62.72.63.229:3001/fallo",
             },
             auto_return: "approved",
         };
