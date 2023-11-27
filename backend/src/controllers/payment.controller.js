@@ -5,7 +5,7 @@ dotenv.config();
 const MercadoPago = Router();
 
 mercadopago.configure({
-    access_token: "TEST-5063350026624776-111619-7aa890bd181375331a78757f4269c055-1208791366",
+    access_token: process.env.MERCADOPAGO_ACCESS_TOKEN,
 });
 
 MercadoPago.post("/", async (req, res) => {

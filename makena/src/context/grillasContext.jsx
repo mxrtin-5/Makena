@@ -14,11 +14,11 @@ const GrillasProvider = ({ children }) => {
 
     const [height, setHeight] = useState(0);
 
-    const [escala, setEscala] = useState([1, 1]);
+    const [escala, setEscala] = useState([1, 1, 1, 1, 1, 1]);
 
-    const [translateX, setTranslateX] = useState([0, 0]);
+    const [translateX, setTranslateX] = useState([0, 0, 0, 0, 0, 0]);
 
-    const [translateY, setTranslateY] = useState([0, 0]);
+    const [translateY, setTranslateY] = useState([0, 0, 0, 0, 0, 0]);
 
     const cropperRef = useRef(null);
 

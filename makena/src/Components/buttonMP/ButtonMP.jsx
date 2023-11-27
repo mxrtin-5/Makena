@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/cartContext';
 
 
-
 const ButtonMP = ({ handlePago }) => {
 
     const [idPreference, setIdPreference] = useState(null)
@@ -37,7 +36,7 @@ const ButtonMP = ({ handlePago }) => {
 
 
     useEffect(() => {
-        initMercadoPago('TEST-c5d11e40-96c2-420b-b5ee-9d91ba05b6a8', { locale: 'es-AR' });
+        initMercadoPago("APP_USR-c7a1b5c7-24e6-4476-8fd1-d9883775f1d7", { locale: 'es-AR' });
     }, []);
 
     const getPreference = async () => {
@@ -60,7 +59,8 @@ const ButtonMP = ({ handlePago }) => {
                 setIdPreference(orderData);
                 handlePago();
             } else {
-                console.error('El pago no fue aprobado.');
+                console.error('El pago no fue aprobado. Estado del pedido:', orderData.status);
+                console.error('Respuesta completa:', orderData);
             }
         } catch (error) {
             console.error('Error al obtener la preferencia:', error);

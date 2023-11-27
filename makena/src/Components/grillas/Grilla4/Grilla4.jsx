@@ -6,7 +6,6 @@ import EditableImage from "../../EditableImage/EditableImage";
 import { useParams } from "react-router-dom";
 import { GrillasContext } from "../../../context/grillasContext";
 import { CartContext } from "../../../context/cartContext";
-import html2canvas from "html2canvas";
 import { db } from "../../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { FaBasketShopping } from "react-icons/fa6";
@@ -22,17 +21,11 @@ const Grilla4 = ({ phoneImg }) => {
 
     const [isPopupOpen, setPopupOpen] = useState(false);
 
-    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
+    const { setHeight, setEscala, escala, setTranslateX, translateX, setTranslateY, translateY, width, height, setWidth, cropperRef, croppedImage, handleCrop } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
     const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
-
-    const [escala, setEscala] = useState([1, 1])
-
-    const [translateX, setTranslateX] = useState(0);
-
-    const [translateY, setTranslateY] = useState(0);
 
     // const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
@@ -140,16 +133,18 @@ const Grilla4 = ({ phoneImg }) => {
                             <div>
                                 {imagenes.slice(0).map((imgData, index) => (
                                     <EditableImage
-                                        imagen={isPopupOpen ? styles.imagen1 : styles.imagenConBorde1}
+                                        key={index.url}
+                                        imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
                                         src={imgData.url}
+                                        index={index}
+                                        referenciaImagenes={index}
+                                        onDrop={handleDrop}
+                                        onClick={() => handleImageClick(index)}
                                         isSelected={isImageSelected(index)}
-                                        style={
-                                            isImageSelected(index)
-                                                ? {
-                                                    transform: `translate(${translateX}px, ${translateY}px) scale(${escala[index]})`,
-                                                }
-                                                : {}
-                                        }
+                                        escala={escala[index]}
+                                        translateX={translateX}
+                                        translateY={translateY}
+                                        className={isImageSelected(index) ? styles.selectedImage : ''}
                                     />
                                 ))}
                             </div>
@@ -166,16 +161,10 @@ const Grilla4 = ({ phoneImg }) => {
                                         onClick={() => handleImageClick(index)}
                                         isSelected={isImageSelected(index)}
                                         escala={escala[index]}
-                                        translateX={imagenSeleccionada === index ? translateX : 0}
-                                        translateY={imagenSeleccionada === index ? translateY : 0}
+                                        translateX={translateX}
+                                        translateY={translateY}
                                         className={isImageSelected(index) ? styles.selectedImage : ''}
-                                        style={
-                                            isImageSelected(index)
-                                                ? {
-                                                    transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-                                                }
-                                                : {}
-                                        }
+                                        
                                     />
                                 ))}
                             </div>
@@ -184,8 +173,8 @@ const Grilla4 = ({ phoneImg }) => {
                         <canvas
                             ref={combinedImageRef}
                             style={{ display: 'none' }}
-                            width={width} // Utilizamos la variable setWidth aquí
-                            height={height} // Utilizamos la variable setHeight aquí
+                            width={width}
+                            height={height}
                         ></canvas>
 
                     </div>
@@ -236,7 +225,12 @@ const Grilla4 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateY(translateY - 5);
+                                        setTranslateY(prev => {
+                                            const newValue = prev[imagenSeleccionada] - 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >
@@ -246,7 +240,12 @@ const Grilla4 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateY(translateY + 5);
+                                        setTranslateY(prev => {
+                                            const newValue = prev[imagenSeleccionada] + 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >
@@ -256,7 +255,12 @@ const Grilla4 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateX(translateX + 5);
+                                        setTranslateX(prev => {
+                                            const newValue = prev[imagenSeleccionada] + 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >
@@ -266,7 +270,12 @@ const Grilla4 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateX(translateX - 5);
+                                        setTranslateX(prev => {
+                                            const newValue = prev[imagenSeleccionada] - 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >

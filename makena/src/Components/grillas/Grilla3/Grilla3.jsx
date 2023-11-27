@@ -23,17 +23,11 @@ const Grilla3 = ({ phoneImg }) => {
 
     const [isPopupOpen, setPopupOpen] = useState(false);
 
-    const { setHeight, width, height, setWidth, croppedImage, cropperRef } = useContext(GrillasContext);
+    const { setHeight, setEscala, escala, setTranslateX, translateX, setTranslateY, translateY, width, height, setWidth, cropperRef, croppedImage, handleCrop } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
     const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
-
-    const [escala, setEscala] = useState([1, 1])
-
-    const [translateX, setTranslateX] = useState(0);
-
-    const [translateY, setTranslateY] = useState(0);
 
     // const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
@@ -138,8 +132,8 @@ const Grilla3 = ({ phoneImg }) => {
                         <div className={styles.contenedorImgs}>
                             {imagenes.map((imgData, index) => (
                                 <EditableImage
+                                    key={index.url}
                                     imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
-                                    key={imgData.url}
                                     src={imgData.url}
                                     index={index}
                                     referenciaImagenes={index}
@@ -147,16 +141,9 @@ const Grilla3 = ({ phoneImg }) => {
                                     onClick={() => handleImageClick(index)}
                                     isSelected={isImageSelected(index)}
                                     escala={escala[index]}
-                                    translateX={imagenSeleccionada === index ? translateX : 0}
-                                    translateY={imagenSeleccionada === index ? translateY : 0}
+                                    translateX={translateX}
+                                    translateY={translateY}
                                     className={isImageSelected(index) ? styles.selectedImage : ''}
-                                    style={
-                                        isImageSelected(index)
-                                            ? {
-                                                transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-                                            }
-                                            : {}
-                                    }
                                 />
                             ))}
                         </div>
@@ -215,7 +202,12 @@ const Grilla3 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateY(translateY - 5);
+                                        setTranslateY(prev => {
+                                            const newValue = prev[imagenSeleccionada] - 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >
@@ -225,7 +217,12 @@ const Grilla3 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateY(translateY + 5);
+                                        setTranslateY(prev => {
+                                            const newValue = prev[imagenSeleccionada] + 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >
@@ -235,7 +232,12 @@ const Grilla3 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateX(translateX + 5);
+                                        setTranslateX(prev => {
+                                            const newValue = prev[imagenSeleccionada] + 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >
@@ -245,7 +247,12 @@ const Grilla3 = ({ phoneImg }) => {
                                 className={styles.button}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
-                                        setTranslateX(translateX - 5);
+                                        setTranslateX(prev => {
+                                            const newValue = prev[imagenSeleccionada] - 5
+                                            const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+    
+                                            return newState
+                                        });
                                     }
                                 }}
                             >
@@ -269,7 +276,7 @@ const Grilla3 = ({ phoneImg }) => {
                         )}
                     </div>
 
-                    {croppedImage && (
+                    {/* {croppedImage && (
                         <div>
                             <img
                                 style={{
@@ -281,7 +288,7 @@ const Grilla3 = ({ phoneImg }) => {
                                 alt="Imagen recortada"
                             />
                         </div>
-                    )}
+                    )} */}
 
                 </>
             </ImageProvider>

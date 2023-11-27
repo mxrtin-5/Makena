@@ -3,7 +3,6 @@ import UploadWidget from "../../UploadWidget/UploadWidget";
 import styles from './Grilla0.module.css'
 import { GrillasContext } from "../../../context/grillasContext";
 import { useParams } from "react-router-dom";
-import html2canvas from "html2canvas";
 import { db } from "../../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { CartContext } from "../../../context/cartContext";
@@ -18,47 +17,77 @@ const Grilla0 = ({ phoneImg }) => {
 
     const { id } = useParams()
 
-    console.log(id);
-
-    const { width, height, croppedImage } = useContext(GrillasContext);
+    const { setHeight, setEscala, escala, setTranslateX, translateX, setTranslateY, translateY, width, height, setWidth, cropperRef, croppedImage, handleCrop } = useContext(GrillasContext);
 
     const { agregarAlCarrito, counter } = useContext(CartContext)
 
-    const [imgData, setImgData] = useState([]);
-
-    const [isPopupOpen, setPopupOpen] = useState(false);
+    const [imagenes, setImagenes] = useState([]);
 
     const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
 
-    const [escala, setEscala] = useState([1, 1])
+    const [isPopupOpen, setPopupOpen] = useState(false);
 
-    const [translateX, setTranslateX] = useState(0);
-
-    const [translateY, setTranslateY] = useState(0);
-
-    const [combinedImageUrl, setCombinedImageUrl] = useState('');
+    // const [combinedImageUrl, setCombinedImageUrl] = useState('');
 
     const [orderInfo, setOrderInfo] = useState({
         modelo: id,
-        url: '',
-        price: 0,
+        url: [],
+        precio: 0,
         cantidad: counter,
     });
 
-    const ref = useRef(null);
-
     const combinedImageRef = useRef(null);
 
-    console.log("TranslateX: ", translateX);
-    console.log("TranslateY: ", translateY);
+    const obtenerPrecio = async () => {
 
+        const celularesRef = doc(db, "celulares", id);
+
+        const docRef = getDoc(celularesRef, id);
+        docRef.then((documento) => {
+            const price = documento.data().price;
+
+            const product = {
+                name: id,
+                img: imagenes,
+                price: price,
+                counter: counter,
+            };
+
+            setOrderInfo((prevData) => ({
+                ...prevData,
+                url: imagenes,
+                escala,
+                translateX,
+                translateY,
+                precio: price,
+            }));
+
+            if (documento.exists()) {
+                agregarAlCarrito(product);
+                return price;
+            } else {
+                throw new Error("Me quiero morir");
+            }
+        })
+    };
+
+
+
+    //Toggle borde
     const TogglePopup = () => {
         setPopupOpen(!isPopupOpen);
-    }
+    };
 
+    const handleAddImageShow = (cloudData) => {
+        setImagenes((prevState) => {
+            let newState = [...prevState, cloudData];
+            setImagenSeleccionada(newState.length - 1);
+            return newState;
+        });
+    };
     //DND
     const handleDrop = (fromIndex, toIndex) => {
-        const updatedImages = [...imgData];
+        const updatedImages = [...imagenes];
         const [movedImage] = updatedImages.splice(fromIndex, 1);
         updatedImages.splice(toIndex, 0, movedImage);
         setImagenes(updatedImages);
@@ -82,77 +111,31 @@ const Grilla0 = ({ phoneImg }) => {
 
     }
 
-    const handleAddImageShow = (cloudData) => {
-        setImgData((prevState) => {
-            let newState = [cloudData, ...prevState];
-            return newState;
-        });
-    };
-
-    const obtenerPrecio = async (ProductID) => {
-        if (ref.current === null) {
-            return;
-        }
-
-        try {
-            const canvas = await html2canvas(ref.current, {
-                allowTaint: true,
-                useCORS: true,
-                scale: 1,
-                logging: true,
-            });
-
-            const screenshotDataUrl = canvas.toDataURL('image/png', 1);
-            console.log("URL de la imagen generada:", screenshotDataUrl);
-
-            setCombinedImageUrl(screenshotDataUrl);
-
-            const docRef = doc(db, "celulares", ProductID);
-            const documento = await getDoc(docRef);
-
-            if (documento.exists()) {
-                const price = documento.data().price;
-
-                const product = {
-                    name: id,
-                    img: screenshotDataUrl,
-                    price: price, // Set the correct price here
-                    counter: counter,
-                };
-
-                setOrderInfo((prevData) => ({
-                    ...prevData,
-                    url: screenshotDataUrl,
-                    price: price, // Set the correct price in orderInfo
-                }));
-
-                agregarAlCarrito(product);;
-            } else {
-                throw new Error("Me quiero morir");
-            }
-        } catch (error) {
-            console.log("Error al generar la imagen:", error);
-        }
-    };
-
-    console.log(orderInfo);
-
     return (
-
-        <ImageProvider>
-            <div className={styles.divContainer}>
-                <div className={styles.marco} ref={ref}>
+        <div className={styles.divContainer}>
+            <ImageProvider>
+                <div className={styles.marco}>
+                    {/* <Cropper
+                        initialAspectRatio={16 / 9}
+                        guides={false}
+                        crop={handleCrop}
+                        ref={cropperRef}
+                    /> */}
                     <img
-                        style={{
-                            zIndex: isPopupOpen ? -1000 : 1000
+                        onLoad={(e) => {
+                            setWidth(e.target.width);
+                            setHeight(e.target.height);
                         }}
                         className={styles.marcoImg}
                         src={phoneImg}
+                        style={{
+                            zIndex: isPopupOpen ? -1000 : 10000
+                        }}
                         alt=""
                     />
 
                     <div className={styles.contenedorImgs}>
-                        {imgData.map((imgData, index) => (
+                        {imagenes.map((imgData, index) => (
                             <EditableImage
                                 imagen={isPopupOpen ? styles.imagen : styles.imagenConBorde}
                                 key={imgData.url}
@@ -163,16 +146,9 @@ const Grilla0 = ({ phoneImg }) => {
                                 onClick={() => handleImageClick(index)}
                                 isSelected={isImageSelected(index)}
                                 escala={escala[index]}
-                                translateX={imagenSeleccionada === index ? translateX : 0}
-                                translateY={imagenSeleccionada === index ? translateY : 0}
+                                translateX={translateX}
+                                translateY={translateY}
                                 className={isImageSelected(index) ? styles.selectedImage : ''}
-                                style={
-                                    isImageSelected(index)
-                                        ? {
-                                            transform: `translate(${translateX}px, ${translateY}px) scale(${escala})`,
-                                        }
-                                        : {}
-                                }
                             />
                         ))}
                     </div>
@@ -181,8 +157,8 @@ const Grilla0 = ({ phoneImg }) => {
                 <canvas
                     ref={combinedImageRef}
                     style={{ display: 'none' }}
-                    width={width} // Utilizamos la variable setWidth aquí
-                    height={height} // Utilizamos la variable setHeight aquí
+                    width={width}
+                    height={height}
                 ></canvas>
 
                 <div className={styles.containerEditar}>
@@ -191,11 +167,17 @@ const Grilla0 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
+
                                     setEscala((estadoPrevio) => {
+
                                         const newValue = estadoPrevio[imagenSeleccionada] + 0.3
+
                                         const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+
                                         return newState
+
                                     })
+
                                 }
                             }}
                         >
@@ -206,9 +188,12 @@ const Grilla0 = ({ phoneImg }) => {
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
                                     setEscala((estadoPrevio) => {
+
                                         const newValue = estadoPrevio[imagenSeleccionada] - 0.3
+
                                         const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
                                         return newState
+
                                     })
                                 }
                             }}
@@ -222,9 +207,10 @@ const Grilla0 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateY((estadoPrevio) => {
-                                        const newValue = estadoPrevio[imagenSeleccionada] + 3
-                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                    setTranslateY(prev => {
+                                        const newValue = prev[imagenSeleccionada] - 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+
                                         return newState
                                     });
                                 }
@@ -236,9 +222,9 @@ const Grilla0 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateY((estadoPrevio) => {
-                                        const newValue = estadoPrevio[imagenSeleccionada] - 3
-                                        const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
+                                    setTranslateY(prev => {
+                                        const newValue = prev[imagenSeleccionada] + 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
                                         return newState
                                     });
                                 }
@@ -250,7 +236,12 @@ const Grilla0 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateX(translateX + 5);
+                                    setTranslateX(prev => {
+                                        const newValue = prev[imagenSeleccionada] + 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+
+                                        return newState
+                                    });
                                 }
                             }}
                         >
@@ -260,7 +251,12 @@ const Grilla0 = ({ phoneImg }) => {
                             className={styles.button}
                             onClick={() => {
                                 if (isImageSelected(imagenSeleccionada)) {
-                                    setTranslateX(translateX - 5);
+                                    setTranslateX(prev => {
+                                        const newValue = prev[imagenSeleccionada] - 5
+                                        const newState = changeValueArray(prev, imagenSeleccionada, newValue)
+
+                                        return newState
+                                    });
                                 }
                             }}
                         >
@@ -283,7 +279,7 @@ const Grilla0 = ({ phoneImg }) => {
                     )}
                 </div>
 
-                {croppedImage && (
+                {/* {croppedImage && (
                     <div>
                         <img
                             style={{
@@ -295,12 +291,11 @@ const Grilla0 = ({ phoneImg }) => {
                             alt="Imagen recortada"
                         />
                     </div>
-                )}
-            </div>
-        </ImageProvider>
-
+                )} */}
+            </ImageProvider>
+        </div>
 
     );
-}
+};
 
 export default Grilla0;
