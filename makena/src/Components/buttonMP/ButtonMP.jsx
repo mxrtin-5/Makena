@@ -41,7 +41,7 @@ const ButtonMP = ({ handlePago }) => {
 
     const getPreference = async () => {
         try {
-            const result = await fetch('http://localhost:3001/createOrder', {
+            const result = await fetch('http://62.72.63.229:3001/createOrder', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
