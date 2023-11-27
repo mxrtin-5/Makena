@@ -125,7 +125,7 @@ const Grilla3 = ({ phoneImg }) => {
                         }}
                             className={styles.marcoImg}
                             style={{
-                                zIndex: isPopupOpen ? -1000 : 10000
+                                zIndex: isPopupOpen ? -10 : 10
                             }}
                             src={phoneImg} alt="" />
 
