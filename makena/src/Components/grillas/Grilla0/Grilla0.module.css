@@ -1,7 +1,6 @@
-/* el div contenedor siempre vas a tener que ponerle un alto y ancho fijo */
 
 .divContainer{
-    height: 70vh;
+    height: 80vh;
 }
 
 .marco {
@@ -61,9 +60,7 @@
     flex-direction: column;
     position: absolute;
     right: 5%;
-    /* Adjust the percentage as needed */
     top: 40%;
-    /* Adjust the percentage as needed */
 }
 
 .containerBotones {
@@ -74,10 +71,12 @@
     gap: 20px;
 }
 
-.containerUpload {
-    position: absolute;
-    top: 80%;
-    left: 47%;
+.containerUpload{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin: 50px;
 }
 
 .button {
@@ -158,13 +157,9 @@
 }
 
 @media (max-width: 1050px) {
-    .containerEditar {
-        .button {
-            font-size: 1.2vw;
-            /* Adjust font size as needed for smaller screens */
-            padding: 1vh 1.5vw;
-            /* Adjust padding as needed for smaller screens */
-        }
+    .containerEditar .button {
+        font-size: 1.2vw;
+        padding: 1vh 1.5vw;
     }
 }
 
@@ -181,24 +176,25 @@
 
     .button {
         width: 100%;
-        /* Los botones de edición ocuparán todo el ancho disponible */
         margin-bottom: 10px;
-        /* Agregar un margen entre los botones */
     }
 }
 
 /* Estilos para pantallas más estrechas (menores a 600px) */
 @media (max-width: 600px) {
+    .divContainer{
+        height: 100vh;
+    }
+
     .marco {
         position: absolute;
-        /* Mover la imagen a la izquierda */
         left: 0;
     }
 
     .button{
-        width: 80px;
+        width: 85px;
         display: block;
-        height: 35px;
+        height: 45px;
     }
 
     .containerBotones {
@@ -207,13 +203,31 @@
         left: 20%;
     }
 
-    .containerEditar{
-        top: 30%;
+    .containerUpload{
+        position: absolute;
+        top: 75%;
+        left: 20%;
     }
 
-    .containerUpload {
+    .containerEditar{
+        top: 25%;
+    }
+
+    .containerEditar .button {
+        font-size: 1.9vw;
+    }
+}
+
+@media (max-width: 370px) {
+    .containerBotones {
         position: absolute;
-        top: 200%;
-        left: 30%;
+        top: 90%;
+        left: 20%;
+    }
+
+    .containerUpload{
+        position: absolute;
+        top: 95%;
+        left: 20%;
     }
 }

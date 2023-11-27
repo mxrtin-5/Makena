@@ -266,11 +266,13 @@ const Grilla0 = ({ phoneImg }) => {
                 </div>
 
                 <div className={styles.containerBotones}>
-                    <div className={styles.containerUpload}>
-                        <UploadWidget getImageData={handleAddImageShow} />
-                    </div>
                     <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
                     <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
+                </div>
+
+                
+                <div className={styles.containerUpload}>
+                    <UploadWidget getImageData={handleAddImageShow} />
                 </div>
 
                 <div style={{ display: "none" }}>

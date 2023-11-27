@@ -13,8 +13,6 @@ const DistribucionImg = () => {
     const id = location.search.split("=")[1]
     const modelo = location.search.split("=")[2]
 
-    console.log(modelo);
-
     return (
         <section className={styles.sectionContainer}>
             <Link to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${0}`}>

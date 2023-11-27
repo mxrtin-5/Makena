@@ -1,5 +1,5 @@
 .divPadre{
-    height: 70vh;
+    height: 80vh;
 }
 
 .marco {
@@ -52,10 +52,20 @@
     margin-bottom: 20px;
 }
 
+.containerBotones{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
 .containerUpload {
-    position: absolute;
-    top: 80%;
-    left: 47%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin: 50px;
 }
 
 .containerEditar {
@@ -177,16 +187,19 @@
 
 
 @media (max-width: 600px) {
+    .divContainer{
+        height: 100vh;
+    }
+
     .marco {
         position: absolute;
-        /* Mover la imagen a la izquierda */
         left: 0;
     }
 
-    .button {
-        width: 80px;
+    .button{
+        width: 85px;
         display: block;
-        height: 35px;
+        height: 45px;
     }
 
     .containerBotones {
@@ -195,13 +208,31 @@
         left: 20%;
     }
 
-    .containerEditar {
-        top: 30%;
+    .containerUpload{
+        position: absolute;
+        top: 75%;
+        left: 20%;
     }
 
-    .containerUpload {
+    .containerEditar{
+        top: 25%;
+    }
+
+    .containerEditar .button {
+        font-size: 1.9vw;
+    }
+}
+
+@media (max-width: 370px) {
+    .containerBotones {
         position: absolute;
-        top: 200%;
-        left: 30%;
+        top: 90%;
+        left: 20%;
+    }
+
+    .containerUpload{
+        position: absolute;
+        top: 95%;
+        left: 20%;
     }
 }

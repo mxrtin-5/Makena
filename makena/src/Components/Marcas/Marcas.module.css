@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 75vh;
+    height: 100%;
 }
 
 .containerSection{
@@ -13,4 +13,11 @@
 
 .containerImg img{
     height: 200px;
+}
+
+@media (max-width: 1050px) {
+    .containerSection{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

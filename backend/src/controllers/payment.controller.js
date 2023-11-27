@@ -15,7 +15,7 @@ MercadoPago.post("/", async (req, res) => {
         const preference = {
             items,
             back_urls: {
-                success: "http://localhost:5173/",
+                success: "http://localhost:5173/order/completed",
                 failure: "http://62.72.63.229:3001/fallo",
             },
             auto_return: "approved",
@@ -28,7 +28,7 @@ MercadoPago.post("/", async (req, res) => {
             msg: 'Ha ocurrido un error con el pago'
         });
     } catch (error) {
-        console.error(error.message);
+        console.error(error.message);   
         throw res.status(500).json(error.message);
     }
 });

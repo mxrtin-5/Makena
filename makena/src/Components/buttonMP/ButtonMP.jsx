@@ -9,6 +9,8 @@ const ButtonMP = ({ handlePago }) => {
 
     const { cart } = useContext(CartContext)
 
+    const [pagoAprobado, setPagoAprobado] = useState(false);
+
     const cartNoImg = cart.map((prod) => {
         const { img, ...newItem } = prod
 
@@ -20,24 +22,29 @@ const ButtonMP = ({ handlePago }) => {
         }
     })
 
-    // const staticData = {
-    //     items: [
-    //         {
-    //             id: 0,
-    //             title: 'GALAXY-A01',
-    //             quantity: 1,
-    //             unit_price: 5000
-    //         }
-    //     ],
-    //     // Resto de los campos...
-    // };
-
-    console.log(cartNoImg);
-
-
     useEffect(() => {
         initMercadoPago("APP_USR-c7a1b5c7-24e6-4476-8fd1-d9883775f1d7", { locale: 'es-AR' });
     }, []);
+
+    const handlePagoAprobado = () => {
+        setPagoAprobado(true);
+    };
+
+    const handleOnReady = () => {
+        if (window.Mercadopago) {
+            window.Mercadopago.preference.on('approved', handlePagoAprobado);
+        }
+    };
+
+    useEffect(() => {
+        handleOnReady();
+    }, []);
+
+    useEffect(() => {
+        if (pagoAprobado) {
+            handlePago();
+        }
+    }, [pagoAprobado]);
 
     const getPreference = async () => {
         try {
@@ -54,14 +61,8 @@ const ButtonMP = ({ handlePago }) => {
             const orderData = await result.json();
             console.log(orderData);
 
-            // Verificar si el pago fue aprobado
-            if (result.status === 200) {
-                setIdPreference(orderData);
-                handlePago();
-            } else {
-                console.error('El pago no fue aprobado. Estado del pedido:', orderData.status);
-                console.error('Respuesta completa:', orderData);
-            }
+            setIdPreference(orderData)
+
         } catch (error) {
             console.error('Error al obtener la preferencia:', error);
         }

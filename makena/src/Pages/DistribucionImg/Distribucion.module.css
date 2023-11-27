@@ -1,7 +1,33 @@
-.sectionContainer{
+.sectionContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    place-items: center;
     padding: 10rem;
-    height: 80vh;
+    height: 100%;
     gap: 2rem;
+}
+
+@media (max-width: 1000px) {
+    .sectionContainer {
+        place-items: center;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 710px) {
+    .sectionContainer {
+        place-items: center;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sectionContainer img{
+        transform: translateX(-50px);
+    }
+}
+
+@media (max-width:400px) {
+    .sectionContainer img{
+        transform: translateX(-90px);
+    }
 }

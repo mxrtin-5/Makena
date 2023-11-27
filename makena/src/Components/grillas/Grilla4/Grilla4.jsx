@@ -164,7 +164,7 @@ const Grilla4 = ({ phoneImg }) => {
                                         translateX={translateX}
                                         translateY={translateY}
                                         className={isImageSelected(index) ? styles.selectedImage : ''}
-                                        
+
                                     />
                                 ))}
                             </div>
@@ -228,7 +228,7 @@ const Grilla4 = ({ phoneImg }) => {
                                         setTranslateY(prev => {
                                             const newValue = prev[imagenSeleccionada] - 5
                                             const newState = changeValueArray(prev, imagenSeleccionada, newValue)
-    
+
                                             return newState
                                         });
                                     }
@@ -243,7 +243,7 @@ const Grilla4 = ({ phoneImg }) => {
                                         setTranslateY(prev => {
                                             const newValue = prev[imagenSeleccionada] + 5
                                             const newState = changeValueArray(prev, imagenSeleccionada, newValue)
-    
+
                                             return newState
                                         });
                                     }
@@ -258,7 +258,7 @@ const Grilla4 = ({ phoneImg }) => {
                                         setTranslateX(prev => {
                                             const newValue = prev[imagenSeleccionada] + 5
                                             const newState = changeValueArray(prev, imagenSeleccionada, newValue)
-    
+
                                             return newState
                                         });
                                     }
@@ -273,7 +273,7 @@ const Grilla4 = ({ phoneImg }) => {
                                         setTranslateX(prev => {
                                             const newValue = prev[imagenSeleccionada] - 5
                                             const newState = changeValueArray(prev, imagenSeleccionada, newValue)
-    
+
                                             return newState
                                         });
                                     }
@@ -285,11 +285,12 @@ const Grilla4 = ({ phoneImg }) => {
                     </div>
 
                     <div className={styles.containerBotones}>
-                        <div className={styles.containerUpload}>
-                            <UploadWidget getImageData={handleAddImageShow} />
-                        </div>
                         <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
                         <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
+                    </div>
+
+                    <div className={styles.containerUpload}>
+                        <UploadWidget getImageData={handleAddImageShow} />
                     </div>
 
                     <div style={{ display: "none" }}>
