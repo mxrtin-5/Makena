@@ -28,6 +28,7 @@
     min-width: 400px;
     overflow-y: auto;
     padding-top: 20%;
+    z-index: 99999999;
 }
 
 .cartProducts p{

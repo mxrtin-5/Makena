@@ -168,7 +168,7 @@ const Grilla1 = ({ phoneImg }) => {
 
                                     setEscala((estadoPrevio) => {
 
-                                        const newValue = estadoPrevio[imagenSeleccionada] + 0.3
+                                        const newValue = estadoPrevio[imagenSeleccionada] + 0.1
 
                                         const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
 
@@ -187,7 +187,7 @@ const Grilla1 = ({ phoneImg }) => {
                                 if (isImageSelected(imagenSeleccionada)) {
                                     setEscala((estadoPrevio) => {
 
-                                        const newValue = estadoPrevio[imagenSeleccionada] - 0.3
+                                        const newValue = estadoPrevio[imagenSeleccionada] - 0.1
 
                                         const newState = changeValueArray(estadoPrevio, imagenSeleccionada, newValue)
                                         return newState
