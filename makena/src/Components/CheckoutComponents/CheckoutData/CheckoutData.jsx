@@ -28,7 +28,6 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
         return nombre && apellido && email && codigoPostal && direccion;
     };
 
-    console.log(data);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -47,7 +46,6 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
             escala
         };
 
-        console.log(ordenData);
         setOrderData(ordenData);
         nextPage();
     };

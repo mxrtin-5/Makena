@@ -56,10 +56,7 @@ const ButtonMP = ({ handlePago }) => {
                 body: JSON.stringify({ items: cartNoImg }),
             });
 
-            console.log(result.status);
-
             const orderData = await result.json();
-            console.log(orderData);
 
             setIdPreference(orderData)
 

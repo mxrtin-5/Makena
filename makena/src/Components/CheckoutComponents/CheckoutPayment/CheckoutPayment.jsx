@@ -13,7 +13,7 @@ const pedido = {
         try {
             // Envía los datos del pedido a Firebase
             const docRef = await addDoc(collection(db, "pedidos"), pedido);
-            console.log("Pedido registrado con ID:", docRef.id);
+            return docRef
         } catch (error) {
             console.error("Error al registrar el pedido:", error);
         }

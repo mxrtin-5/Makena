@@ -13,10 +13,6 @@ const Carrito = () => {
         event.stopPropagation();
     };
 
-    cart.map((product) => {
-        console.log("Product:", product);
-    })
-
 
     return (
         <div>

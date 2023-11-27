@@ -23,7 +23,6 @@ const ItemDetailProd = ({ item }) => {
 
             agregarAlCarrito(productInfo);
 
-            console.log(productInfo);
         } else {
             console.log('Selecciona un modelo antes de agregar al carrito');
         }

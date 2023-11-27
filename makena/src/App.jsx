@@ -16,7 +16,6 @@ import DetalleProds from './Pages/DetalleProds/DetalleProds';
 import Contacto from './Pages/Contacto/Contacto';
 import Footer from './Components/Footer/Footer';
 import { BsWhatsapp } from "react-icons/bs";
-import ActualizarDatos from './Components/ActualizadDatos/ActualizarDatos';
 import DataProvider from './context/dataContext';
 import ButtonMP from './Components/buttonMP/ButtonMP';
 import Login from './Pages/Login/Login';

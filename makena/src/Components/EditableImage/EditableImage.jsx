@@ -25,15 +25,6 @@ const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY
         },
     });
 
-
-    console.log("isSelected:", isSelected);
-
-    console.log(index);
-
-
-    console.log('en editable image', translateY[index])
-
-
     return (
         <div className={`${styles.div} ${styles.contenedorImagen} ${isSelected ? styles.selectedImage : ''}`}
             ref={(node) => {

@@ -10,7 +10,6 @@ const UploadWidget = ({getImageData}) => {
 
     useEffect(() => {
         cloudinaryRef.current = window.cloudinary;
-        console.log(cloudinaryRef.current);
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
             cloudName: 'druiqihxp',
             uploadPreset: 'Makena'

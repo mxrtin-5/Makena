@@ -19,7 +19,6 @@ const Checkout = () => {
         setPage(page + 1);
     };
 
-    console.log(orderData)
 
     return (
         <div className={styles.form}>

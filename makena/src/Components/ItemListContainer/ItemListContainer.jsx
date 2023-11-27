@@ -12,9 +12,6 @@ const ItemListContainer = () => {
     const [loading, setLoading] = useState(true)
 
     const { marca } = useParams()
-    console.log(marca);
-
-
 
     useEffect(() => {
 
@@ -22,8 +19,6 @@ const ItemListContainer = () => {
 
         //1 armo la referencia
         const productosRef = collection(db, "celulares")
-
-        console.log(productosRef);
 
         //2 filtro los datos por la marca
         const q = marca

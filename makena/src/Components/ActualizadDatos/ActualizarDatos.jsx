@@ -32,9 +32,7 @@ const ActualizarDatos = () => {
             for (const collectionName of collectionsToUpdate) {
                 await updatePricesInCollection(collectionName);
             }
-            console.log('Precios actualizados con éxito');
         } catch (error) {
-            console.error('Error al actualizar los precios:', error);
         }
     };
 
