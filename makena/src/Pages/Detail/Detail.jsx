@@ -13,11 +13,7 @@ const Detail = () => {
 
     const { id } = useParams()
 
-    console.log(id);
-
     const [telefonoInfo, setTelefonoInfo] = useState({});
-
-    console.log(telefonoInfo, "<<<----------");
 
     const idGrilla = location.search.split("=")[1]
 
@@ -32,7 +28,6 @@ const Detail = () => {
                 if (docSnap.exists()) {
                     // El documento existe, puedes acceder a sus datos
                     const phoneData = docSnap.data();
-                    console.log("Datos del teléfono:", phoneData);
                     setTelefonoInfo(phoneData)
                 } else {
                     console.log("El documento no existe.");

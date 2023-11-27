@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineMenu } from 'react-icons/ai'
 import Menulist from "./Menu/MenuList";
 import styles from './Navbar.module.css'
-
+import logo from '../../assets/makenaIcon.jpg'
 
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
             <div className={styles.header_container}>
                 <h2 className={styles.title}>
                     <Link className={styles["title-content"]} to={'/'}>
-                        <img className={styles["img-logo"]} src='/20230814_105315_0000.png' alt="" />
+                        <img className={styles["img-logo"]} src={logo} alt="" />
                     </Link>
                 </h2>
 
