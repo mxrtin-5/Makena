@@ -8,7 +8,6 @@ const ItemCard = ({ item }) => {
             <div className={styles.containerProds} key={item.id}>
                 <Link to={`/crear-funda/seleccion/distribucion?id=${item.id}`}>
                     <h4 className={styles.tituloProducto}> {item.nombre} </h4>
-                    <img className={styles.product} src={item.image} alt="" />
                 </Link>
 
             </div>

@@ -1,6 +1,8 @@
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/cartContext';
+import styles from './ButtonMP.module.css'
+import { CiCreditCard2 } from "react-icons/ci";
 
 
 const ButtonMP = ({ handlePago }) => {
@@ -59,6 +61,7 @@ const ButtonMP = ({ handlePago }) => {
             const orderData = await result.json();
 
             setIdPreference(orderData)
+            handlePago()
 
         } catch (error) {
             console.error('Error al obtener la preferencia:', error);
@@ -66,8 +69,8 @@ const ButtonMP = ({ handlePago }) => {
     };
 
     return (
-        <div>
-            <button onClick={getPreference}>Generar boton de pago</button>
+        <div className={styles.contenedor}>
+            <button className={styles.Btn} onClick={getPreference}>Pagar <CiCreditCard2 className={styles.path} /></button>
             {idPreference ? <Wallet initialization={{ preferenceId: idPreference }} /> : <></>}
             <pre>{JSON.stringify(idPreference)}</pre>
         </div>

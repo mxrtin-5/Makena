@@ -3,7 +3,14 @@
     align-items: center;
     justify-content: center;
     margin-top: 2em;
-    height: 80vh;
+    height: 90vh;
+}
+
+.prod{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .name{
@@ -26,6 +33,24 @@
     flex-direction: column;
 }
 
+.seleccionMarca{
+    margin-bottom: 10px;
+}
+
+.seleccionMarca select{
+    margin-left: 10px;
+    background-color: #e8e8e8;
+    border-radius: 8px;
+    border: none;
+}
+
+.seleccionModeloSamsung select{
+    margin-left: 10px;
+    background-color: #e8e8e8;
+    border-radius: 8px;
+    border: none;
+}
+
 .button2 {
     display: inline-block;
     transition: all 0.2s ease-in;
@@ -42,6 +67,7 @@
         -6px -6px 12px #ffffff;
     cursor: pointer;
     top: 88%;
+    margin-top: 80px;
 }
 
 .button2:active {

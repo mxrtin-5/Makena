@@ -7,6 +7,7 @@ const Presentacion = () => {
         <div className={styles.divContenedor}>
             <h1>Fundas personalizadas</h1>
             <h2>Creamos fundas completamente a tu gusto</h2>
+            <button>Crea tu funda</button>
         </div>
 
     );

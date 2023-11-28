@@ -10,7 +10,10 @@ import EditableImage from "../../EditableImage/EditableImage";
 import ImageProvider from "../../../context/imageContext";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
 import { FaBasketShopping } from "react-icons/fa6";
-
+import { FaArrowDown } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
 
 
 const Grilla0 = ({ phoneImg }) => {
@@ -216,7 +219,7 @@ const Grilla0 = ({ phoneImg }) => {
                                 }
                             }}
                         >
-                            Arriba
+                            <FaArrowUp />
                         </button>
                         <button
                             className={styles.button}
@@ -230,7 +233,7 @@ const Grilla0 = ({ phoneImg }) => {
                                 }
                             }}
                         >
-                            Abajo
+                            <FaArrowDown />
                         </button>
                         <button
                             className={styles.button}
@@ -245,7 +248,7 @@ const Grilla0 = ({ phoneImg }) => {
                                 }
                             }}
                         >
-                            {"=>"}
+                            <FaArrowRight />
                         </button>
                         <button
                             className={styles.button}
@@ -260,15 +263,18 @@ const Grilla0 = ({ phoneImg }) => {
                                 }
                             }}
                         >
-                            {"<="}
+                            <FaArrowLeft />
                         </button>
                     </div>
                 </div>
 
                 <div className={styles.containerBotones}>
-                    <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
-                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
+                    <button className={styles.btn} onClick={TogglePopup}>Editar Imagenes</button>
+                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+                    <button className={styles.btn} onClick={() => setImagenes([])}>Eliminar Imagenes</button>
                 </div>
+
+                
 
                 
                 <div className={styles.containerUpload}>

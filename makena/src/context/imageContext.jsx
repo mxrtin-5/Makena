@@ -20,7 +20,12 @@ const ImageProvider = ({ children }) => {
             ItemTypes,
             drop
         }}>
-            <div ref={drop}>
+            <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column"
+            }} ref={drop}>
                 {children}
             </div>
         </ImageContext.Provider>

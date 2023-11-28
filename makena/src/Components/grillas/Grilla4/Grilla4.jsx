@@ -9,7 +9,10 @@ import { CartContext } from "../../../context/cartContext";
 import { db } from "../../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { FaBasketShopping } from "react-icons/fa6";
-
+import { FaArrowDown } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
 
 
 
@@ -234,7 +237,7 @@ const Grilla4 = ({ phoneImg }) => {
                                     }
                                 }}
                             >
-                                Arriba
+                                <FaArrowUp />
                             </button>
                             <button
                                 className={styles.button}
@@ -243,13 +246,12 @@ const Grilla4 = ({ phoneImg }) => {
                                         setTranslateY(prev => {
                                             const newValue = prev[imagenSeleccionada] + 5
                                             const newState = changeValueArray(prev, imagenSeleccionada, newValue)
-
                                             return newState
                                         });
                                     }
                                 }}
                             >
-                                Abajo
+                                <FaArrowDown />
                             </button>
                             <button
                                 className={styles.button}
@@ -264,7 +266,7 @@ const Grilla4 = ({ phoneImg }) => {
                                     }
                                 }}
                             >
-                                {"=>"}
+                                <FaArrowRight />
                             </button>
                             <button
                                 className={styles.button}
@@ -279,14 +281,16 @@ const Grilla4 = ({ phoneImg }) => {
                                     }
                                 }}
                             >
-                                {"<="}
+                                <FaArrowLeft />
                             </button>
                         </div>
                     </div>
 
                     <div className={styles.containerBotones}>
-                        <button className={styles.btn} onClick={TogglePopup}>Toggle</button>
-                        <button className={styles.btn} onClick={() => obtenerPrecio(id)}><FaBasketShopping /></button>
+                        <button className={styles.btn} onClick={TogglePopup}>Editar Imagenes</button>
+                        <button className={styles.btn} onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+                        <button className={styles.btn} onClick={() => setImagenes([])}>Eliminar Imagenes</button>
+
                     </div>
 
                     <div className={styles.containerUpload}>

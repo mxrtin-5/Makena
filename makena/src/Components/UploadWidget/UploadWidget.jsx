@@ -26,7 +26,7 @@ const UploadWidget = ({getImageData}) => {
     return (
         <div className={styles.containerButton}>
             <button className={styles.button2} onClick={() => widgetRef.current.open()}>
-                Upload
+                Cargar Imagen
             </button>
         </div>
     );

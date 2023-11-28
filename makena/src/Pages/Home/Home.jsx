@@ -4,7 +4,7 @@ import portada from '../../assets/portada.png'
 import portada2 from '../../assets/cambio 1.png'
 import portada3 from '../../assets/cambio 2.png'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Catalogo from '../Catalogo/Catalogo';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -22,9 +22,13 @@ const Home = () => {
                     slidesPerView={1}
                     loop={true}
                     pagination={{
-                        clickable: true,
+                        type: 'progressbar',
                     }}
-                    modules={[Pagination, Navigation]}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[Pagination, Navigation, Autoplay]}
                     navigation={true}
                     className={styles.backgroundImg}
                 >
