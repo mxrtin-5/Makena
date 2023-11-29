@@ -32,6 +32,7 @@ export const Marcas = () => {
 
     return (
         <section className={styles.containerSeccionMarcas}>
+            <h1 className={styles.titulo}>Selecciona la Marca</h1>
             <div className={styles.containerSection}>
                 {marcas.map(marcaDetail => <article key={marcaDetail.id} className={styles.containerImg}>
                     <Link to={`/crear-funda/seleccion/${marcaDetail.nombre}`}><img src={marcaDetail.image} alt="" /></Link>

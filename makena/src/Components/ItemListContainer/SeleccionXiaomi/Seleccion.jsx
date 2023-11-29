@@ -7,7 +7,7 @@ const Seleccion = ({ celulares }) => {
 
     return (
         <section className={styles.section}>
-            <h1 className={styles.tituloSamsungs}>Productos</h1>
+            <h1 className={styles.tituloSamsungs}>Selecciona el modelo</h1>
             <div className={styles.containerProds}>
                 {
                     celulares && celulares.map((cel) => (
