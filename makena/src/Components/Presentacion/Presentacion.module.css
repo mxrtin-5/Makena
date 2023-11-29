@@ -81,7 +81,15 @@
         top: 33%;
     }
 
-    
+    .btn{
+        width: 160px;
+        height: 65px;
+        font-size: 2.5vw;
+    }
+
+    .btn::before{
+        width: 192px;
+    }
 
     .divContenedor div h1 {
         font-size: 8vw;
