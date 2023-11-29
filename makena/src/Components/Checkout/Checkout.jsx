@@ -19,7 +19,6 @@ const Checkout = () => {
         setPage(page + 1);
     };
 
-
     return (
         <div className={styles.form}>
             <div className={styles.progressBar}><div style={{
@@ -39,11 +38,10 @@ const Checkout = () => {
                     )}
                     {page === 1 && (
                         <CheckoutPayment
-                        orderData={orderData}
                         />
                     )}
                     {page === 2 && (
-                        <CheckoutSucces />
+                        <CheckoutSucces orderData={orderData} />
                     )}
                 </div>
                 <div className={styles.footer}>

@@ -21,3 +21,19 @@
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
+@media (max-height:900px) {
+    .containerSection{
+        height: 100%;
+    }
+
+    .containerImg img{
+        width: 150px;
+    }
+}
+
+@media (max-height:700px) {
+    .containerImg img{
+        width: 100px;
+    }
+}

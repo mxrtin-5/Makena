@@ -30,10 +30,6 @@
 
 @media (max-width: 1400px) {
 
-    .header_container {
-        height: 50px;
-    }
-
     .menu-icon {
         color: white;
         opacity: 1;

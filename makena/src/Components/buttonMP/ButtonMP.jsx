@@ -5,7 +5,7 @@ import styles from './ButtonMP.module.css'
 import { CiCreditCard2 } from "react-icons/ci";
 
 
-const ButtonMP = ({ handlePago }) => {
+const ButtonMP = () => {
 
     const [idPreference, setIdPreference] = useState(null)
 
@@ -42,15 +42,11 @@ const ButtonMP = ({ handlePago }) => {
         handleOnReady();
     }, []);
 
-    useEffect(() => {
-        if (pagoAprobado) {
-            handlePago();
-        }
-    }, [pagoAprobado]);
+
 
     const getPreference = async () => {
         try {
-            const result = await fetch('http://62.72.63.229:3001/createOrder', {
+            const result = await fetch('https://62.72.63.229/createOrder', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +57,6 @@ const ButtonMP = ({ handlePago }) => {
             const orderData = await result.json();
 
             setIdPreference(orderData)
-            handlePago()
 
         } catch (error) {
             console.error('Error al obtener la preferencia:', error);

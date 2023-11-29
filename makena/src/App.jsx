@@ -21,6 +21,7 @@ import Login from './Pages/Login/Login';
 import Admin from './Pages/Admin/Admin';
 import { UserProvider } from './context/userContext';
 import Devs from './Components/Devs/Devs';
+import CheckoutSucces from './Components/CheckoutComponents/CheckoutSucces/CheckoutSucces';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path='/admin' element={<Admin />} />
                     <Route path="/devs" element={<Devs />} />
+                    <Route path='/order/completed' element={ <CheckoutSucces/>} />
 
 
                   </Routes>

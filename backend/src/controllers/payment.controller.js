@@ -15,7 +15,7 @@ MercadoPago.post("/", async (req, res) => {
         const preference = {
             items,
             back_urls: {
-                success: "http://localhost:5173/order/completed",
+                success: "https://makenafundas.com/order/completed",
                 failure: "http://62.72.63.229:3001/fallo",
             },
             auto_return: "approved",

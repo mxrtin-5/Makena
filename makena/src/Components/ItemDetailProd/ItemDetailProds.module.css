@@ -122,3 +122,35 @@
     background-color: blueviolet;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
+
+@media (max-height: 950px){
+    .button2{
+        top: 94%;
+    }
+}
+
+@media (max-height: 800px) {
+
+    .container{
+        height: 120vh;
+    }
+    .prod{
+        padding: 40px;
+    }
+
+    .button2{
+        top: 110%;
+    }
+}
+
+@media (max-height: 795px){
+    .button2{
+        top: 115%;
+    }
+}
+
+@media (max-height: 733px){
+    .button2{
+        top: 125%;
+    }
+}
