@@ -78,10 +78,13 @@
         color: rgb(238, 238, 238);
         z-index: 999;
         width: 90%;
+        top: 33%;
     }
 
-    .divContenedor h1 {
-        font-size: 4vw;
+    
+
+    .divContenedor div h1 {
+        font-size: 8vw;
     }
 
     .divContenedor div {
