@@ -25,7 +25,7 @@ const Menulist = ({ cerrar }) => {
 
             <nav ref={navRef} onClick={handleCloseMenu} className='menulist'>
                 <Link onClick={showNavbar} className="menulist__link active" to="/">Inicio</Link>
-                <Link onClick={showNavbar} className="menulist__link" to="/crear-funda/seleccion">Crear Funda</Link>
+                <Link onClick={showNavbar} className="menulist__link" to="/crear-funda/seleccion">Crea tu funda</Link>
                 <Link onClick={showNavbar} className="menulist__link" to="/contacto">Contacto</Link>
 
                 <button className="nav-btn nav-close-btn" onClick={handleCloseMenu}>
