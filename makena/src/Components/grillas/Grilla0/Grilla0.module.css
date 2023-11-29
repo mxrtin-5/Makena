@@ -168,7 +168,6 @@
 @media (max-width: 800px) {
     .marcoImg {
         left: 0;
-        /* La imagen del celular se moverá a la izquierda */
     }
 
     .containerEditar {
@@ -185,7 +184,7 @@
 /* Estilos para pantallas más estrechas (menores a 600px) */
 @media (max-width: 600px) {
     .divContainer{
-        height: 100vh;
+        height: 110vh;
     }
 
     .marco {
@@ -201,35 +200,61 @@
 
     .containerBotones {
         position: absolute;
-        top: 80%;
-        left: 20%;
+        top: 100%;
+        left: 0%;
     }
 
     .containerUpload{
         position: absolute;
-        top: 85%;
+        top: 110%;
         left: 20%;
     }
 
+    .btn{
+        font-size: 10px;
+    }
+
     .containerEditar{
-        top: 25%;
+        top: 50%;
     }
 
     .containerEditar .button {
-        font-size: 1.9vw;
+        font-size: 3vw;
     }
 }
 
 @media (max-width: 370px) {
-    .containerBotones {
-        position: absolute;
-        top: 90%;
-        left: 20%;
+
+    .divContainer{
+        margin-bottom: 200px;
+    }
+
+    .containerBotones{
+        display: grid;
+        place-items: center;
     }
 
     .containerUpload{
         position: absolute;
-        top: 95%;
+        top: 120%;
         left: 20%;
+    }
+
+    .containerEditar .button {
+        font-size: 4vw;
+        width: 100%;
+        height: 100%;
+    }
+
+    .containerUpload{
+        top: 100%;
+        width: 100px;
+        left: 45%;
+    }
+}
+
+@media (max-height: 850px) {
+    .containerBotones{
+        margin-top: 60px;
     }
 }
