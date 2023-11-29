@@ -40,40 +40,6 @@ body{
   z-index: 100;
 }
 
-.joinchat{
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  top: 7px;
-  right: 60px;
-  width: auto;
-  height: 35px;
-  padding: 5px 10px 5px 5px;
-  border: none;
-  border-radius: 50px;
-  background-color: #fff;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.3s ease-out 0.4s;
-  filter: drop-shadow(0 1px 4px rgba(0, 0,0,0.4));
-}
-
-.joinchat::before{
-  content: "";
-  display: block;
-  position: absolute;
-  top: 10px;
-  right: -6px;
-  border: 8px solid transparent;
-  border-width: 6px 0 6px 8px;
-  border-left-color: #fff;
-}
-
-.wpp .text{
-  color: #525252;
-  font-size: 16px;
-}
 .wpp:hover{
   transition: all 0.5s ease-in-out;
   animation: bounce 1.6s infinite;
@@ -88,13 +54,5 @@ body{
   }
   60%{
     transform: translateY(-5px);
-  }
-}
-
-@media (hover: hover){
-  .wpp:hover .joinchat{
-    opacity: 1;
-    animation: none;
-    transition: opacity 0.2s;
   }
 }
