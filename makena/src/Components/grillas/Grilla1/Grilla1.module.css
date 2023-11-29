@@ -254,7 +254,13 @@
     }
 
     .marco{
-        transform: translate(-30px, 200px);
+        transform: translate(-70px, 200px);
+    }
+}
+
+@media (max-width:380px) {
+    .marco{
+        transform: translate(-60px, 200px);
     }
 }
 

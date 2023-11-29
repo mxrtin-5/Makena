@@ -258,3 +258,23 @@
         margin-top: 60px;
     }
 }
+
+@media (max-height: 756px) {
+    .containerBotones{
+        margin-top: 100px;
+    }
+
+    .containerUpload{
+        top: 120%;
+        width: 100%;
+        left: -10%;
+    }
+}
+
+@media (max-width: 366px) and (max-height: 755px) {
+    .containerUpload{
+        top: 110%;
+        width: 100px;
+        left: 45%;
+    }
+}
