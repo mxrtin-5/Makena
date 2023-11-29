@@ -6,6 +6,7 @@ import portada3 from '../../assets/cambio2.png'
 import bannerMovile1 from '../../assets/Bannermovil1.png'
 import bannerMovile2 from '../../assets/2.png'
 import bannerMovile3 from '../../assets/3.png'
+import bannerMovile4 from '../../assets/4.png'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Catalogo from '../Catalogo/Catalogo';
@@ -64,6 +65,9 @@ const Home = () => {
                             <SwiperSlide className={styles.imagenes}>
                                 <img src={bannerMovile3} alt="" />
                             </SwiperSlide>
+                            <SwiperSlide className={styles.imagenes}>
+                                <img src={bannerMovile4} alt="" />
+                            </SwiperSlide>
                         </>
                     ) : (
                         <>
@@ -76,6 +80,7 @@ const Home = () => {
                             <SwiperSlide className={styles.imagenes}>
                                 <img src={portada3} alt="" />
                             </SwiperSlide>
+                            
                         </>
                     )}
                 </Swiper>
