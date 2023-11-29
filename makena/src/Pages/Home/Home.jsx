@@ -1,12 +1,12 @@
 import Presentacion from '../../Components/Presentacion/Presentacion';
 import styles from './Home.module.css'
-import portada from '../../assets/portada.png'
-import portada2 from '../../assets/cambio1.png'
-import portada3 from '../../assets/cambio2.png'
-import bannerMovile1 from '../../assets/Bannermovil1.png'
-import bannerMovile2 from '../../assets/2.png'
-import bannerMovile3 from '../../assets/3.png'
-import bannerMovile4 from '../../assets/4.png'
+import portada from '../../assets/PortadaPrincipal.png'
+import portada2 from '../../assets/Cambio1Principal.png'
+import portada3 from '../../assets/Cambio2Principal.png'
+import bannerMovile1 from '../../assets/BannerMovile.png'
+import bannerMovile2 from '../../assets/Cambio.png'
+import bannerMovile3 from '../../assets/Cambio1Min.png'
+import bannerMovile4 from '../../assets/Cambio2Min.png'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Catalogo from '../Catalogo/Catalogo';

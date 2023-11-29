@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import Grilla0 from '/Grilla1.png'
-import grilla1 from "/Grilla2.png"
-import grilla2 from "/Grilla3.png"
-import grilla3 from "/Grilla4.png"
-import grilla4 from "/Grilla5.png"
+import Grilla0 from '/Grilla1Min.png'
+import grilla1 from "/Grilla2Min.png"
+import grilla2 from "/Grilla3Min.png"
+import grilla3 from "/Grilla4Min.png"
+import grilla4 from "/Grilla-5.png"
 import styles from './Distribucion.module.css'
 
 
