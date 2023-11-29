@@ -1,4 +1,4 @@
-.divPadre{
+.divPadre {
     height: 80vh;
 }
 
@@ -38,6 +38,7 @@
     height: 100%;
     object-fit: cover;
 }
+
 .container {
     margin-bottom: 20px;
 }
@@ -144,6 +145,7 @@
     transform: scaleX(1.4) scaleY(1.6);
     opacity: 0;
 }
+
 @media (max-width: 1050px) {
     .containerEditar .button {
         font-size: 1.2vw;
@@ -169,15 +171,15 @@
 
 /* Estilos para pantallas más estrechas (menores a 600px) */
 @media (max-width: 600px) {
-    .divPadre{
+    .divPadre {
         height: 110vh;
     }
 
     .marco {
-        transform: translate(-80px, 200px) ;
+        transform: translate(-80px, 200px);
     }
 
-    .button{
+    .button {
         width: 85px;
         display: block;
         height: 45px;
@@ -189,17 +191,17 @@
         left: 0%;
     }
 
-    .containerUpload{
+    .containerUpload {
         position: absolute;
         top: 110%;
         left: 20%;
     }
 
-    .btn{
+    .btn {
         font-size: 10px;
     }
 
-    .containerEditar{
+    .containerEditar {
         top: 50%;
     }
 
@@ -210,16 +212,16 @@
 
 @media (max-width: 410px) {
 
-    .divPadre{
+    .divPadre {
         margin-bottom: 200px;
     }
 
-    .containerBotones{
+    .containerBotones {
         display: grid;
         place-items: center;
     }
 
-    .containerUpload{
+    .containerUpload {
         position: absolute;
         top: 120%;
         left: 20%;
@@ -231,33 +233,61 @@
         height: 100%;
     }
 
-    .containerUpload{
+    .containerUpload {
         top: 100%;
         width: 100px;
         left: 45%;
     }
 
-    .marco{
+    .marco {
         transform: translate(-60px, 200px);
     }
 }
 
 @media (max-height: 850px) {
-    .containerBotones{
+    .containerBotones {
         margin-top: 100px;
     }
 
-    .containerUpload{
+    .containerUpload {
         margin-top: 100px;
+    }
+
+    .containerEditar {
+        top: 60%;
     }
 }
 
 @media (max-height: 755px) {
-    .containerBotones{
+    .divPadre {
+        padding-bottom: 1000px;
+    }
+
+    .containerBotones {
         margin-top: 150px;
     }
 
-    .containerUpload{
+    .containerUpload {
         margin-top: 150px;
+    }
+}
+
+@media (max-height:708px) {
+    .containerBotones {
+        margin-top: 210px;
+    }
+
+    .containerUpload {
+        top: 125%;
+    }
+
+    .containerEditar {
+        top: 65%;
+    }
+}
+
+@media (max-height:800px) {
+    .divPadre {
+        height: 110vh;
     }
 }

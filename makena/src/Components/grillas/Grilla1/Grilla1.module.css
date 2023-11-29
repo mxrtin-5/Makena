@@ -272,14 +272,42 @@
     .containerUpload{
         margin-top: 100px;
     }
+
+    .containerEditar{
+        top: 60%;
+    }
 }
 
 @media (max-height: 755px) {
+    .divPadre{
+        padding-bottom: 1000px;
+    }
+
     .containerBotones{
         margin-top: 150px;
     }
 
     .containerUpload{
         margin-top: 150px;
+    }
+}
+
+@media (max-height:708px) {
+    .containerBotones{
+        margin-top: 210px;
+    }
+
+    .containerUpload{
+        top: 125%;
+    }
+
+    .containerEditar{
+        top: 65%;
+    }
+}
+
+@media (max-height:800px) {
+    .divPadre{
+        height: 110vh;
     }
 }

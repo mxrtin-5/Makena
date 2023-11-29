@@ -269,7 +269,7 @@ const Grilla0 = ({ phoneImg }) => {
                 </div>
 
                 <div className={styles.containerBotones}>
-                    <button className={styles.btn} onClick={TogglePopup}>Editar Imagenes</button>
+                    <button className={styles.btn} onClick={TogglePopup}>Seleccionar imagen</button>
                     <button className={styles.btn} onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
                     <button className={styles.btn} onClick={() => setImagenes([])}>Eliminar Imagenes</button>
                 </div>

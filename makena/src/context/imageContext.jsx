@@ -24,7 +24,8 @@ const ImageProvider = ({ children }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                flexDirection: "column"
+                flexDirection: "column",
+                marginBottom: "100px"
             }} ref={drop}>
                 {children}
             </div>
