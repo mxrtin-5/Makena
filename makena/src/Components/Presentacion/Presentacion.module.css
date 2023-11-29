@@ -13,6 +13,7 @@
 
 .link {
     color: white;
+    font-size: 20px;
 }
 
 .btn {
@@ -115,8 +116,8 @@
         z-index: 999;
     }
 
-    .divContenedor h1 {
-        font-size: 5vw;
+    .divContenedor div h1 {
+        font-size: 9vw;
         align-self: center;
         text-align: center;
         align-items: center;
