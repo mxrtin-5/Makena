@@ -154,3 +154,22 @@
         top: 125%;
     }
 }
+
+
+@media (max-height: 660px){
+    .container{
+        height: 130vh;
+    }
+    .button2{
+        top: 135%;
+    }
+}
+
+@media (max-height: 590px){
+    .container{
+        height: 140vh;
+    }
+    .button2{
+        top: 145%;
+    }
+}
