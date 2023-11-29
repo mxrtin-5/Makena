@@ -6,7 +6,7 @@ import { GrillasContext } from '../../../context/grillasContext';
 
 const CheckoutData = ({ setOrderData, nextPage, data }) => {
 
-    const { cart } = useContext(CartContext); 
+    const { cart } = useContext(CartContext);
 
     const { translateX, translateY, escala } = useContext(GrillasContext)
 
@@ -24,6 +24,23 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
 
     const [opcionesEnvio, setOpcionesEnvio] = useState("Capital Federal");
 
+    const [precioEnvioExtra, setPrecioEnvioExtra] = useState(0);
+
+    const handleOpcionesEnvioChange = (e) => {
+        const nuevaOpcionEnvio = e.target.value;
+
+        // Lógica para determinar el precio adicional según la opción de envío
+        let nuevoPrecioEnvioExtra = 0;
+        if (nuevaOpcionEnvio === "Buenos Aires") {
+            nuevoPrecioEnvioExtra = 200; // Puedes ajustar este valor según tus necesidades
+        } else if (nuevaOpcionEnvio === "Interior") {
+            nuevoPrecioEnvioExtra = 350; // Puedes ajustar este valor según tus necesidades
+        }
+
+        setOpcionesEnvio(nuevaOpcionEnvio);
+        setPrecioEnvioExtra(nuevoPrecioEnvioExtra);
+    };
+
     const areCamposCompletos = () => {
         return nombre && apellido && email && codigoPostal && direccion;
     };
@@ -33,7 +50,10 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
         e.preventDefault();
 
         const ordenData = {
-            cart,
+            cart: {
+                ...cart,
+                price: cart.price + precioEnvioExtra,
+            },
             nombre,
             apellido,
             email,
@@ -97,13 +117,17 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
                 <select
                     name="opcionesEnvio"
                     value={opcionesEnvio}
-                    onChange={(e) => setOpcionesEnvio(e.target.value)}
+                    onChange={handleOpcionesEnvioChange}
                     required
                 >
                     <option value="Capital Federal">Capital Federal</option>
                     <option value="Buenos Aires">Buenos Aires</option>
                     <option value="Interior">Interior</option>
                 </select>
+
+                {precioEnvioExtra > 0 && (
+                    <p>Precio extra: ${precioEnvioExtra}</p>
+                )}
 
                 <button
                     className={styles.buttonForm}
