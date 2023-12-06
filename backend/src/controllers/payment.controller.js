@@ -5,31 +5,29 @@ dotenv.config();
 const MercadoPago = Router();
 
 mercadopago.configure({
-    access_token: process.env.MERCADOPAGO_ACCESS_TOKEN,
+    access_token: process.env.ACCESS,
 });
 
 MercadoPago.post("/", async (req, res) => {
     const { items } = req.body;
+    console.log(items);
 
     try {
         const preference = {
             items,
             back_urls: {
                 success: "https://makenafundas.com/order/completed",
-                failure: "http://62.72.63.229:3001/fallo",
+                failure: "https://youtube.com/",
             },
             auto_return: "approved",
         };
 
         const respuesta = await mercadopago.preferences.create(preference);
-        if(respuesta.status === 201) return res.status(201).json(respuesta.response.id);
         console.log(respuesta);
-        return res.status(400).json({
-            msg: 'Ha ocurrido un error con el pago'
-        });
+        res.status(200).json(respuesta.response.id);
     } catch (error) {
-        console.error(error.message);   
-        throw res.status(500).json(error.message);
+        console.error(error.message);
+        res.status(500).json(error.message);
     }
 });
 

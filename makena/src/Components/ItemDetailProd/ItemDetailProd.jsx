@@ -115,6 +115,44 @@ const ItemDetailProd = ({ item }) => {
                                 <option value="A72">A72</option>
                                 <option value="J2 CORE">J2 CORE</option>
                                 <option value="J2 Prime">J2 Prime</option>
+                                <option value="J4 2018">J4 2018</option>
+                                <option value="J4 Plus">J4 Plus</option>
+                                <option value="J5 2016">J5 2016</option>
+                                <option value="J5 Prime">J5 Prime</option>
+                                <option value="J6 2018">J6 2018</option>
+                                <option value="J6 Plus/PRIME">J6 Plus/PRIME</option>
+                                <option value="J7 2015">J7 2015</option>
+                                <option value="J7 Neo (SM-J701)">J7 Neo (SM-J701)</option>
+                                <option value="J7 2016">J7 2016</option>
+                                <option value="J7 2018">J7 2018</option>
+                                <option value="J7 Prime">J7 Prime</option>
+                                <option value="J8">J8</option>
+                                <option value="Galaxy Note 10">Galaxy Note 10</option>
+                                <option value="Galaxy Note 10 Plus">Galaxy Note 10 Plus</option>
+                                <option value="Galaxy Note 20">Galaxy Note 20</option>
+                                <option value="Galaxy Note 20 Ultra">Galaxy Note 20 Ultra</option>
+                                <option value="S8">S8</option>
+                                <option value="S8 Plus">S8 Plus</option>
+                                <option value="S9">S9</option>
+                                <option value="S9 Plus">S9 Plus</option>
+                                <option value="S10">S10</option>
+                                <option value="S10 plus">S10 plus</option>
+                                <option value="S20">S20</option>
+                                <option value="S20 Plus">S20 Plus</option>
+                                <option value="S20 ultra">S20 ultra</option>
+                                <option value="S20 fe">S20 fe</option>
+                                <option value="S21">S21</option>
+                                <option value="S21 ultra">S21 ultra</option>
+                                <option value="S21 Plus">S21 Plus</option>
+                                <option value="S21 fe">S21 fe</option>
+                                <option value="S22">S22</option>
+                                <option value="S22 ultra">S22 ultra</option>
+                                <option value="S23">S23</option>
+                                <option value="S23 Plus">S23 Plus</option>
+                                <option value="S23 ultra">S23 ultra</option>
+                                <option value="M13">M13</option>
+                                <option value="M23/F23">M23/F23</option>
+                                <option value="Z FLIP 3">Z FLIP 3</option>
                             </select>
                         </div>
                     )
