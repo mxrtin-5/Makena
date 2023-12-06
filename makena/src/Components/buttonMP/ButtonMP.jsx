@@ -29,7 +29,7 @@ const ButtonMP = () => {
 
     const setPreference = async () => {
         try {
-            const result = await fetch('https://makenafundas.com/createOrder', {
+            const result = await fetch('https://makenafundas.com/api/createOrder', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

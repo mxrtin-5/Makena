@@ -9,6 +9,6 @@ const server = express();
 //*- Proxy - Midleware :
 server.use(express.json());
 server.use(cors());
-server.use("/createOrder", MercadoPago);
+server.use("api/createOrder", MercadoPago);
 
 module.exports = server;
