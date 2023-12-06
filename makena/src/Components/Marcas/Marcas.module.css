@@ -22,8 +22,10 @@
     font-size: 50px;
 }
 
-
 @media (max-width: 1050px) {
+    .containerSeccionMarcas{
+        height: 100%;
+    }
     .containerSection {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
@@ -33,10 +35,28 @@
 @media (max-height:900px) {
     .containerSection {
         height: 100%;
+        margin-top: 200px;
     }
 
     .containerImg img {
         width: 150px;
+    }
+
+    .titulo{
+        top: 0%;
+    }
+}
+
+@media (max-width: 505px) {
+    .titulo{
+        font-size: 40px;
+        text-align: center;
+    }
+}
+
+@media (min-height:900px){
+    .containerSeccionMarcas{
+        height: 150vh;
     }
 }
 
