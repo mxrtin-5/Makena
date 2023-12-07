@@ -22,6 +22,7 @@ import Admin from './Pages/Admin/Admin';
 import { UserProvider } from './context/userContext';
 import Devs from './Components/Devs/Devs';
 import CheckoutSucces from './Components/CheckoutComponents/CheckoutSucces/CheckoutSucces';
+import { Navigate } from 'react-router-dom';
 
 
 function App() {
@@ -43,7 +44,8 @@ function App() {
                   <Navbar />
 
                   <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path="*" element={<Navigate to="/home" />} />
+                    <Route path="/" element={<Navigate to="/home" />} />
                     <Route path='/crear-funda/seleccion' element={<CrearFunda />} />
                     <Route path='/crear-funda/seleccion/:marca' element={<ItemListContainer />} />
                     <Route path='/crear-funda/seleccion/:marca/:id' element={<Detail />} />
@@ -55,7 +57,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path='/admin' element={<Admin />} />
                     <Route path="/devs" element={<Devs />} />
-                    <Route path='/order/completed' element={ <CheckoutSucces/>} />
+                    <Route path='/order/completed' element={<CheckoutSucces />} />
                   </Routes>
 
                   <a className="wpp" target='_blank' href="https://api.whatsapp.com/send?phone=5491122444188"><BsWhatsapp /></a>
