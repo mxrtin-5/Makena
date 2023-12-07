@@ -24,7 +24,7 @@ const ButtonMP = () => {
 
 
     useEffect(() => {
-        initMercadoPago("APP_USR-b6e3a1d4-4cad-437f-ad2a-4d8755258222", { locale: 'es-AR' });
+        initMercadoPago("TEST-c5d11e40-96c2-420b-b5ee-9d91ba05b6a8", { locale: 'es-AR' });
     }, []);
 
     const setPreference = async () => {
