@@ -4,21 +4,19 @@ import { CartContext } from '../../../context/cartContext';
 import { GrillasContext } from '../../../context/grillasContext';
 
 
-const CheckoutData = ({ setOrderData, nextPage, data }) => {
+const CheckoutData = ({ setOrderData, nextPage }) => {
 
     const { cart } = useContext(CartContext);
 
     const { translateX, translateY, escala } = useContext(GrillasContext)
 
-    const [nombre, setNombre] = useState("");
-
-    const [apellido, setApellido] = useState("");
-
     const [email, setEmail] = useState("");
 
-    const [telefono, setTelefono] = useState("");
+    const [observasiones, setObservaciones] = useState('')
 
     const [codigoPostal, setCodigoPostal] = useState("");
+
+    const [sucursal, setSucursal] = useState('')
 
     const [direccion, setDireccion] = useState("");
 
@@ -32,9 +30,13 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
         // Lógica para determinar el precio adicional según la opción de envío
         let nuevoPrecioEnvioExtra = 0;
         if (nuevaOpcionEnvio === "Buenos Aires") {
-            nuevoPrecioEnvioExtra = 200; // Puedes ajustar este valor según tus necesidades
-        } else if (nuevaOpcionEnvio === "Interior") {
-            nuevoPrecioEnvioExtra = 350; // Puedes ajustar este valor según tus necesidades
+            nuevoPrecioEnvioExtra = 1300; // Puedes ajustar este valor según tus necesidades
+        } else if (nuevaOpcionEnvio === "GBA") {
+            nuevoPrecioEnvioExtra = 2200; // Puedes ajustar este valor según tus necesidades
+        } else if (nuevaOpcionEnvio === "Sucursal") {
+            nuevoPrecioEnvioExtra = 1700; // Puedes ajustar este valor según tus necesidades
+        } else if (nuevaOpcionEnvio === "Domicilio") {
+            nuevoPrecioEnvioExtra = 2200; // Puedes ajustar este valor según tus necesidades
         }
 
         setOpcionesEnvio(nuevaOpcionEnvio);
@@ -42,7 +44,7 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
     };
 
     const areCamposCompletos = () => {
-        return nombre && apellido && email && codigoPostal && direccion;
+        return email && codigoPostal && direccion;
     };
 
 
@@ -54,10 +56,9 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
                 ...cart,
                 price: cart.price + precioEnvioExtra,
             },
-            nombre,
-            apellido,
             email,
-            telefono,
+            sucursal,
+            observasiones,
             codigoPostal,
             direccion,
             opcionesEnvio,
@@ -72,21 +73,21 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
 
     return (
         <div className={styles.data}>
+
+            <select
+                name="opcionesEnvio"
+                value={opcionesEnvio}
+                onChange={handleOpcionesEnvioChange}
+                required
+            >
+                <option value="Capital Federal">Capital Federal</option>
+                <option value="GBA">GBA</option>
+                <option value="Sucursal">Correo SUC</option>
+                <option value="Domicilio">Correo DOM</option>
+
+            </select>
+
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Apellido"
-                    value={apellido}
-                    onChange={(e) => setApellido(e.target.value)}
-                    required
-                />
                 <input
                     type="email"
                     placeholder="Email"
@@ -94,36 +95,32 @@ const CheckoutData = ({ setOrderData, nextPage, data }) => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <input
-                    type="text"
-                    placeholder="Número de Teléfono"
-                    value={telefono}
-                    onChange={(e) => setTelefono(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Código Postal"
-                    value={codigoPostal}
-                    onChange={(e) => setCodigoPostal(e.target.value)}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Dirección"
-                    value={direccion}
-                    onChange={(e) => setDireccion(e.target.value)}
-                    required
-                />
-                <select
-                    name="opcionesEnvio"
-                    value={opcionesEnvio}
-                    onChange={handleOpcionesEnvioChange}
-                    required
-                >
-                    <option value="Capital Federal">Capital Federal</option>
-                    <option value="Buenos Aires">Buenos Aires</option>
-                    <option value="Interior">Interior</option>
-                </select>
+                {opcionesEnvio !== "Sucursal" && (
+                    <>
+                        <input
+                            type="text"
+                            placeholder="Código Postal"
+                            value={codigoPostal}
+                            onChange={(e) => setCodigoPostal(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Dirección"
+                            value={direccion}
+                            onChange={(e) => setDireccion(e.target.value)}
+                            required
+                        />
+                    </>
+                )}
+
+                {opcionesEnvio === "Sucursal" && (
+                    <>
+                        <input onChange={(e) => setSucursal(e.target.value)} value={sucursal} placeholder='Ingrese sucursal' type="text" required />
+                    </>
+                )}
+
+                <input value={observasiones} onChange={(e) => setObservaciones(e.target.value)} placeholder='Observasiones' className={styles.textArea} type="textarea" />
 
                 {precioEnvioExtra > 0 && (
                     <p>Precio extra: ${precioEnvioExtra}</p>

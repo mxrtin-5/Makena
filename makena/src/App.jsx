@@ -56,6 +56,7 @@ function App() {
                     <Route path='/admin' element={<Admin />} />
                     <Route path="/devs" element={<Devs />} />
                     <Route path='/order/completed' element={ <CheckoutSucces/>} />
+                    
                   </Routes>
 
                   <a className="wpp" target='_blank' href="https://api.whatsapp.com/send?phone=5491122444188"><BsWhatsapp /></a>

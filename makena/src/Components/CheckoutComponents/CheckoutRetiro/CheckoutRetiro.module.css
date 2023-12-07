@@ -1,0 +1,11 @@
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: blueviolet;
+    border: none;
+    width: 90px;
+    height: 40px;
+    border-radius: 10px;
+    color: white;
+}

@@ -3,7 +3,7 @@ import { addDoc, collection } from "firebase/firestore";
 
 
 
-const CheckoutSucces = ( orderData ) => {
+const CheckoutSucces = ( {orderData} ) => {
 
     const handlePago = async () => {
         try {
@@ -14,6 +14,8 @@ const CheckoutSucces = ( orderData ) => {
             console.error("Error al registrar el pedido:", error);
         }
     };
+
+    console.log(orderData);
 
     return (
         <div onLoad={handlePago()}>

@@ -6,6 +6,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: -50px;
+}
+
+.data .textArea{
+    width: 60%;
+    height: 30%;
 }
 
 .data input {
@@ -35,7 +41,7 @@
 
 .buttonForm {
     position: absolute;
-    top: 101%;
+    top: 114%;
     left: 55%;
     background-color: blueviolet;
     border: none;
@@ -43,5 +49,4 @@
     height: 40px;
     border-radius: 10px;
     color: white;
-
 }

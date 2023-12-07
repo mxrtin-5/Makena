@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import styles from './Checkout.module.css'
+import styles from './Checkout.module.css';
 import CheckoutData from '../CheckoutComponents/CheckoutData/CheckoutData';
 import CheckoutPayment from '../CheckoutComponents/CheckoutPayment/CheckoutPayment';
-import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces';
+import CheckoutChoise from '../CheckoutComponents/CheckoutChoise/CheckoutChoise';
+import CheckoutRetiro from '../CheckoutComponents/CheckoutRetiro/CheckoutRetiro';
 
 
 
@@ -12,7 +13,11 @@ const Checkout = () => {
 
     const [orderData, setOrderData] = useState('');
 
-    const FormTitles = ["Datos Personales", "Pago", "Completado"]
+    const [eleccion, setEleccion] = useState('');
+
+    const [envio, setEnvio] = useState('')
+
+    const FormTitles = ["Datos Personales", "Pago", "Completado"];
 
     // Función para avanzar a la siguiente página
     const nextPage = () => {
@@ -30,18 +35,21 @@ const Checkout = () => {
                 </div>
                 <div className={styles.body}>
                     {page === 0 && (
-                        <CheckoutData
-                            data={orderData}
-                            nextPage={nextPage}
-                            setOrderData={setOrderData}
+                        <CheckoutChoise setEnvio={setEnvio} envio={envio} setOrderData={setOrderData} nextPage={nextPage} setEleccion={setEleccion}
                         />
                     )}
                     {page === 1 && (
-                        <CheckoutPayment
-                        />
+                        eleccion === 'retiro' ? (
+                            <CheckoutRetiro setEnvio={setEnvio} nextPage={nextPage} />
+                        ) : eleccion === 'envio' ? (
+                            <CheckoutData setEnvio={setEnvio} setOrderData={setOrderData} nextPage={nextPage} />
+                        ) : (
+                            <p>Seleccione una opción</p>
+                        )
                     )}
                     {page === 2 && (
-                        <CheckoutSucces orderData={orderData} />
+                        <CheckoutPayment
+                        />
                     )}
                 </div>
                 <div className={styles.footer}>
