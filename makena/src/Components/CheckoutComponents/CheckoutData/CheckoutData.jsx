@@ -4,7 +4,7 @@ import { CartContext } from '../../../context/cartContext';
 import { GrillasContext } from '../../../context/grillasContext';
 
 
-const CheckoutData = ({ setEnvio, setOrderData, nextPage, eleccion }) => {
+const CheckoutData = ({ setEnvio, orderData, setOrderData, nextPage, eleccion }) => {
 
     const { cart } = useContext(CartContext);
 
@@ -52,6 +52,7 @@ const CheckoutData = ({ setEnvio, setOrderData, nextPage, eleccion }) => {
         e.preventDefault();
 
         const ordenData = {
+            ...orderData,
             cart: {
                 ...cart,
                 price: cart.price + precioEnvioExtra,

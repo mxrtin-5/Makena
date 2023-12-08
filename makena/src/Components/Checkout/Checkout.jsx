@@ -18,6 +18,8 @@ const Checkout = () => {
 
     const [envio, setEnvio] = useState('')
 
+    console.log(orderData);
+
     const FormTitles = ["Datos Personales", "Pago", "Completado"];
 
     // Función para avanzar a la siguiente página
@@ -52,6 +54,7 @@ const Checkout = () => {
                         ) : eleccion === 'envio' ? (
                             <CheckoutData
                                 setEnvio={setEnvio}
+                                orderData={orderData}
                                 setOrderData={setOrderData}
                                 nextPage={nextPage}
                                 eleccion={eleccion} />
@@ -65,7 +68,7 @@ const Checkout = () => {
                     )}
 
                     <div style={{ display: 'none' }}>
-                        <CheckoutSucces orderData={orderData} />
+                        <CheckoutSucces orderData={orderData} setOrderData={setOrderData} />
                     </div>
                 </div>
                 <div className={styles.footer}>
