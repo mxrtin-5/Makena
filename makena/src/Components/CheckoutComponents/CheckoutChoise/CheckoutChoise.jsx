@@ -3,7 +3,7 @@ import { CartContext } from "../../../context/cartContext";
 import styles from './CheckoutChoise.module.css'
 
 
-const CheckoutChoise = ({ setEnvio, envio, setOrderData, nextPage, setEleccion }) => {
+const CheckoutChoise = ({ eleccion, setEnvio, envio, setOrderData, nextPage, setEleccion }) => {
 
     const { cart } = useContext(CartContext)
 
@@ -18,11 +18,13 @@ const CheckoutChoise = ({ setEnvio, envio, setOrderData, nextPage, setEleccion }
         telefono,
         envio,
         nombre,
-        apellido
+        apellido,
+        eleccion
     }
 
     const handleSubmit = (e, eleccion) => {
         e.preventDefault()
+
 
         setEleccion(eleccion)
         setEnvio(eleccion)
