@@ -5,15 +5,13 @@ import styles from './CheckoutChoise.module.css'
 
 const CheckoutChoise = ({ setEnvio, envio, setOrderData, nextPage, setEleccion }) => {
 
-    const { cart } = useContext(CartContext)
+    const { cart } = useContext(CartContext);
 
     const [telefono, setTelefono] = useState("");
 
     const [nombre, setNombre] = useState("");
 
     const [apellido, setApellido] = useState("");
-
-
 
     const handleSubmit = (e, eleccion) => {
         e.preventDefault()
@@ -26,7 +24,6 @@ const CheckoutChoise = ({ setEnvio, envio, setOrderData, nextPage, setEleccion }
             apellido,
             eleccion
         }
-
 
         setEleccion(eleccion)
         setEnvio(eleccion)

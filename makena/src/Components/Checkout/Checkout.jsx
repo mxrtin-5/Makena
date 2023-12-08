@@ -36,14 +36,25 @@ const Checkout = () => {
                 </div>
                 <div className={styles.body}>
                     {page === 0 && (
-                        <CheckoutChoise setEnvio={setEnvio} envio={envio} setOrderData={setOrderData} nextPage={nextPage} setEleccion={setEleccion}
+                        <CheckoutChoise
+                            setEnvio={setEnvio}
+                            envio={envio}
+                            setOrderData={setOrderData}
+                            nextPage={nextPage}
+                            setEleccion={setEleccion}
                         />
                     )}
                     {page === 1 && (
                         eleccion === 'retiro' ? (
-                            <CheckoutRetiro setEnvio={setEnvio} nextPage={nextPage} />
+                            <CheckoutRetiro
+                                setEnvio={setEnvio}
+                                nextPage={nextPage} />
                         ) : eleccion === 'envio' ? (
-                            <CheckoutData  setEnvio={setEnvio} setOrderData={setOrderData} nextPage={nextPage} />
+                            <CheckoutData
+                                setEnvio={setEnvio}
+                                setOrderData={setOrderData}
+                                nextPage={nextPage}
+                                eleccion={eleccion} />
                         ) : (
                             <p>Seleccione una opción</p>
                         )
@@ -53,8 +64,8 @@ const Checkout = () => {
                         />
                     )}
 
-                    <div style={{ display: 'none'}}>
-                        <CheckoutSucces orderData={orderData}/>
+                    <div style={{ display: 'none' }}>
+                        <CheckoutSucces orderData={orderData} />
                     </div>
                 </div>
                 <div className={styles.footer}>
