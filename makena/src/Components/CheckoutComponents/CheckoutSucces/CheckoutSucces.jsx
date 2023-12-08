@@ -19,7 +19,7 @@ const CheckoutSucces = ({ orderData, id }) => {
     console.log(orderData);
 
     return (
-        <div className={styles.divPadre} onLoad={() => handlePago()}>
+        <div className={styles.divPadre} onLoad={handlePago()}>
             <h1>Su compra se ha realizado con exito</h1>
 
             <p>Id: {id}</p>
