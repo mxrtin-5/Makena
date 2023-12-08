@@ -81,10 +81,10 @@ const CheckoutData = ({ eleccion, setOrderData, nextPage }) => {
                 onChange={handleOpcionesEnvioChange}
                 required
             >
-                <option value="Capital Federal">Capital Federal</option>
-                <option value="GBA">GBA</option>
-                <option value="Sucursal">Correo SUC</option>
-                <option value="Domicilio">Correo DOM</option>
+                <option setOpcionesEnvio={'Capital Federal'} value="Capital Federal">Capital Federal</option>
+                <option setOpcionesEnvio={'GBA'} value="GBA">GBA</option>
+                <option setOpcionesEnvio={'Sucursal'} value="Sucursal">Correo SUC</option>
+                <option setOpcionesEnvio={'Domicilio'} value="Domicilio">Correo DOM</option>
 
             </select>
 
