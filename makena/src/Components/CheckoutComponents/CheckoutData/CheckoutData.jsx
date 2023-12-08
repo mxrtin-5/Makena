@@ -128,8 +128,6 @@ const CheckoutData = ({ setEnvio, setOrderData, nextPage, eleccion }) => {
                     <p>Precio extra: ${precioEnvioExtra}</p>
                 )}
 
-                <p>pene</p>
-
                 <button
                     className={styles.buttonForm}
                     type="submit"
