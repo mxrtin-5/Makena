@@ -41,9 +41,9 @@ const Checkout = () => {
                     )}
                     {page === 1 && (
                         eleccion === 'retiro' ? (
-                            <CheckoutRetiro eleccion={eleccion} setEnvio={setEnvio} nextPage={nextPage} />
+                            <CheckoutRetiro setEnvio={setEnvio} nextPage={nextPage} />
                         ) : eleccion === 'envio' ? (
-                            <CheckoutData eleccion={eleccion} setEnvio={setEnvio} setOrderData={setOrderData} nextPage={nextPage} />
+                            <CheckoutData  setEnvio={setEnvio} setOrderData={setOrderData} nextPage={nextPage} />
                         ) : (
                             <p>Seleccione una opción</p>
                         )
