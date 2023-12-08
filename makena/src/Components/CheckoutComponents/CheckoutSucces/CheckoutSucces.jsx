@@ -11,7 +11,6 @@ const CheckoutSucces = ({ orderData, setOrderData }) => {
             try {
                 // Envía los datos del pedido a Firebase
                 const docRef = await addDoc(collection(db, 'pedidos'), orderData);
-                console.log('Pedido registrado con éxito:', docRef.id);
             } catch (error) {
                 console.error('Error al registrar el pedido:', error);
             }
@@ -26,8 +25,6 @@ const CheckoutSucces = ({ orderData, setOrderData }) => {
     return (
         <div className={styles.divPadre}>
             <h1>Su compra se ha realizado con exito</h1>
-
-            <p>Id: {id}</p>
         </div>
     );
 }
