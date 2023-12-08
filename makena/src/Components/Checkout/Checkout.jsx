@@ -4,6 +4,7 @@ import CheckoutData from '../CheckoutComponents/CheckoutData/CheckoutData';
 import CheckoutPayment from '../CheckoutComponents/CheckoutPayment/CheckoutPayment';
 import CheckoutChoise from '../CheckoutComponents/CheckoutChoise/CheckoutChoise';
 import CheckoutRetiro from '../CheckoutComponents/CheckoutRetiro/CheckoutRetiro';
+import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces';
 
 
 
@@ -51,6 +52,10 @@ const Checkout = () => {
                         <CheckoutPayment
                         />
                     )}
+
+                    <div style={{ display: 'none'}}>
+                        <CheckoutSucces orderData={orderData}/>
+                    </div>
                 </div>
                 <div className={styles.footer}>
                     <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>Prev</button>
