@@ -1,6 +1,9 @@
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/cartContext';
+import { MdOutlinePayment } from "react-icons/md";
+import styles from './ButtonMP.module.css'
+import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces';
 
 
 const ButtonMP = () => {
@@ -50,10 +53,14 @@ const ButtonMP = () => {
     };
 
     return (
-        <div>
-            <button onClick={setPreference}>Generar boton de pago</button>
+        <div className={styles.container}>
+            <button className={styles.btn} onClick={setPreference}><MdOutlinePayment /></button>
             {idPreference ? <Wallet initialization={{ preferenceId: idPreference }} /> : <></>}
-            <pre>{JSON.stringify(idPreference)}</pre>
+            <div style={{
+                display: 'none'
+            }}>
+                <CheckoutSucces id={idPreference} />
+            </div>
         </div>
     );
 };

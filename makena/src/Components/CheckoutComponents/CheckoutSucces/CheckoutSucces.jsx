@@ -1,12 +1,11 @@
-import { useEffect } from "react";
 import { db } from "../../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
+import styles from './CheckoutSucces.module.css'
 
 
+const CheckoutSucces = ({ orderData, id }) => {
 
-const CheckoutSucces = ({ orderData }) => {
-
-    useEffect(() => {
+    
         const handlePago = async () => {
             try {
                 // Envía los datos del pedido a Firebase
@@ -17,14 +16,13 @@ const CheckoutSucces = ({ orderData }) => {
             }
         };
 
-        handlePago()
-    }, [])
-
     console.log(orderData);
 
     return (
-        <div>
-            <h1>succes</h1>
+        <div className={styles.divPadre} onLoad={() => handlePago()}>
+            <h1>Su compra se ha realizado con exito</h1>
+
+            <p>Id: {id}</p>
         </div>
     );
 }

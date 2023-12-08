@@ -1,11 +1,11 @@
-.contenedor{
+.container{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.Btn {
+.btn {
     width: 130px;
     height: 40px;
     display: flex;
@@ -24,12 +24,7 @@
     border-radius: 10px;
 }
 
-.path {
-    width: 16px;
-    font-size: x-large;
-}
-
-.Btn::before {
+.btn::before {
     width: 130px;
     height: 130px;
     position: absolute;
@@ -42,13 +37,13 @@
     mix-blend-mode: difference;
 }
 
-.Btn:hover::before {
+.btn:hover::before {
     transition-duration: .3s;
     transform: translate(100%, -50%);
     border-radius: 20px;
 }
 
-.Btn:active {
+.btn:active {
     transform: translate(5px, 5px);
     transition-duration: .3s;
 }
