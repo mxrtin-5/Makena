@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Checkout.module.css';
 import CheckoutData from '../CheckoutComponents/CheckoutData/CheckoutData';
 import CheckoutPayment from '../CheckoutComponents/CheckoutPayment/CheckoutPayment';
 import CheckoutChoise from '../CheckoutComponents/CheckoutChoise/CheckoutChoise';
 import CheckoutRetiro from '../CheckoutComponents/CheckoutRetiro/CheckoutRetiro';
-import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces';
+import { DataContext } from '../../context/dataContext';
 
 
 
@@ -12,11 +12,11 @@ const Checkout = () => {
 
     const [page, setPage] = useState(0);
 
-    const [orderData, setOrderData] = useState('');
-
     const [eleccion, setEleccion] = useState('');
 
-    const [envio, setEnvio] = useState('')
+    const [envio, setEnvio] = useState('');
+
+    const { orderData, setOrderData } = useContext(DataContext);
 
     console.log(orderData);
 
@@ -24,7 +24,9 @@ const Checkout = () => {
 
     // Función para avanzar a la siguiente página
     const nextPage = () => {
-        setPage(page + 1);
+        if(page < 2){
+            setPage(page + 1);
+        }
     };
 
     return (
@@ -66,10 +68,6 @@ const Checkout = () => {
                         <CheckoutPayment
                         />
                     )}
-
-                    <div style={{ display: 'none' }}>
-                        <CheckoutSucces orderData={orderData} setOrderData={setOrderData} />
-                    </div>
                 </div>
                 <div className={styles.footer}>
                     <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>Prev</button>

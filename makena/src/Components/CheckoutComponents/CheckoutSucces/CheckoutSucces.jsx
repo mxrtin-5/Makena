@@ -1,10 +1,13 @@
 import { db } from "../../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import styles from './CheckoutSucces.module.css'
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { DataContext } from "../../../context/dataContext";
 
 
-const CheckoutSucces = ({ orderData, setOrderData }) => {
+const CheckoutSucces = () => {
+
+    const { orderData, setOrderData } = useContext(DataContext)
 
     useEffect(() => {
         const handlePago = async () => {

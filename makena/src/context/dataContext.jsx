@@ -17,6 +17,8 @@ const DataProvider = ({ children }) => {
 
     const [direccion, setDireccion] = useState("");
 
+    const [orderData, setOrderData] = useState('');
+
     const [opcionesEnvio, setOpcionesEnvio] = useState("Capital Federal");
 
     const ordenData = {
@@ -46,7 +48,9 @@ const DataProvider = ({ children }) => {
                 setDireccion,
                 opcionesEnvio,
                 setOpcionesEnvio,
-                ordenData
+                ordenData,
+                orderData,
+                setOrderData
             }}>
 
             {children}

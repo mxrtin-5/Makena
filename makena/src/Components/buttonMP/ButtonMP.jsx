@@ -56,11 +56,6 @@ const ButtonMP = () => {
         <div className={styles.container}>
             <button className={styles.btn} onClick={setPreference}><MdOutlinePayment /></button>
             {idPreference ? <Wallet initialization={{ preferenceId: idPreference }} /> : <></>}
-            <div style={{
-                display: 'none'
-            }}>
-                <CheckoutSucces id={idPreference} />
-            </div>
         </div>
     );
 };

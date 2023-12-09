@@ -4,20 +4,20 @@ import { CartContext } from '../../context/cartContext';
 
 const ItemDetailProd = ({ item }) => {
 
-    const { agregarAlCarrito } = useContext(CartContext)
+    const { agregarAlCarrito } = useContext(CartContext);
 
     const [selectedModel, setSelectedModel] = useState('');
 
-    const [selectedMarca, setSelectedMarca] = useState('')
+    const [selectedMarca, setSelectedMarca] = useState('');
 
-    const [marca, setMarca] = useState(null)
+    const [marca, setMarca] = useState(null);
 
     const handleModelChange = (event) => {
         setSelectedModel(event.target.value);
     };
 
     const handleMarcaChange = (event) => {
-        setSelectedMarca(event.target.value)
+        setSelectedMarca(event.target.value);
     }
 
     const handleAddToCart = () => {
@@ -38,7 +38,7 @@ const ItemDetailProd = ({ item }) => {
 
 
     return (
-        <section className={styles.container} >
+        <section className={styles.container}>
             <div className={styles.prod}>
                 <h1 className={styles.name}>{item.name}</h1>
                 <img className={styles.image} src={item.image} alt="" />
