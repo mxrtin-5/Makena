@@ -7,22 +7,23 @@ import { DataContext } from "../../../context/dataContext";
 
 const CheckoutSucces = () => {
 
-    const { orderData, setOrderData } = useContext(DataContext)
+    const { orderData } = useContext(DataContext)
 
     useEffect(() => {
         const handlePago = async () => {
             try {
+                console.log('Order Data:', orderData);
                 // Envía los datos del pedido a Firebase
-                const docRef = await addDoc(collection(db, 'pedidos'), orderData);
+                await addDoc(collection(db, 'pedidos'), orderData);
             } catch (error) {
                 console.error('Error al registrar el pedido:', error);
             }
         };
 
-        if (orderData) {
-            handlePago();
-        }
-    }, [orderData, setOrderData]);
+
+        handlePago();
+
+    }, [orderData]);
 
 
     return (
