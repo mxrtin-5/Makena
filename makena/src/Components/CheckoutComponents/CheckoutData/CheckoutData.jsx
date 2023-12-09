@@ -2,11 +2,14 @@ import { useContext, useState } from 'react';
 import styles from './CheckoutData.module.css'
 import { CartContext } from '../../../context/cartContext';
 import { GrillasContext } from '../../../context/grillasContext';
+import { DataContext } from '../../../context/dataContext';
 
 
-const CheckoutData = ({ setEnvio, orderData, setOrderData, nextPage, eleccion }) => {
+const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
 
     const { cart } = useContext(CartContext);
+
+    const { orderData, setOrderData } = useContext(DataContext)
 
     const { translateX, translateY, escala } = useContext(GrillasContext)
 

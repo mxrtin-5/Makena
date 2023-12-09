@@ -16,7 +16,7 @@ const Checkout = () => {
 
     const [envio, setEnvio] = useState('');
 
-    const { orderData, setOrderData } = useContext(DataContext);
+    const { orderData } = useContext(DataContext);
 
     console.log(orderData);
 
@@ -43,7 +43,6 @@ const Checkout = () => {
                         <CheckoutChoise
                             setEnvio={setEnvio}
                             envio={envio}
-                            setOrderData={setOrderData}
                             nextPage={nextPage}
                             setEleccion={setEleccion}
                         />
@@ -56,8 +55,6 @@ const Checkout = () => {
                         ) : eleccion === 'envio' ? (
                             <CheckoutData
                                 setEnvio={setEnvio}
-                                orderData={orderData}
-                                setOrderData={setOrderData}
                                 nextPage={nextPage}
                                 eleccion={eleccion} />
                         ) : (

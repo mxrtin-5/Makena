@@ -1,11 +1,14 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../../../context/cartContext";
 import styles from './CheckoutChoise.module.css'
+import { DataContext } from "../../../context/dataContext";
 
 
-const CheckoutChoise = ({ setEnvio, envio, setOrderData, nextPage, setEleccion }) => {
+const CheckoutChoise = ({ setEnvio, envio, nextPage, setEleccion }) => {
 
     const { cart } = useContext(CartContext);
+
+    const { setOrderData } = useContext(DataContext)
 
     const [telefono, setTelefono] = useState("");
 
