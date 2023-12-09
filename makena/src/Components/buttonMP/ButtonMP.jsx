@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/cartContext';
 import { MdOutlinePayment } from "react-icons/md";
 import styles from './ButtonMP.module.css'
-import CheckoutSucces from '../CheckoutComponents/CheckoutSucces/CheckoutSucces';
 
 
 const ButtonMP = () => {

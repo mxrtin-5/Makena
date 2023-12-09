@@ -9,7 +9,7 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
 
     const { cart } = useContext(CartContext);
 
-    const { orderData, setOrderData } = useContext(DataContext)
+    const { orderData, setOrderData } = useContext(DataContext);
 
     const { translateX, translateY, escala } = useContext(GrillasContext)
 
@@ -26,6 +26,8 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
     const [opcionesEnvio, setOpcionesEnvio] = useState("Capital Federal");
 
     const [precioEnvioExtra, setPrecioEnvioExtra] = useState(0);
+
+    console.log(orderData);
 
     const handleOpcionesEnvioChange = (e) => {
         const nuevaOpcionEnvio = e.target.value;

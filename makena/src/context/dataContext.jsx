@@ -21,6 +21,8 @@ const DataProvider = ({ children }) => {
 
     const [opcionesEnvio, setOpcionesEnvio] = useState("Capital Federal");
 
+    console.log(orderData);
+
     const ordenData = {
         nombre,
         apellido,

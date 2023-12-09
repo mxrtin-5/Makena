@@ -1,23 +1,21 @@
 import { db } from "../../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import styles from './CheckoutSucces.module.css'
-import { useContext, useEffect } from "react";
-import { DataContext } from "../../../context/dataContext";
+import { useEffect } from "react";
 
 
-const CheckoutSucces = () => {
+const CheckoutSucces = ({ orderData, setOrderData }) => {
 
-    const { orderData, setOrderData } = useContext(DataContext)
 
     useEffect(() => {
         const handlePago = async () => {
             try {
                 console.log('Order Data:', orderData);
 
-                if (typeof orderData === 'object' && orderData !== null) {
+                if (typeof orderData === 'object' && Object.keys(orderData).length > 0) {
                     await addDoc(collection(db, 'pedidos'), orderData);
                 } else {
-                    console.error('Error: orderData no es un objeto válido');
+                    console.error('Error: orderData no es un objeto válido o está vacío');
                 }
             } catch (error) {
                 console.error('Error al registrar el pedido:', error);
