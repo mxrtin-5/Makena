@@ -16,11 +16,11 @@ const CheckoutSucces = () => {
             try {
                 console.log('Order Data:', orderData);
 
-                if (typeof orderData === 'object' && Object.keys(orderData).length > 0) {
+                if (orderData && typeof orderData === 'object' && Object.keys(orderData).length > 0) {
                     await addDoc(collection(db, 'pedidos'), orderData);
                 } else {
                     Toastify({
-                        text: `Error: orderData no es un objeto valido`,
+                        text: `Error: orderData no es un objeto válido`,
                         className: "info",
                         style: {
                             background: "linear-gradient(to right, #00b09b, #96c93d)",
@@ -29,25 +29,18 @@ const CheckoutSucces = () => {
                 }
             } catch (error) {
                 Toastify({
-                    text: `Ocurrio un error ${error}`,
+                    text: `Ocurrió un error ${error}`,
                     className: "info",
                     style: {
                         background: "linear-gradient(to right, #00b09b, #96c93d)",
                     }
                 }).showToast();
             }
-        }
+        };
 
+        // Verifica que orderData sea válido antes de ejecutar la función
         if (orderData && typeof orderData === 'object') {
-            handlePago()
-        } else {
-            Toastify({
-                text: `Error: orderData no es un objeto valido`,
-                className: "info",
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }
-            }).showToast();
+            handlePago();
         }
     }, [orderData]);
 
