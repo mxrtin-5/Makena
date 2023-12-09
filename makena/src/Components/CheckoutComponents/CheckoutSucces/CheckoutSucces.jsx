@@ -7,23 +7,27 @@ import { DataContext } from "../../../context/dataContext";
 
 const CheckoutSucces = () => {
 
-    const { orderData } = useContext(DataContext)
+    const { orderData, setOrderData } = useContext(DataContext)
 
     useEffect(() => {
         const handlePago = async () => {
             try {
                 console.log('Order Data:', orderData);
-                // Envía los datos del pedido a Firebase
-                await addDoc(collection(db, 'pedidos'), orderData);
+
+                if (typeof orderData === 'object' && orderData !== null) {
+                    await addDoc(collection(db, 'pedidos'), orderData);
+                } else {
+                    console.error('Error: orderData no es un objeto válido');
+                }
             } catch (error) {
                 console.error('Error al registrar el pedido:', error);
             }
-        };
+        }
 
-
-        handlePago();
-
-    }, [orderData]);
+        if (orderData) {
+            handlePago();
+        }
+    }, [orderData, setOrderData]);
 
 
     return (
