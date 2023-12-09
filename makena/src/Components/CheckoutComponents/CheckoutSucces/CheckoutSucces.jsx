@@ -22,7 +22,7 @@ const CheckoutSucces = () => {
         if (orderData) {
             handlePago();
         }
-    }, [orderData]);
+    }, []);
 
 
     return (
