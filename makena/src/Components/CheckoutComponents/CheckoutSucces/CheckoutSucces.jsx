@@ -24,8 +24,10 @@ const CheckoutSucces = () => {
             }
         }
 
-        if (orderData) {
-            handlePago();
+        if (orderData && typeof orderData === 'object') {
+            handlePago()
+        } else {
+            console.error('Error: orderData no es un objeto válido');
         }
     }, [orderData, setOrderData]);
 

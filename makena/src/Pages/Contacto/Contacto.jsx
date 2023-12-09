@@ -4,6 +4,8 @@ import { db } from '../../firebase/config'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import styles from './Contacto.module.css'
+import "toastify-js/src/toastify.css"
+import Toastify from 'toastify-js'
 
 
 const Contacto = () => {
@@ -58,6 +60,14 @@ const Contacto = () => {
 
         }
 
+        Toastify({
+            text: "Mensaje enviado con exito",
+            className: "info",
+            style: {
+                background: "linear-gradient(to right, #6b16bb, #d21bd8)",
+            }
+        }).showToast();
+
         const doc = await addDoc(coment, comentario)
 
         setComents(doc)
@@ -67,10 +77,10 @@ const Contacto = () => {
     return (
         <div className={styles.containerContact}>
             <div>
-            <h2>Contacto</h2>
+                <h2>Contacto</h2>
                 <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={schema} >
                     {() => (
-                        <div  className={styles.container}>
+                        <div className={styles.container}>
                             <Form className={styles.formContact}>
 
                                 <div className={styles.divForm}>

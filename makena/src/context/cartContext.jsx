@@ -1,4 +1,6 @@
 import { createContext, useState } from "react";
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 
 export const CartContext = createContext()
@@ -14,6 +16,14 @@ const CartProvider = ({ children }) => {
 
             const existingProduct = prevCart.find((item) => item.name === product.name);
 
+            Toastify({
+                text: "Añadido al carrito",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #6b16bb, #d21bd8)",
+                }
+            }).showToast();
+
             if (existingProduct) {
                 const updatedCart = prevCart.map((item) =>
                     item.name === product.name
@@ -24,6 +34,7 @@ const CartProvider = ({ children }) => {
             } else {
                 return [...prevCart, { ...product }];
             }
+
         });
     };
 
