@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/cartContext';
 import { MdOutlinePayment } from "react-icons/md";
 import styles from './ButtonMP.module.css'
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 
 const ButtonMP = () => {
@@ -47,7 +49,13 @@ const ButtonMP = () => {
             console.log(orderData);
 
         } catch (error) {
-            console.error('Error al obtener la preferencia:', error);
+            Toastify({
+                text: `Ocurrio un error ${error}`,
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
         }
     };
 

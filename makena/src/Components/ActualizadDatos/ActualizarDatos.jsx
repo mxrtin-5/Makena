@@ -2,6 +2,8 @@ import { collection, getDocs, query, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useState } from "react";
 import styles from './ActualizarDatos.module.css'
+import "toastify-js/src/toastify.css";
+import Toastify from 'toastify-js';
 
 
 const ActualizarDatos = () => {
@@ -33,6 +35,13 @@ const ActualizarDatos = () => {
                 await updatePricesInCollection(collectionName);
             }
         } catch (error) {
+            Toastify({
+                text: `Ocurrio un error ${error}`,
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
         }
     };
 

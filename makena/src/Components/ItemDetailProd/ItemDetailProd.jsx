@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react';
 import styles from './ItemDetailProds.module.css'
 import { CartContext } from '../../context/cartContext';
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
+
 
 const ItemDetailProd = ({ item }) => {
 
@@ -32,7 +35,13 @@ const ItemDetailProd = ({ item }) => {
             agregarAlCarrito(productInfo);
 
         } else {
-            console.log('Selecciona un modelo antes de agregar al carrito');
+            Toastify({
+                text: "Selecciona un modelo",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
         }
     };
 

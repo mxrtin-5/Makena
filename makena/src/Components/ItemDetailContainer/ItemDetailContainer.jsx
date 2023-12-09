@@ -3,8 +3,8 @@ import { db } from "../../firebase/config"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import ItemDetailProd from "../ItemDetailProd/ItemDetailProd"
-
-
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 const ItemDetailContainer = () => {
 
@@ -25,10 +25,22 @@ const ItemDetailContainer = () => {
                         ...productoData
                     });
                 } else {
-                    console.log("El documento no existe.");
+                    Toastify({
+                        text: "Ocurrio un error",
+                        className: "info",
+                        style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                        }
+                    }).showToast();
                 }
             } catch (error) {
-                console.error("Error al obtener el documento:", error);
+                Toastify({
+                    text: `Error al obtener el documento: ${error}`,
+                    className: "info",
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
             }
         };
 

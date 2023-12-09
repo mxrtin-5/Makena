@@ -8,6 +8,9 @@ import Grilla4 from '../../Components/grillas/Grilla4/Grilla4';
 import Grilla1 from '../../Components/grillas/Grilla1/Grilla1';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase/config'
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
+
 
 const Detail = () => {
 
@@ -30,11 +33,23 @@ const Detail = () => {
                     const phoneData = docSnap.data();
                     setTelefonoInfo(phoneData)
                 } else {
-                    console.log("El documento no existe.");
+                    Toastify({
+                        text: `El documento no existe`,
+                        className: "info",
+                        style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                        }
+                    }).showToast();
                 }
             })
             .catch((error) => {
-                console.error("Error al obtener el documento:", error);
+                Toastify({
+                    text: `Error al obtener el documento ${error}`,
+                    className: "info",
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
             });
 
     }, [id]);

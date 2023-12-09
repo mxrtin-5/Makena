@@ -9,11 +9,12 @@ import { doc, getDoc } from "firebase/firestore";
 import { CartContext } from "../../../context/cartContext";
 import { useParams } from "react-router-dom";
 import CheckoutPayment from "../../CheckoutComponents/CheckoutPayment/CheckoutPayment";
-import { FaBasketShopping } from "react-icons/fa6";
 import { FaArrowDown } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
+import "toastify-js/src/toastify.css"
+import Toastify from 'toastify-js'
 
 
 const Grilla1 = ({ phoneImg }) => {
@@ -69,7 +70,13 @@ const Grilla1 = ({ phoneImg }) => {
                 agregarAlCarrito(product);
                 return price;
             } else {
-                throw new Error("Me quiero morir");
+                Toastify({
+                    text: `Ocurrio un error`,
+                    className: "info",
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
             }
         })
     };

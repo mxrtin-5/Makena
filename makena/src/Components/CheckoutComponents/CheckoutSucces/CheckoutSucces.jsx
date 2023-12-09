@@ -1,11 +1,15 @@
 import { db } from "../../../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import styles from './CheckoutSucces.module.css'
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { DataContext } from "../../../context/dataContext";
+import "toastify-js/src/toastify.css";
+import Toastify from 'toastify-js';
 
 
-const CheckoutSucces = ({ orderData, setOrderData }) => {
+const CheckoutSucces = () => {
 
+    const { orderData } = useContext(DataContext);
 
     useEffect(() => {
         const handlePago = async () => {
@@ -15,24 +19,41 @@ const CheckoutSucces = ({ orderData, setOrderData }) => {
                 if (typeof orderData === 'object' && Object.keys(orderData).length > 0) {
                     await addDoc(collection(db, 'pedidos'), orderData);
                 } else {
-                    console.error('Error: orderData no es un objeto válido o está vacío');
+                    Toastify({
+                        text: `Error: orderData no es un objeto valido`,
+                        className: "info",
+                        style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                        }
+                    }).showToast();
                 }
             } catch (error) {
-                console.error('Error al registrar el pedido:', error);
+                Toastify({
+                    text: `Ocurrio un error ${error}`,
+                    className: "info",
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
             }
         }
 
         if (orderData && typeof orderData === 'object') {
             handlePago()
         } else {
-            console.error('Error: orderData no es un objeto válido');
+            Toastify({
+                text: `Error: orderData no es un objeto valido`,
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
         }
-    }, [orderData, setOrderData]);
-
+    }, [orderData]);
 
     return (
         <div className={styles.divPadre}>
-            <h1>Su compra se ha realizado con exito</h1>
+            <h1>Su compra se ha realizado con éxito</h1>
         </div>
     );
 }

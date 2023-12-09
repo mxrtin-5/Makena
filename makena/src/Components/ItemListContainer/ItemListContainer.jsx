@@ -4,6 +4,8 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase/config'
 import Loader from "../Loader/Loader";
 import Seleccion from './SeleccionXiaomi/Seleccion'
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 
 const ItemListContainer = () => {
@@ -39,7 +41,13 @@ const ItemListContainer = () => {
 
             })
             .catch((error) => {
-                console.log(error);
+                Toastify({
+                    text: `Ocurrio un error ${error}`,
+                    className: "info",
+                    style: {
+                        background: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }
+                }).showToast();
             })
             .finally(() => setLoading(false))
 

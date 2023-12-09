@@ -28,7 +28,6 @@ const PadreAdmin = () => {
                 rol: rol,
             };
             setUser(userData);
-            console.log("userData fianl", userData);
         });
     }
 
