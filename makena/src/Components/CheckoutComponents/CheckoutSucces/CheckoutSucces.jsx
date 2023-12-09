@@ -7,7 +7,7 @@ import { DataContext } from "../../../context/dataContext";
 
 const CheckoutSucces = () => {
 
-    const { orderData } = useContext(DataContext)
+    const { orderData, setOrderData } = useContext(DataContext)
 
     useEffect(() => {
         const handlePago = async () => {
@@ -22,7 +22,7 @@ const CheckoutSucces = () => {
         if (orderData) {
             handlePago();
         }
-    }, []);
+    }, [orderData, setOrderData]);
 
 
     return (
