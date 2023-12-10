@@ -43,6 +43,7 @@ const EditableImage = ({ src, id, index, onDrop, onClick, translateX, translateY
                         maxHeight: '100%',
                         display: imageLoaded ? 'block' : 'none',
                         transform: `translate(${translateX[index]}px, ${translateY[index]}px) scale(${escala})`,
+                        border: isSelected ? "2px solid blue" : null
                     }}
                     onLoad={handleImageLoad}
                     onClick={onClick}

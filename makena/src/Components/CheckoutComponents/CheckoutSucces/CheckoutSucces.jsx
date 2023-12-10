@@ -14,6 +14,10 @@ const CheckoutSucces = () => {
     useEffect(() => {
         const handlePago = async () => {
             try {
+                // Recupera los datos del localStorage
+                const storedOrderData = localStorage.getItem('orderData');
+                const orderData = storedOrderData ? JSON.parse(storedOrderData) : null;
+
                 console.log('Order Data:', orderData);
 
                 if (orderData && typeof orderData === 'object' && Object.keys(orderData).length > 0) {
@@ -35,14 +39,15 @@ const CheckoutSucces = () => {
                         background: "linear-gradient(to right, #00b09b, #96c93d)",
                     }
                 }).showToast();
+            } finally {
+                // Elimina los datos del localStorage después de realizar la acción
+                localStorage.removeItem('orderData');
             }
         };
 
-        // Verifica que orderData sea válido antes de ejecutar la función
-        if (orderData && typeof orderData === 'object') {
-            handlePago();
-        }
-    }, [orderData]);
+        // Ejecuta la función al montar el componente
+        handlePago();
+    }, []);
 
     return (
         <div className={styles.divPadre}>

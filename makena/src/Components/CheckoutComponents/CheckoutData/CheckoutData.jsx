@@ -74,6 +74,8 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
             escala
         };
 
+        localStorage.setItem('orderData', JSON.stringify(ordenData));
+
         setOrderData(ordenData);
         setEnvio(opcionesEnvio);
         nextPage();
