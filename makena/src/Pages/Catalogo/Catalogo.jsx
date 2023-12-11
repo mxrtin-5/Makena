@@ -54,7 +54,6 @@ const Catalogo = () => {
                         <ItemCard
                             id={elemento.id}
                             name={elemento.name}
-                            price={elemento.price}
                             image={elemento.image}
                             key={elemento.id}
                         />

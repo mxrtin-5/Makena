@@ -25,6 +25,7 @@ import CheckoutSucces from './Components/CheckoutComponents/CheckoutSucces/Check
 import { Navigate } from 'react-router-dom';
 import Catalogo from './Pages/Catalogo/Catalogo';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
+import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
 
                   <Navbar />
 
+                  <ScrollToTop />
+
                   <Routes>
                     <Route path='/home' element={<Home />} />
                     <Route path="*" element={<Navigate to="/home" />} />
@@ -62,7 +65,7 @@ function App() {
                     <Route path='/admin' element={<Admin />} />
                     <Route path="/devs" element={<Devs />} />
                     <Route path="/catalogo" element={<Catalogo />} />
-                    <Route path='/order/completed' element={<CheckoutSucces/>} />
+                    <Route path='/order/completed' element={<CheckoutSucces />} />
                   </Routes>
 
                   <a className="wpp" target='_blank' href="https://api.whatsapp.com/send?phone=5491122444188"><BsWhatsapp /></a>
