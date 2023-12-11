@@ -65,3 +65,13 @@
 .formContainer .footer button:hover{
     background-color: rgb(91, 27, 151);
 }
+
+@media (max-width:505px) {
+    .formContainer{
+        width: 100%;
+    }
+
+    .progressBar{
+        width: 300px;
+    }
+}

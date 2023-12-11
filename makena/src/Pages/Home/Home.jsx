@@ -9,13 +9,12 @@ import bannerMovile3 from '../../assets/Cambio1Min.png'
 import bannerMovile4 from '../../assets/Cambio2Min.png'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
-import Catalogo from '../Catalogo/Catalogo';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import InfoHome from '../../Components/InfoHome/InfoHome';
 import Banner from '../../Components/Banner/Banner';
 import { useEffect, useState } from 'react';
+import CatralogoHome from '../../Components/CatalogoHome/CatalogoHome';
 
 
 
@@ -91,10 +90,7 @@ const Home = () => {
 
             <Presentacion />
 
-            <Catalogo />
-
-            <InfoHome />
-
+            <CatralogoHome />
 
         </section>
 

@@ -61,7 +61,7 @@ const ButtonMP = () => {
 
     return (
         <div className={styles.container}>
-            <button className={styles.btn} onClick={setPreference}><MdOutlinePayment /></button>
+            <button className={styles.btn} onClick={setPreference}>Finalizar Compra</button>
             {idPreference ? <Wallet initialization={{ preferenceId: idPreference }} /> : <></>}
         </div>
     );

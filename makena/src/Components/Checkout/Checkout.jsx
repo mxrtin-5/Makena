@@ -20,7 +20,7 @@ const Checkout = () => {
 
     console.log(orderData);
 
-    const FormTitles = ["Datos Personales", "Pago", "Completado"];
+    const FormTitles = ["Datos Personales", "Pago", "Confirmar los datos"];
 
     // Función para avanzar a la siguiente página
     const nextPage = () => {
@@ -67,7 +67,7 @@ const Checkout = () => {
                     )}
                 </div>
                 <div className={styles.footer}>
-                    <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>Prev</button>
+                    <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}>Volver</button>
                 </div>
 
             </div>

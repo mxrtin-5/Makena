@@ -23,6 +23,8 @@ import { UserProvider } from './context/userContext';
 import Devs from './Components/Devs/Devs';
 import CheckoutSucces from './Components/CheckoutComponents/CheckoutSucces/CheckoutSucces';
 import { Navigate } from 'react-router-dom';
+import Catalogo from './Pages/Catalogo/Catalogo';
+import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
 
 
 function App() {
@@ -52,12 +54,14 @@ function App() {
                     <Route path='/crear-funda/seleccion/:marca/:id' element={<Detail />} />
                     <Route path='/crear-funda/seleccion/distribucion' element={<DistribucionImg />} />
                     <Route path='/checkout' element={<Checkout />} />
-                    <Route path='/detail/:id' element={<DetalleProds />} />
+                    <Route path='/detail/:id' element={<ItemDetailContainer />} />
+                    <Route path='/detail-destacado/:id' element={<DetalleProds />} />
                     <Route path='/contacto' element={<Contacto />} />
                     <Route path='/prueba2' element={<ButtonMP />} />
                     <Route path="/login" element={<Login />} />
                     <Route path='/admin' element={<Admin />} />
                     <Route path="/devs" element={<Devs />} />
+                    <Route path="/catalogo" element={<Catalogo />} />
                     <Route path='/order/completed' element={<CheckoutSucces/>} />
                   </Routes>
 

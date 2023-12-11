@@ -5,6 +5,15 @@
     margin: 20px 60px;
 }
 
+.divContainer{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 45px;
+}
+
 
 .buttonForm {
     display: flex;
@@ -16,4 +25,11 @@
     height: 40px;
     border-radius: 10px;
     color: white;
+}
+
+
+@media (max-width:380px){
+    .divContainer{
+        margin-left: 20px;
+    }
 }

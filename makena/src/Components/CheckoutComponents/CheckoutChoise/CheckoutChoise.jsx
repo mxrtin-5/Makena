@@ -39,7 +39,7 @@ const CheckoutChoise = ({ setEnvio, envio, nextPage, setEleccion }) => {
     };
 
     return (
-        <div>
+        <div className={styles.divContainer}>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -69,7 +69,7 @@ const CheckoutChoise = ({ setEnvio, envio, nextPage, setEleccion }) => {
                         disabled={!areCamposCompletos()}
                         onClick={(e) => handleSubmit(e, 'retiro')}
                     >
-                        Retiro
+                        Quiero Retirar
                     </button>
                     <button
                         className={styles.buttonForm}
@@ -77,7 +77,7 @@ const CheckoutChoise = ({ setEnvio, envio, nextPage, setEleccion }) => {
                         disabled={!areCamposCompletos()}
                         onClick={(e) => handleSubmit(e, 'envio')}
                     >
-                        Envio
+                        Prefiero el Envio
                     </button>
                 </div>
             </form>

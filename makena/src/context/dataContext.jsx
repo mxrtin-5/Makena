@@ -21,6 +21,8 @@ const DataProvider = ({ children }) => {
 
     const [opcionesEnvio, setOpcionesEnvio] = useState("Capital Federal");
 
+    const [precioEnvioExtra, setPrecioEnvioExtra] = useState(0);
+
     console.log(orderData);
 
     const ordenData = {
@@ -52,7 +54,9 @@ const DataProvider = ({ children }) => {
                 setOpcionesEnvio,
                 ordenData,
                 orderData,
-                setOrderData
+                setOrderData,
+                precioEnvioExtra,
+                setPrecioEnvioExtra
             }}>
 
             {children}

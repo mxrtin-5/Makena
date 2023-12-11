@@ -10,10 +10,11 @@ import "toastify-js/src/toastify.css"
 
 const ItemListContainer = () => {
 
-    const [celulares, setCelulares] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [celulares, setCelulares] = useState([]);
 
-    const { marca } = useParams()
+    const [loading, setLoading] = useState(true);
+
+    const { marca } = useParams();
 
     useEffect(() => {
 

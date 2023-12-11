@@ -13,7 +13,6 @@ const CartProvider = ({ children }) => {
 
     const agregarAlCarrito = (product) => {
         setCart((prevCart) => {
-
             const existingProduct = prevCart.find((item) => item.name === product.name);
 
             Toastify({
@@ -27,14 +26,13 @@ const CartProvider = ({ children }) => {
             if (existingProduct) {
                 const updatedCart = prevCart.map((item) =>
                     item.name === product.name
-                        ? { ...item, counter: item.counter + product.counter }
+                        ? { ...item, counter: item.counter + 1 } // Suponiendo la propiedad 'counter'
                         : item
                 );
                 return updatedCart;
             } else {
-                return [...prevCart, { ...product }];
+                return [...prevCart, { ...product, counter: 1 }]; // Suponiendo la propiedad 'counter'
             }
-
         });
     };
 

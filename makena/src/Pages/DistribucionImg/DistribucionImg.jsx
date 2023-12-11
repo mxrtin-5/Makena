@@ -15,6 +15,7 @@ const DistribucionImg = () => {
 
     return (
         <section className={styles.sectionContainer}>
+            <h1>Selecciona la grilla</h1>
             <div className={styles.containerGrid}>
                 <Link className={styles.link} to={`/crear-funda/seleccion/:${modelo}/${id}?tipoGrilla=${0}`}>
                     <img src={Grilla0} alt="grillaImage" />

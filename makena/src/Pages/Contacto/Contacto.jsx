@@ -84,36 +84,37 @@ const Contacto = () => {
                             <Form className={styles.formContact}>
 
                                 <div className={styles.divForm}>
-                                    <label className={styles.labelName} htmlFor="">Tu nombre*</label>
+                                    <label className={styles.labelName} htmlFor="">Nombre*</label>
                                     <Field
                                         className={styles.formontact}
                                         type="text"
                                         name="nombre" />
-                                    <label className={styles.label} htmlFor="">Tu apellido*</label>
+                                    <label className={styles.label} htmlFor="">Apellido*</label>
                                     <Field
                                         className={styles.formontact}
                                         type="text"
                                         name="apellido" />
                                 </div>
-                                <label className={styles.sorete} htmlFor="">Tu Email*</label>
+                                <label className={styles.sorete} htmlFor="">Email*</label>
                                 <Field
                                     className={styles.formontact}
                                     type="email"
                                     name="email" />
-                                <label className={styles.sorete1} htmlFor="">Tu numero</label>
+                                <label className={styles.sorete1} htmlFor="">Numero</label>
                                 <Field
                                     className={styles.formontact}
                                     type="text"
                                     name="telefono" />
-                                <label className={styles.sorete1} htmlFor="">Tu mensaje*</label>
+                                <label className={styles.sorete1} htmlFor="">Mensaje*</label>
                                 <Field
                                     className={styles.formontactMsj}
                                     type="textarea"
                                     name="mensaje" />
 
                                 <div className="buttons-reset-submit">
+                            <p>Dejanos tu mensaje o sugerencia y te responderemos lo antes posible</p>
+
                                     <button type="submit" className={styles.buttons} disabled={loading} >Enviar</button>
-                                    <button type="reset" className={styles.buttons}>Reset</button>
                                 </div>
                             </Form>
                         </div>

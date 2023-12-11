@@ -15,6 +15,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 import "toastify-js/src/toastify.css"
 import Toastify from 'toastify-js'
+import { FaShoppingBasket } from "react-icons/fa";
 
 
 const Grilla2 = ({ phoneImg }) => {
@@ -272,12 +273,12 @@ const Grilla2 = ({ phoneImg }) => {
 
                 <div className={styles.containerBotones}>
                     <button className={styles.btn} onClick={TogglePopup}>Editar Imagenes</button>
-                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}>Agregar al carrito</button>
+                    <UploadWidget getImageData={handleAddImageShow} />
                     <button className={styles.btn} onClick={() => setImagenes([])}>Eliminar Imagenes</button>
                 </div>
 
                 <div className={styles.containerUpload}>
-                    <UploadWidget getImageData={handleAddImageShow} />
+                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}>Agregar al carrito <FaShoppingBasket /></button>
                 </div>
 
                 <div style={{ display: "none" }}>

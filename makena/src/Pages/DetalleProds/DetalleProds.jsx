@@ -1,10 +1,10 @@
-import ItemDetailContainer from "../../Components/ItemDetailContainer/ItemDetailContainer";
+import DetalleDestacados from "../../Components/DetalleDestacados/DetalleDestacados";
 
 
 const DetalleProds = () => {
     return (
         <div>
-            <ItemDetailContainer />
+            <DetalleDestacados />
         </div>
     );
 }
