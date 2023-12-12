@@ -31,18 +31,18 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
 
     const [direccion, setDireccion] = useState("");
 
-    const [opcionesEnvio, setOpcionesEnvio] = useState(null);
+    const [opcionesEnvio, setOpcionesEnvio] = useState('capital_federal');
 
     // const [precioEnvioExtra, setPrecioEnvioExtra] = useState(1300);
 
     // const [precioTotal, setPrecioTotal] = useState(0);
 
     const handleOpcionesEnvioChange = (e) => {
-        const nuevaOpcionEnvio = e.target.value;
+        setOpcionesEnvio(e.target.value);
 
         let nuevoPrecioEnvioExtra = 0;
 
-        switch (nuevaOpcionEnvio) {
+        switch (opcionesEnvio) {
             case 'capital_federal':
                 nuevoPrecioEnvioExtra = 1300;
                 break
@@ -56,16 +56,11 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                 nuevoPrecioEnvioExtra = 2200;
                 break;
         }
+        setPrecioEnvioExtra(Number(nuevoPrecioEnvioExtra));
 
-        if (nuevoPrecioEnvioExtra > 0) {
-            setPrecioEnvioExtra(Number(nuevoPrecioEnvioExtra));
-
-            // Update the total price
-            const newTotalPrice = totalCompra() + Number(nuevoPrecioEnvioExtra);
-            setPrecioTotal(newTotalPrice);
-        }
-
-        throw new Error('Ocurrio un error inesperado')
+        // Update the total price
+        const newTotalPrice = totalCompra() + Number(nuevoPrecioEnvioExtra);
+        setPrecioTotal(newTotalPrice);
     };
 
     const areCamposCompletos = () => {
@@ -118,10 +113,10 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                 onChange={handleOpcionesEnvioChange}
                 required
             >
-                <option onSelect={() => setOpcionesEnvio('capital_federal')} value="capital_federal">Capital Federal</option>
-                <option onSelect={() => setOpcionesEnvio('gba')} value="gba">GBA</option>
-                <option onSelect={() => setOpcionesEnvio('sucursal')} value="sucursal">Correo a sucursal</option>
-                <option onSelect={() => setOpcionesEnvio('domicilio')} value="domicilio">Correo a domicilio</option>
+                <option value="capital_federal">Capital Federal</option>
+                <option value="gba">GBA</option>
+                <option value="sucursal">Correo a sucursal</option>
+                <option value="domicilio">Correo a domicilio</option>
 
             </select>
 
@@ -234,7 +229,7 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
             </form>
 
 
-        </div>
+        </div >
     );
 };
 
