@@ -7,7 +7,6 @@ const UploadWidget = ({getImageData}) => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
-
     useEffect(() => {
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({

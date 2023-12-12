@@ -65,8 +65,6 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
         return email && codigoPostal && direccion;
     };
 
-    console.log(precioTotal);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 

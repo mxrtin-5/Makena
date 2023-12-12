@@ -281,7 +281,7 @@ const Grilla1 = ({ phoneImg }) => {
                 </div>
 
                 <div className={styles.containerUpload}>
-                    <button className={styles.btn} onClick={() => obtenerPrecio(id)}>Agregar al carrito <FaShoppingBasket /></button>
+                    <button className={styles.btn1} onClick={() => obtenerPrecio(id)}>Agregar al carrito <FaShoppingBasket /></button>
                 </div>
 
                 <div style={{ display: "none" }}>
