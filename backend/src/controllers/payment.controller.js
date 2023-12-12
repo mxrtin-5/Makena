@@ -10,7 +10,6 @@ mercadopago.configure({
 
 MercadoPago.post("/", async (req, res) => {
     const { items } = req.body;
-    console.log(items);
 
     try {
         const preference = {
@@ -23,7 +22,6 @@ MercadoPago.post("/", async (req, res) => {
         };
 
         const respuesta = await mercadopago.preferences.create(preference);
-        console.log(respuesta);
         res.status(200).json(respuesta.response.id);
     } catch (error) {
         console.error(error.message);

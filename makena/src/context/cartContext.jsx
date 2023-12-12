@@ -26,12 +26,12 @@ const CartProvider = ({ children }) => {
             if (existingProduct) {
                 const updatedCart = prevCart.map((item) =>
                     item.name === product.name
-                        ? { ...item, counter: item.counter + 1 } // Suponiendo la propiedad 'counter'
+                        ? { ...item, counter: (item.counter || 0) + 1 }
                         : item
                 );
                 return updatedCart;
             } else {
-                return [...prevCart, { ...product, counter: 1 }]; // Suponiendo la propiedad 'counter'
+                return [...prevCart, { ...product, counter: 1 }];
             }
         });
     };

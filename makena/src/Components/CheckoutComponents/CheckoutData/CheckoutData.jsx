@@ -25,7 +25,9 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
 
     const [codigoPostal, setCodigoPostal] = useState("");
 
-    const [sucursal, setSucursal] = useState('')
+    const [sucursal, setSucursal] = useState('');
+
+    const [precioTotal, setPrecioTotal] = useState(0);
 
     const [direccion, setDireccion] = useState("");
 
@@ -35,23 +37,33 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
     // const [precioEnvioExtra, setPrecioEnvioExtra] = useState(1300);
 
     // const [precioTotal, setPrecioTotal] = useState(0);
-    console.log(orderData);
 
     const handleOpcionesEnvioChange = (e) => {
         const nuevaOpcionEnvio = e.target.value;
 
         let nuevoPrecioEnvioExtra = 0;
-        if (nuevaOpcionEnvio === 'Capital Federal') {
-            nuevoPrecioEnvioExtra = 1300;
-        } else if (nuevaOpcionEnvio === "GBA") {
-            nuevoPrecioEnvioExtra = 2200;
-        } else if (nuevaOpcionEnvio === "Sucursal") {
-            nuevoPrecioEnvioExtra = 1700;
-        } else if (nuevaOpcionEnvio === "Domicilio") {
-            nuevoPrecioEnvioExtra = 2200;
+
+        switch (nuevaOpcionEnvio) {
+            case 'capital_federal':
+                nuevoPrecioEnvioExtra = 1300;
+            case "gba":
+                nuevoPrecioEnvioExtra = 2200;
+            case 'sucursal':
+                nuevoPrecioEnvioExtra = 1700;
+            case "domicilio":
+                nuevoPrecioEnvioExtra = 2200;
+                break;
         }
 
-        setPrecioEnvioExtra(nuevoPrecioEnvioExtra);
+        if (nuevoPrecioEnvioExtra > 0) {
+            setPrecioEnvioExtra(Number(nuevoPrecioEnvioExtra));
+
+            // Update the total price
+            const newTotalPrice = cart.price + Number(nuevoPrecioEnvioExtra);
+            setPrecioTotal(newTotalPrice);
+        }
+
+        throw new Error('Ocurrio un error inesperado')
     };
 
     const areCamposCompletos = () => {
@@ -62,7 +74,12 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const precioTotal = cart.price + precioEnvioExtra;
+        const cartPrice = cart.price || 0; // Ensure cart.price is a valid number
+        const envioExtra = precioEnvioExtra || 0; // Ensure precioEnvioExtra is a valid number
+
+        const precioTotal = cartPrice + envioExtra;
+
+        console.log(envioExtra);
 
         const ordenData = {
             ...orderData,
@@ -101,15 +118,15 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                 onChange={handleOpcionesEnvioChange}
                 required
             >
-                <option onSelect={() => setOpcionesEnvio('Capital Fededral')} value="Capital Federal">Capital Federal</option>
-                <option onSelect={() => setOpcionesEnvio('GBA')} value="GBA">GBA</option>
-                <option onSelect={() => setOpcionesEnvio('Sucursal')} value="Sucursal">Correo a Sucursal</option>
-                <option onSelect={() => setOpcionesEnvio('Domicilio')} value="Domicilio">Correo a Domicilio</option>
+                <option onSelect={() => setOpcionesEnvio('Capital Fededral')} value="capital_federal">Capital Federal</option>
+                <option onSelect={() => setOpcionesEnvio('gba')} value="gba">GBA</option>
+                <option onSelect={() => setOpcionesEnvio('sucursal')} value="sucursal">Correo a sucursal</option>
+                <option onSelect={() => setOpcionesEnvio('domicilio')} value="domicilio">Correo a domicilio</option>
 
             </select>
 
             <form onSubmit={handleSubmit}>
-                {opcionesEnvio === "Capital Federal" && (
+                {opcionesEnvio === "capital_federal" && (
                     <>
                         <input
                             type="text"
@@ -134,7 +151,7 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                     </>
                 )}
 
-                {opcionesEnvio === "GBA" && (
+                {opcionesEnvio === "gba" && (
                     <>
                         <input
                             type="text"
@@ -160,14 +177,14 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                     </>
                 )}
 
-                {opcionesEnvio === "Sucursal" && (
+                {opcionesEnvio === "sucursal" && (
                     <>
                         <input onChange={(e) => setProvincia(e.target.value)} value={provincia} placeholder='Provincia' type="text" required />
                         <input onChange={(e) => setSucursal(e.target.value)} value={sucursal} placeholder='Sucursal' type="text" required />
                     </>
                 )}
 
-                {opcionesEnvio === "Domicilio" && (
+                {opcionesEnvio === "domicilio" && (
                     <>
                         <input onChange={(e) => setProvincia(e.target.value)} value={provincia} placeholder='Provincia' type="text" required />
                         <input type="text"

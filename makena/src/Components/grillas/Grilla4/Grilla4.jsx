@@ -91,7 +91,6 @@ const Grilla4 = ({ phoneImg }) => {
         const docRef = getDoc(celularesRef, id);
         docRef.then((documento) => {
             const price = documento.data().price;
-            console.log(documento);
 
             const product = {
                 name: id,

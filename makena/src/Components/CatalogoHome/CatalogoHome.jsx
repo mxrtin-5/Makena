@@ -41,7 +41,6 @@ const CatralogoHome = () => {
             })
     }, [marca])
 
-    console.log(celulares);
 
     return (
         <div className={styles.divP}>

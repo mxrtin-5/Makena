@@ -23,8 +23,6 @@ const DataProvider = ({ children }) => {
 
     const [precioEnvioExtra, setPrecioEnvioExtra] = useState(0);
 
-    console.log(orderData);
-
     const ordenData = {
         nombre,
         apellido,

@@ -18,8 +18,6 @@ const Checkout = () => {
 
     const { orderData } = useContext(DataContext);
 
-    console.log(orderData);
-
     const FormTitles = ["Datos Personales", "Pago", "Confirmar los datos"];
 
     // Función para avanzar a la siguiente página

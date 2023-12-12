@@ -18,7 +18,6 @@ const CheckoutSucces = () => {
                 const storedOrderData = localStorage.getItem('orderData');
                 const orderData = storedOrderData ? JSON.parse(storedOrderData) : null;
 
-                console.log('Order Data:', orderData);
 
                 if (orderData && typeof orderData === 'object' && Object.keys(orderData).length > 0) {
                     await addDoc(collection(db, 'pedidos'), orderData);

@@ -326,7 +326,7 @@ export default Grilla1;
 //     })
 //         .then((canvas) => {
 //             const screenshotDataUrl = canvas.toDataURL('image/png', 1);
-//             console.log("URL de la imagen generada:", screenshotDataUrl);
+//            
 //             return screenshotDataUrl;
 //         })
 //         .then((screenshotDataUrl) => {

@@ -59,14 +59,12 @@ const Grilla2 = ({ phoneImg }) => {
     //DND
     const handleDrop = (fromIndex, toIndex) => {
         const updatedImages = [...imagenes];
-        console.log("handleDrop called with fromIndex:", fromIndex, "toIndex:", toIndex);
         const [movedImage] = updatedImages.splice(fromIndex, 1);
         updatedImages.splice(toIndex, 0, movedImage);
         setImagenes(updatedImages);
     };
     //Click img
     const handleImageClick = (index) => {
-        console.log("Imagen seleccionada:", index);
         setImagenSeleccionada(index);
     };
     //Condicion de imagen seleccionada
@@ -94,7 +92,6 @@ const Grilla2 = ({ phoneImg }) => {
         const docRef = getDoc(celularesRef, id);
         docRef.then((documento) => {
             const price = documento.data().price;
-            console.log(documento);
 
             const product = {
                 name: id,
@@ -325,7 +322,6 @@ export default Grilla2;
 //         });
 
 //         const screenshotDataUrl = canvas.toDataURL('image/png', 1);
-//         console.log("URL de la imagen generada:", screenshotDataUrl);
 
 //         setCombinedImageUrl(screenshotDataUrl);
 
