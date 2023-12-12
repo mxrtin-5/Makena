@@ -18,6 +18,7 @@ const CartProvider = ({ children }) => {
             Toastify({
                 text: "Añadido al carrito",
                 className: "info",
+                duration: 1000,
                 style: {
                     background: "linear-gradient(to right, #6b16bb, #d21bd8)",
                 }
