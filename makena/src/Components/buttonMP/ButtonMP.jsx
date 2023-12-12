@@ -11,7 +11,7 @@ const ButtonMP = () => {
 
     const [idPreference, setIdPreference] = useState(null)
 
-    const { cart } = useContext(CartContext)
+    const { cart, precioTotal } = useContext(CartContext)
 
     const cartNoImg = cart.map((prod) => {
         const { img, ...newItem } = prod
@@ -20,7 +20,7 @@ const ButtonMP = () => {
             id: newItem.id,
             title: newItem.name,
             quantity: newItem.counter,
-            unit_price: newItem.price
+            unit_price: precioTotal
         }
     })
 

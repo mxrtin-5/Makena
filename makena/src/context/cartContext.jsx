@@ -9,6 +9,8 @@ const CartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([])
 
+    const [precioTotal, setPrecioTotal] = useState(0);
+
     const [counter, setCounter] = useState(1)
 
     const agregarAlCarrito = (product) => {
@@ -87,7 +89,9 @@ const CartProvider = ({ children }) => {
             totalCompra,
             vaciarCarrito,
             totalCantidad,
-            removerDelCarrito
+            removerDelCarrito,
+            precioTotal,
+            setPrecioTotal
         }}>
             {children}
         </CartContext.Provider>

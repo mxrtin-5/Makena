@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './CheckoutData.module.css'
 import { CartContext } from '../../../context/cartContext';
 import { GrillasContext } from '../../../context/grillasContext';
@@ -7,7 +7,7 @@ import { DataContext } from '../../../context/dataContext';
 
 const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
 
-    const { cart, totalCompra } = useContext(CartContext);
+    const { cart, totalCompra, precioTotal, setPrecioTotal } = useContext(CartContext);
 
     const { orderData, setOrderData, precioEnvioExtra, setPrecioEnvioExtra } = useContext(DataContext);
 
@@ -27,22 +27,20 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
 
     const [sucursal, setSucursal] = useState('');
 
-    const [precioTotal, setPrecioTotal] = useState(0);
-
     const [direccion, setDireccion] = useState("");
 
-    const [opcionesEnvio, setOpcionesEnvio] = useState(null);
+    const [opcionesEnvio, setOpcionesEnvio] = useState('capital_federal');
 
-    // const [precioEnvioExtra, setPrecioEnvioExtra] = useState(1300);
-
-    // const [precioTotal, setPrecioTotal] = useState(0);
+    useEffect(() =>{
+        setPrecioTotal(totalCompra() + 1300)
+    }, [])
 
     const handleOpcionesEnvioChange = (e) => {
-        const nuevaOpcionEnvio = e.target.value;
+        setOpcionesEnvio(e.target.value);
 
         let nuevoPrecioEnvioExtra = 0;
 
-        switch (nuevaOpcionEnvio) {
+        switch (opcionesEnvio) {
             case 'capital_federal':
                 nuevoPrecioEnvioExtra = 1300;
                 break
@@ -56,30 +54,21 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                 nuevoPrecioEnvioExtra = 2200;
                 break;
         }
+        setPrecioEnvioExtra(Number(nuevoPrecioEnvioExtra));
 
-        if (nuevoPrecioEnvioExtra > 0) {
-            setPrecioEnvioExtra(Number(nuevoPrecioEnvioExtra));
-
-            // Update the total price
-            const newTotalPrice = totalCompra() + Number(nuevoPrecioEnvioExtra);
-            setPrecioTotal(newTotalPrice);
-        }
-
-        throw new Error('Ocurrio un error inesperado')
+        // Update the total price
+        const newTotalPrice = totalCompra() + Number(nuevoPrecioEnvioExtra);
+        setPrecioTotal(newTotalPrice);
     };
 
     const areCamposCompletos = () => {
         return email && codigoPostal && direccion;
     };
 
+    console.log(precioTotal);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const cartPrice = cart.price || 0; // Ensure cart.price is a valid number
-        const envioExtra = precioEnvioExtra || 0; // Ensure precioEnvioExtra is a valid number
-
-        const precioTotal = cartPrice + envioExtra;
 
         const ordenData = {
             ...orderData,
@@ -118,10 +107,10 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                 onChange={handleOpcionesEnvioChange}
                 required
             >
-                <option onSelect={() => setOpcionesEnvio('capital_federal')} value="capital_federal">Capital Federal</option>
-                <option onSelect={() => setOpcionesEnvio('gba')} value="gba">GBA</option>
-                <option onSelect={() => setOpcionesEnvio('sucursal')} value="sucursal">Correo a sucursal</option>
-                <option onSelect={() => setOpcionesEnvio('domicilio')} value="domicilio">Correo a domicilio</option>
+                <option value="capital_federal">Capital Federal</option>
+                <option value="gba">GBA</option>
+                <option value="sucursal">Correo a sucursal</option>
+                <option value="domicilio">Correo a domicilio</option>
 
             </select>
 
@@ -234,7 +223,7 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
             </form>
 
 
-        </div>
+        </div >
     );
 };
 
