@@ -11,7 +11,7 @@ const CartProvider = ({ children }) => {
 
     const [precioTotal, setPrecioTotal] = useState(0);
 
-    const [counter, setCounter] = useState(1)
+    const [counter, setCounter] = useState(1);
 
     const agregarAlCarrito = (product) => {
         setCart((prevCart) => {
@@ -65,9 +65,9 @@ const CartProvider = ({ children }) => {
 
     const totalCompra = () => {
         return cart.reduce((acc, item) => {
-            return acc + item.price * item.counter;
+            return acc + item.price * (item.counter || 1);
         }, 0);
-    }
+    };
 
     const totalCantidad = () => {
         return cart.reduce((acc, item) => acc + item.counter, 0)

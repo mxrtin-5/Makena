@@ -31,21 +31,22 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
 
     const [opcionesEnvio, setOpcionesEnvio] = useState('capital_federal');
 
-    useEffect(() =>{
-        setPrecioTotal(totalCompra() + 1300)
-    }, [])
+    useEffect(() => {
+        setPrecioTotal(totalCompra() + precioEnvioExtra)
+    }, [totalCompra, precioEnvioExtra])
 
     const handleOpcionesEnvioChange = (e) => {
-        setOpcionesEnvio(e.target.value);
+        const nuevaOpcionEnvio = e.target.value;
+        setOpcionesEnvio(nuevaOpcionEnvio);
 
         let nuevoPrecioEnvioExtra = 0;
 
-        switch (opcionesEnvio) {
+        switch (nuevaOpcionEnvio) {
             case 'capital_federal':
-                nuevoPrecioEnvioExtra = 1300;
+                nuevoPrecioEnvioExtra = 2200;
                 break
             case "gba":
-                nuevoPrecioEnvioExtra = 2200;
+                nuevoPrecioEnvioExtra = 1300;
                 break
             case 'sucursal':
                 nuevoPrecioEnvioExtra = 1700;
@@ -56,9 +57,9 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
         }
         setPrecioEnvioExtra(Number(nuevoPrecioEnvioExtra));
 
-        // Update the total price
-        const newTotalPrice = totalCompra() + Number(nuevoPrecioEnvioExtra);
-        setPrecioTotal(newTotalPrice);
+        // Actualizar el precio total
+        const nuevoPrecioTotal = totalCompra() + Number(nuevoPrecioEnvioExtra);
+        setPrecioTotal(nuevoPrecioTotal);
     };
 
     const areCamposCompletos = () => {
