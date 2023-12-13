@@ -19,7 +19,7 @@ const ButtonMP = () => {
             id: newItem.id,
             title: newItem.name,
             quantity: newItem.counter,
-            unit_price: precioTotal
+            unit_price: newItem.price
         }
     })
 

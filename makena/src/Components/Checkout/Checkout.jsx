@@ -3,7 +3,6 @@ import styles from './Checkout.module.css';
 import CheckoutData from '../CheckoutComponents/CheckoutData/CheckoutData';
 import CheckoutPayment from '../CheckoutComponents/CheckoutPayment/CheckoutPayment';
 import CheckoutChoise from '../CheckoutComponents/CheckoutChoise/CheckoutChoise';
-import CheckoutRetiro from '../CheckoutComponents/CheckoutRetiro/CheckoutRetiro';
 import { DataContext } from '../../context/dataContext';
 
 
@@ -18,7 +17,7 @@ const Checkout = () => {
 
     const { orderData } = useContext(DataContext);
 
-    const FormTitles = ["Datos Personales", "Pago", "Confirmar los datos"];
+    const FormTitles = ["Datos Personales", "Confirmar los datos", "Pago"];
 
     // Función para avanzar a la siguiente página
     const nextPage = () => {

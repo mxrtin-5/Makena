@@ -269,7 +269,7 @@ const Grilla2 = ({ phoneImg }) => {
 
 
                 <div className={styles.containerBotones}>
-                    <button className={styles.btn} onClick={TogglePopup}>Editar Imagenes</button>
+                    <button className={styles.btn} onClick={TogglePopup}>Seleccionar Imagenes</button>
                     <UploadWidget getImageData={handleAddImageShow} />
                     <button className={styles.btn} onClick={() => setImagenes([])}>Eliminar Imagenes</button>
                 </div>

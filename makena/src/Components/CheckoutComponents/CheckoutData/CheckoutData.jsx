@@ -206,7 +206,7 @@ const CheckoutData = ({ setEnvio, nextPage, eleccion }) => {
                     required
                 />
 
-                <input value={observasiones} onChange={(e) => setObservaciones(e.target.value)} placeholder='Observasiones' className={styles.textArea} type="textarea" />
+                <input value={observasiones} onChange={(e) => setObservaciones(e.target.value)} placeholder='Observaciones' className={styles.textArea} type="textarea" />
 
                 <button
                     className={styles.buttonForm}

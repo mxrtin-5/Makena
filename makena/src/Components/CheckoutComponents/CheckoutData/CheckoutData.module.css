@@ -50,3 +50,9 @@
     border-radius: 10px;
     color: white;
 }
+
+@media (max-width:480px) {
+    .data input{
+        margin: 10px;
+    }
+}
