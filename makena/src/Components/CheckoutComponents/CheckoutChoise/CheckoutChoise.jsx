@@ -63,6 +63,9 @@ const CheckoutChoise = ({ setEnvio, envio, nextPage, setEleccion }) => {
                 />
 
                 <div className={styles.divBtn}>
+                    <p className={styles.textoRetiro}>
+                        Lanus Oeste a 15m de la estacion
+                    </p>
                     <button
                         className={styles.buttonForm}
                         type="submit"

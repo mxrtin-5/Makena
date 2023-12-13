@@ -1,7 +1,6 @@
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/cartContext';
-import { MdOutlinePayment } from "react-icons/md";
 import styles from './ButtonMP.module.css'
 import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
@@ -27,7 +26,7 @@ const ButtonMP = () => {
     console.log(cartNoImg);
 
 
-    useEffect(() => {
+    useEffect(() => {   
         initMercadoPago("APP_USR-c7a1b5c7-24e6-4476-8fd1-d9883775f1d7", { locale: 'es-AR' });
     }, []);
 
