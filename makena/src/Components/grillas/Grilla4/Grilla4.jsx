@@ -231,7 +231,7 @@ const Grilla4 = ({ phoneImg }) => {
 
                         <div className={styles.container}>
                             <button
-                                className={styles.button}
+                                className={styles.buttonUp}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
                                         setTranslateY(prev => {
@@ -246,7 +246,7 @@ const Grilla4 = ({ phoneImg }) => {
                                 <FaArrowUp />
                             </button>
                             <button
-                                className={styles.button}
+                                className={styles.buttonDown}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
                                         setTranslateY(prev => {
@@ -260,7 +260,7 @@ const Grilla4 = ({ phoneImg }) => {
                                 <FaArrowDown />
                             </button>
                             <button
-                                className={styles.button}
+                                className={styles.buttonRight}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
                                         setTranslateX(prev => {
@@ -275,7 +275,7 @@ const Grilla4 = ({ phoneImg }) => {
                                 <FaArrowRight />
                             </button>
                             <button
-                                className={styles.button}
+                                className={styles.buttonLeft}
                                 onClick={() => {
                                     if (isImageSelected(imagenSeleccionada)) {
                                         setTranslateX(prev => {

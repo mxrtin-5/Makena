@@ -98,6 +98,130 @@
     transform: scale(0.95);
 }
 
+
+.buttonUp {
+    position: absolute;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 1.1em;
+    background-color: #212121;
+    color: white;
+    padding: 1em 2em;
+    transition: box-shadow ease-in-out 0.3s,
+        background-color ease-in-out 0.1s,
+        letter-spacing ease-in-out 0.1s,
+        transform ease-in-out 0.1s;
+    box-shadow: 5px 5px 5px #1c1c1c,
+        -5px -5px 5px #262626;
+    cursor: pointer;
+}
+
+.buttonUp:hover {
+    box-shadow: var(--hover-shadows);
+}
+
+.buttonUp:active {
+    box-shadow: var(--hover-shadows),
+        var(--accent) 0px 0px 30px 5px;
+    background-color: var(--accent);
+    transform: scale(0.95);
+}
+
+.buttonDown {
+    position: absolute;
+    top: 200%;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 1.1em;
+    background-color: #212121;
+    color: white;
+    padding: 1em 2em;
+    transition: box-shadow ease-in-out 0.3s,
+        background-color ease-in-out 0.1s,
+        letter-spacing ease-in-out 0.1s,
+        transform ease-in-out 0.1s;
+    box-shadow: 5px 5px 5px #1c1c1c,
+        -5px -5px 5px #262626;
+    cursor: pointer;
+
+}
+
+.buttonDown:hover {
+    box-shadow: var(--hover-shadows);
+}
+
+.buttonDown:active {
+    box-shadow: var(--hover-shadows),
+        var(--accent) 0px 0px 30px 5px;
+    background-color: var(--accent);
+    transform: scale(0.95);
+}
+
+.buttonLeft {
+    font-weight: bold;
+    position: absolute;
+    top: 145%;
+    right: 60%;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 1.1em;
+    background-color: #212121;
+    color: white;
+    padding: 1em 2em;
+    transition: box-shadow ease-in-out 0.3s,
+        background-color ease-in-out 0.1s,
+        letter-spacing ease-in-out 0.1s,
+        transform ease-in-out 0.1s;
+    box-shadow: 5px 5px 5px #1c1c1c,
+        -5px -5px 5px #262626;
+    cursor: pointer;
+}
+
+.buttonLeft:hover {
+    box-shadow: var(--hover-shadows);
+}
+
+.buttonLeft:active {
+    box-shadow: var(--hover-shadows),
+        var(--accent) 0px 0px 30px 5px;
+    background-color: var(--accent);
+    transform: scale(0.95);
+}
+
+.buttonRight {
+    font-weight: bold;
+    position: absolute;
+    top: 145%;
+    right: -23%;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 1.1em;
+    background-color: #212121;
+    color: white;
+    padding: 1em 2em;
+    transition: box-shadow ease-in-out 0.3s,
+        background-color ease-in-out 0.1s,
+        letter-spacing ease-in-out 0.1s,
+        transform ease-in-out 0.1s;
+    box-shadow: 5px 5px 5px #1c1c1c,
+        -5px -5px 5px #262626;
+    cursor: pointer;
+}
+
+.buttonRight:hover {
+    box-shadow: var(--hover-shadows);
+}
+
+.buttonRight:active {
+    box-shadow: var(--hover-shadows),
+        var(--accent) 0px 0px 30px 5px;
+    background-color: var(--accent);
+    transform: scale(0.95);
+}
+
+
 .btn {
     position: relative;
     text-transform: uppercase;
@@ -224,19 +348,44 @@
     }
 }
 
-@media (max-width: 800px) {
-    .marcoImg {
-        left: 0;
+@media (max-width: 1050px) {
+    .containerEditar .button {
+        font-size: 1.2vw;
+        padding: 1vh 1.5vw;
     }
 
+    .buttonUp {
+        position: initial;
+    }
+
+    .buttonDown {
+        position: initial;
+    }
+
+    .buttonLeft {
+        position: initial;
+    }
+
+    .buttonRight {
+        position: initial;
+    }
+}
+
+@media (max-width:870px) {
     .containerEditar {
-        position: absolute;
-        top: 35%;
+        display: flex;
+        flex-direction: column;
+        top: 30%;
     }
 
-    .button {
-        width: 100%;
-        margin-bottom: 10px;
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .divInterno {
+        display: flex;
+        flex-direction: column;
     }
 }
 
